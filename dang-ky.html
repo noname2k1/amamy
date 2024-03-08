@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/app.css">
+    <link rel="stylesheet" href="./assets/styles/auth.css">
+    <link rel="stylesheet" href="./assets/styles/register.css">
+    <link rel="stylesheet" href="./assets/styles/responsive.css">
+</head>
+
+<body>
+    <main id="root">
+        <header>
+            <div class="logo">
+                <a href="/">
+                    AMAMY
+                </a>
+            </div>
+            <nav class="menu large">
+                <ul>
+                    <li><a href="#">
+                            Theo dõi bưu kiện
+                        </a></li>
+                    <li>
+                        <a href="#">
+                            Tính giá vận chuyển
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Tin tức
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Hữu ích cho gửi hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Về Amamy
+                        </a>
+                        <img src="./assets/svgs/fi_chevron-down.svg" alt="">
+                    </li>
+                </ul>
+            </nav>
+            <div class="sub">
+                <button>
+                    <picture>
+                        <source media="(max-width:767px)" srcset="./assets/svgs/fi_search.svg">
+                        <img src="./assets/svgs/MagnifyingGlass.svg" alt="">
+                    </picture>
+                </button>
+                <button>
+                    <picture>
+                        <source media="(max-width:767px)" srcset="./assets/svgs/USER-mobile.svg">
+                        <img src="./assets/svgs/USER.svg" alt="">
+                    </picture>
+                </button>
+                <button class="mobile">
+                    <img src="./assets/svgs/fi_menu.svg" alt="">
+                </button>
+            </div>
+        </header>
+        <section class="main-section">
+            <div class="bg">
+                <img src="./assets/images/Rectangle 34625437.png" alt="">
+            </div>
+            <div class="main auth">
+                <form class="form-container auth-form">
+                    <h2 class="">Đăng ký tài khoản</h2>
+                    <div class="double-input">
+                        <div class="input-group">
+                            <label for="fullName">Họ và tên*</label>
+                            <input type="text" name="fullName" id="fullName" placeholder="Ngọc Nguyễn">
+                            <span class="error-message"></span>
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Số điện thoại*</label>
+                            <input type="text" name="phone" id="phone" placeholder="0978236443">
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email đăng ký*</label>
+                        <input type="email" name="email" id="email" placeholder="example@gmail.com">
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Mật khẩu*</label>
+                        <div class="input-wrapper">
+                            <input type="password" placeholder="Tối thiểu 8 ký tự" name="new-password"
+                                id="new-password">
+                            <img class="show-pwd" src="./assets/svgs/fi_eye.svg" alt="">
+                            <img class="hide-pwd" src="./assets/svgs/fi_eye-off.svg" alt="">
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <div class="input-group confirm-password">
+                        <label for="password">Nhập lại mật khẩu*</label>
+                        <div class="input-wrapper">
+                            <input type="password" placeholder="Tối thiểu 8 ký tự" name="confirm-password"
+                                id="confirm-password">
+                            <img class="show-pwd" src="./assets/svgs/fi_eye.svg" alt="">
+                            <img class="hide-pwd" src="./assets/svgs/fi_eye-off.svg" alt="">
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit">
+                        Đăng ký
+                    </button>
+                    <span class="or">Hoặc</span>
+                    <a href="#">Đăng ký bằng <div class="mobile"><img src="./assets/svgs/devicon_google.svg" alt="">
+                        </div><img src="./assets/svgs/devicon_google.svg" alt="" class="large"></a>
+                </form>
+
+                <div class="ranks large">
+                    <div class="rank newbie">
+                        <h2>Thành viên mới</h2>
+                        <p>Giảm 1.5% trên tổng hóa đơn</p>
+                    </div>
+                    <div class="rank copper large">
+                        <h2>Hạng đồng</h2>
+                        <p>Giảm 3% trên tổng hóa đơn</p>
+                    </div>
+                    <div class="rank silver large">
+                        <h2>Hạng Bạc</h2>
+                        <p>Giảm 4% trên tổng hóa đơn</p>
+                    </div>
+                    <div class="rank gold">
+                        <h2>Hạng Vàng</h2>
+                        <p>Giảm 5% trên tổng hóa đơn</p>
+                    </div>
+                </div>
+                <p class="suggested mobile">Bạn đã có tài khoản? <a href="#">Đăng nhập</a></p>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="./assets/scripts/primary.js"></script>
+    <script src="./assets/scripts/validate-primary.js"></script>
+</body>
+
+</html>

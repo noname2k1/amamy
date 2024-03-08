@@ -1,0 +1,458 @@
+.member-ship {
+  width: 65.5625rem;
+  height: 34.8125rem;
+  flex-shrink: 0;
+  margin-left: 3.75rem;
+  border-radius: 0.75rem;
+  background: var(--tuyt, #fff);
+  padding: 1.25rem 1.5rem 2rem;
+}
+.member-ship .benefit {
+  display: flex;
+  width: 61.6875rem;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary, #38b6ff);
+  background: var(--soft, #f7fbfd);
+}
+.member-ship .benefit h2 {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 1.2rem */
+}
+.member-ship .benefit p {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%; /* 1.4rem */
+  margin-top: 0.5rem;
+}
+.member-ship .membership-progress {
+  position: relative;
+  border-radius: 0.625rem;
+  background: var(--1, #d9f1ff);
+  width: 60.9375rem;
+  height: 0.375rem;
+  flex-shrink: 0;
+  margin-top: 3.13rem;
+  margin-bottom: 2.19rem;
+}
+.member-ship .membership-progress .thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 19.65569rem;
+  border-radius: 0.625rem;
+  background: var(--primary, #38b6ff);
+}
+.member-ship .membership-progress .rank-texts {
+  position: absolute;
+  bottom: calc(100% + 0.88rem);
+  display: flex;
+  align-items: center;
+}
+.member-ship .membership-progress .rank-texts span {
+  display: inline-block;
+  width: 2.17706rem;
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.member-ship .membership-progress .rank-texts span.copper {
+  margin-left: 7rem;
+}
+.member-ship .membership-progress .rank-texts span.silver {
+  margin-left: 23.3rem;
+}
+.member-ship .membership-progress .rank-texts span.gold {
+  margin-left: 23rem;
+}
+.member-ship .membership-progress .level {
+  position: absolute;
+  border-radius: 3.125rem;
+  border: 1px solid var(--tuyt, #fff);
+  background: var(--primary, #38b6ff);
+  width: 1.12681rem;
+  height: 1.13219rem;
+  flex-shrink: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.member-ship .membership-progress .level.active {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 3.125rem;
+  border: 1px solid var(--tuyt, #fff);
+}
+.member-ship .membership-progress .level.newbie.active {
+  background-color: #b5b0f1;
+}
+.member-ship .membership-progress .level.copper {
+  left: 9.56rem;
+}
+.member-ship .membership-progress .level.copper.active {
+  background: #e78b37;
+}
+.member-ship .membership-progress .level.silver {
+  left: 34.72rem;
+}
+.member-ship .membership-progress .level.silver.active {
+  background-color: #5684b9;
+}
+.member-ship .membership-progress .level.gold {
+  left: 99%;
+}
+.member-ship .membership-progress .level.gold.active {
+  background-color: #ffc700;
+}
+.member-ship .achieve {
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%; /* 1.225rem */
+  margin-bottom: 2.75rem;
+}
+.member-ship .achieve p:nth-child(2) {
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+}
+.member-ship .achieve span {
+  color: #e78b37;
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 140%;
+}
+.member-ship .rank-introduce h3 {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 1.25rem;
+}
+.member-ship .rank-introduce ul {
+  display: flex;
+}
+.member-ship .rank-introduce ul li {
+  border-radius: 0.5rem;
+  background: var(--soft, #f7fbfd);
+  cursor: pointer;
+  flex: 1;
+  margin-right: 1.27rem;
+}
+.member-ship .rank-introduce ul li:last-child {
+  margin-right: 0;
+}
+.member-ship .rank-introduce ul li > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: stretch;
+}
+.member-ship .rank-introduce ul li > div:first-child {
+  padding: 0.875rem 1.25rem;
+}
+.member-ship .rank-introduce ul li .newbie {
+  border-radius: 0.375rem;
+  background: linear-gradient(100deg, #b9b4cc 0%, #b5b0f1 56.65%, #eaf6fd 112.17%);
+}
+.member-ship .rank-introduce ul li .copper {
+  border-radius: 0.375rem;
+  background: linear-gradient(100deg, #e3b04c 0%, #d59923 56.65%, #fdf6ea 112.17%);
+  box-shadow: 2px 2px 12px 0px rgba(50, 73, 130, 0.1);
+}
+.member-ship .rank-introduce ul li .silver {
+  border-radius: 0.5rem;
+  background: linear-gradient(99deg, #5684b9 0%, #9ecdf8 50.5%, #b9d0dd 100%);
+  box-shadow: 4px 4px 8px 0px rgba(83, 118, 209, 0.1);
+}
+.member-ship .rank-introduce ul li .gold {
+  border-radius: 0.5rem;
+  background: linear-gradient(99deg, #ffc700 0%, #fed500 51.5%, #ffe999 100%);
+  box-shadow: 4px 4px 8px 0px rgba(83, 118, 209, 0.1);
+}
+.member-ship .rank-introduce ul li h4 {
+  color: var(--Grey-scale-White, #fff);
+  font-family: Montserrat;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 1.125rem */
+  text-transform: uppercase;
+}
+.member-ship .rank-introduce ul li h4 + p {
+  color: var(--tuyt, #fff);
+  font-family: Montserrat;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: 0.63rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.member-ship .rank-introduce ul li h4 + p img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: auto;
+  transition: 0.2s ease-in;
+}
+.member-ship .rank-introduce ul li .detail {
+  padding: 0.75rem 0.88rem 0.88rem;
+  transition: 0.2s linear;
+}
+.member-ship .rank-introduce ul li .detail h5 {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0.12rem;
+}
+.member-ship .rank-introduce ul li .detail h5 ~ h5 {
+  margin-bottom: 0.5rem;
+}
+.member-ship .rank-introduce ul li .detail p {
+  margin-bottom: 0.75rem;
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 1.125rem */
+}
+.member-ship .rank-introduce ul li .detail p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .member-ship {
+    margin-left: 0;
+    width: unset;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5.33333rem;
+    border-radius: unset;
+    height: unset;
+    padding: 0;
+    background: unset;
+  }
+  .split {
+    background: var(--tuyt, #fff);
+    padding: 4.26667rem 3.2rem;
+    border-radius: 3.2rem;
+  }
+  .member-ship .benefit {
+    border-radius: 1.06667rem;
+    border: 1px solid var(--primary, #38b6ff);
+    background: var(--soft, #f7fbfd);
+    display: flex;
+    padding: 4.26667rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+    width: unset;
+  }
+  .member-ship .benefit h2 {
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 2.93333rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%; /* 3.52rem */
+  }
+  .member-ship .benefit p {
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%; /* 4.48rem */
+    margin-top: 2.13333rem;
+  }
+  .member-ship .membership-progress {
+    width: unset;
+    height: 0.53333rem;
+    margin-top: 10.93rem;
+    margin-bottom: 4.53rem;
+  }
+  .member-ship .membership-progress .rank-texts span {
+    color: var(--text, #586693);
+    font-family: Montserrat;
+    font-size: 2.66667rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .member-ship .membership-progress .level.copper {
+    left: 16.27rem;
+  }
+  .member-ship .membership-progress .level.silver {
+    left: 49.6rem;
+  }
+  .member-ship .membership-progress .level {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-shrink: 0;
+  }
+  .member-ship .membership-progress .level.copper.active {
+    width: 2.66667rem;
+    height: 2.66667rem;
+    flex-shrink: 0;
+  }
+  .member-ship .membership-progress .rank-texts span.copper {
+    margin-left: 12rem;
+  }
+  .member-ship .membership-progress .rank-texts span.silver {
+    margin-left: 31.3rem;
+  }
+  .member-ship .membership-progress .rank-texts span.gold {
+    margin-left: 30rem;
+  }
+  .member-ship .membership-progress .thumb {
+    width: 26.13333rem;
+  }
+  .member-ship .achieve {
+    color: var(--text, #586693);
+    font-family: Montserrat;
+    font-size: 2.93333rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 4.4rem */
+    margin-bottom: 0;
+  }
+  .member-ship .achieve p:nth-child(2) {
+    color: #586693;
+    font-family: Montserrat;
+    font-size: 2.93333rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+  }
+  .member-ship .achieve span {
+    color: #e78b37;
+    font-family: Montserrat;
+    font-size: 2.93333rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+  }
+  .rank-introduce {
+    margin-top: 8.53rem;
+    margin-bottom: 6.67rem;
+  }
+  .member-ship .rank-introduce h3 {
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 4.27rem;
+  }
+  .member-ship .rank-introduce ul {
+    padding: 4.26667rem;
+    background: var(--tuyt, #fff);
+    border-radius: 3.2rem;
+    flex-direction: column;
+  }
+  .member-ship .rank-introduce ul li {
+    margin-right: 0;
+    background-color: transparent;
+    margin-bottom: 5.33rem;
+  }
+  .member-ship .rank-introduce ul li:last-child {
+    margin-bottom: 0;
+  }
+  .member-ship .rank-introduce ul li.active {
+    margin-bottom: 0;
+  }
+  .member-ship .rank-introduce ul li.active .detail {
+    display: flex;
+    padding: 5.33rem 0;
+  }
+  .member-ship .rank-introduce ul li > div:first-child {
+    display: flex;
+    padding: 3.73333rem 5.33333rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 1.6rem;
+  }
+  .member-ship .rank-introduce ul li h4 {
+    color: var(--Grey-scale-White, #fff);
+    font-family: Montserrat;
+    font-size: 5.33333rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 5.33333rem */
+    text-transform: uppercase;
+  }
+  .member-ship .rank-introduce ul li h4 + p {
+    color: var(--tuyt, #fff);
+    font-family: Montserrat;
+    font-size: 2.66667rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .member-ship .rank-introduce ul li h4 + p img {
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+  .member-ship .rank-introduce ul li .detail {
+    display: none;
+  }
+  .member-ship .rank-introduce ul li .detail h5 {
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 0.53rem;
+  }
+  .member-ship .rank-introduce ul li .detail p {
+    color: var(--text, #586693);
+    font-family: Montserrat;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 4.8rem */
+    margin-bottom: 5.33rem;
+  }
+  .member-ship .rank-introduce ul li .detail h5 ~ h5 {
+    margin-bottom: 2.13rem;
+  }
+  #root {
+    height: 275.2rem;
+  }
+}/*# sourceMappingURL=membership.css.map */

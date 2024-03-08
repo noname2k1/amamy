@@ -1,0 +1,314 @@
+.main-section .main {
+  top: 5.19rem;
+  justify-content: center;
+  margin-left: 0;
+  border-radius: 0.75rem;
+  border: 1px solid #e9ebf8;
+  background: #fff;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.05);
+  display: flex;
+  width: 87.5rem;
+  padding: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.main-section .main .form-container {
+  margin-left: 0;
+  padding: 0;
+  width: 100%;
+}
+.main-section .main .form-container h2 {
+  margin-bottom: 1.5rem;
+  color: #031c2b;
+  font-family: Montserrat;
+  font-size: 1.375rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.main-section .main .form-container .form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.main-section .main .form-container .form-group > div {
+  display: flex;
+  flex: 1;
+}
+.main-section .main .form-container .form-group > div .select-group {
+  user-select: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: 1px solid var(--black, #202432);
+  background: #fff;
+  display: flex;
+  padding: 0rem 1.75695rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
+  margin-top: 0 !important;
+  margin-bottom: 0;
+  position: relative;
+}
+.main-section .main .form-container .form-group > div .select-group .core {
+  border-radius: 0.58565rem;
+  display: flex;
+  padding: 1.0981rem 0rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+.main-section .main .form-container .form-group > div .select-group .core span {
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 1.02489rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.main-section .main .form-container .form-group > div .select-group .core img {
+  width: 1.75695rem;
+  height: 1.75695rem;
+}
+.main-section .main .form-container .form-group > div .select-group .core ul {
+  padding: 0.5rem 0;
+  display: none;
+  position: absolute;
+  border-radius: 0.58565rem;
+  top: calc(100% + 0.5rem);
+  border: 1px solid #e9ebf8;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  z-index: 1;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.05);
+}
+.main-section .main .form-container .form-group > div .select-group .core ul.active {
+  display: block;
+}
+.main-section .main .form-container .form-group > div .select-group .core ul li {
+  padding: 1.0981rem 1.75695rem;
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 1.02489rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.main-section .main .form-container .form-group > div .select-group .core ul li:hover {
+  background-color: #586693;
+  color: #fff;
+}
+.main-section .main .form-container .form-group > div .select-group:last-child {
+  margin-right: 0;
+}
+.main-section .main .form-container .form-group > div:first-child {
+  margin-bottom: 0.94rem;
+}
+.main-section .main .form-container .form-group > div:last-child {
+  margin-top: 1.94rem;
+}
+.main-section .main .form-container .form-group .total,
+.main-section .main .form-container .form-group .select-group {
+  margin-right: 3rem;
+}
+.main-section .main .form-container .form-group .total {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+  flex: 1;
+}
+.main-section .main .form-container .form-group .bar {
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary, #38b6ff);
+  display: flex;
+  padding: 1.125rem 1.5rem;
+  align-items: center;
+  align-self: stretch;
+  flex: 1;
+  margin-bottom: 0;
+}
+.main-section .main .form-container .form-group .bar p {
+  color: var(--primary, #38b6ff);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.main-section .main .form-container .form-group .bar p.old-price {
+  color: var(--text-3, #9098b1);
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration-line: line-through;
+  margin-left: 0.75rem;
+}
+.main-section .main .form-container .form-group .benefit {
+  margin-top: 0.5rem !important;
+  color: #179917;
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+}
+.main-section .main .form-container .form-group .benefit span:first-child {
+  margin-left: 1.5rem;
+  margin-right: auto;
+}
+.main-section .main .form-container button {
+  width: 40.75rem;
+  border-radius: 0.5rem;
+  background: #38b6ff;
+  display: flex;
+  height: 3.375rem;
+  padding: 1.125rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+}
+.main-section .main .form-container button img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 2rem;
+}
+
+@media (max-width: 767px) {
+  .main-section .main {
+    width: unset;
+    padding: 4.26667rem 3.2rem;
+  }
+  .main-section .main .form-container .form-group div {
+    flex-direction: column;
+  }
+  .main-section .main .form-container .form-group .select-group {
+    margin-bottom: 3.2rem;
+  }
+  .main-section .main .form-container .form-group .select-group,
+  .main-section .main .form-container .form-group .total {
+    margin-right: 0;
+  }
+  .main-section .main .form-container .form-group .bar {
+    cursor: pointer;
+    flex-direction: row;
+    display: flex;
+    width: 85.06667rem;
+    height: 12.26667rem;
+    padding: 4rem 3.2rem;
+    align-items: center;
+  }
+  .main-section .main .form-container .form-group .bar p:first-child {
+    color: var(--text-3, #9098b1);
+    font-family: Montserrat;
+    font-size: 2.66667rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .main-section .main .form-container .form-group .bar p.color {
+    color: var(--primary, #38b6ff);
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .main-section .main .form-container .form-group .bar p.old-price {
+    text-decoration: line-through;
+    margin-left: 3.2rem;
+    font-size: 2.66667rem;
+  }
+  .main-section .main .form-container .form-group .benefit {
+    margin-top: 2.13rem !important;
+    align-items: start;
+    color: #179917;
+    font-family: Montserrat;
+    font-size: 2.66667rem;
+    font-style: italic;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .main-section .main .form-container .form-group .benefit span {
+    margin-left: 3.2rem !important;
+  }
+  .main-section .main .form-container button {
+    width: 100%;
+    margin-top: 4.27rem;
+    border-radius: 1.06667rem;
+    height: unset;
+    align-items: center;
+    color: var(--tuyt, #fff);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    padding: 3.2rem 0rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+  }
+  .main-section .main .form-container button img {
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+  .main-section .main .form-container h2 {
+    margin-bottom: 1.33rem;
+    color: var(--primary, #38b6ff);
+    font-family: Montserrat;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .main-section .main .form-container .form-group > div:last-child {
+    margin-top: 3.2rem;
+  }
+  .main-section .main .form-container .form-group > div .select-group {
+    border-radius: 1.06667rem;
+    border: 1px solid var(--black, #202432);
+    display: flex;
+    padding: 0rem 3.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    margin-bottom: 3.2rem;
+  }
+  .main-section .main .form-container .form-group > div .select-group .core span {
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .main-section .main .form-container .form-group > div .select-group .core {
+    flex-direction: row;
+    padding: 4.13rem 0;
+  }
+  .main-section .main .form-container .form-group > div:first-child {
+    margin-bottom: 0;
+  }
+  .main-section .main .form-container .form-group > div .select-group:last-child.currency {
+    margin-bottom: 0;
+  }
+  .main-section .main .form-container .form-group > div .select-group .core ul {
+    padding: 3rem 0;
+  }
+  .main-section .main .form-container .form-group > div .select-group .core ul li {
+    padding: 3rem;
+    font-size: 3.8rem;
+  }
+  .main-section .main .form-container .form-group > div .select-group .core img {
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+}/*# sourceMappingURL=calculate-order.css.map */

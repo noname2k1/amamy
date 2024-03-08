@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/app.css">
+    <link rel="stylesheet" href="./assets/styles/auth.css">
+    <link rel="stylesheet" href="./assets/styles/forgot-password.css">
+    <link rel="stylesheet" href="./assets/styles/responsive.css">
+</head>
+
+<body>
+    <main id="root">
+        <header>
+            <div class="logo">
+                <a href="/">
+                    AMAMY
+                </a>
+            </div>
+            <nav class="menu large">
+                <ul>
+                    <li><a href="#">
+                            Theo dõi bưu kiện
+                        </a></li>
+                    <li>
+                        <a href="#">
+                            Tính giá vận chuyển
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Tin tức
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Hữu ích cho gửi hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Về Amamy
+                        </a>
+                        <img src="./assets/svgs/fi_chevron-down.svg" alt="">
+                    </li>
+                </ul>
+            </nav>
+            <div class="sub">
+                <button>
+                    <picture>
+                        <source media="(max-width:767px)" srcset="./assets/svgs/fi_search.svg">
+                        <img src="./assets/svgs/MagnifyingGlass.svg" alt="">
+                    </picture>
+                </button>
+                <button>
+                    <picture>
+                        <source media="(max-width:767px)" srcset="./assets/svgs/USER-mobile.svg">
+                        <img src="./assets/svgs/USER.svg" alt="">
+                    </picture>
+                </button>
+                <button class="mobile">
+                    <img src="./assets/svgs/fi_menu.svg" alt="">
+                </button>
+            </div>
+        </header>
+        <section class="main-section">
+            <div class="bg">
+                <img src="./assets/images/Rectangle 34625437.png" alt="">
+            </div>
+            <div class="main auth">
+                <form class="form-container auth-form">
+                    <h2 class="">Bạn quên mật khẩu?</h2>
+                    <div class="input-group email">
+                        <label for="email">Email*</label>
+                        <input type="email" name="email" id="email" placeholder="example@gmail.com">
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit">
+                        Lấy lại mật khẩu
+                    </button>
+                    <span class="or">Hoặc</span>
+                    <a href="#">Liên hệ bộ phận hỗ trợ</a>
+                </form>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- <script src="./assets/scripts/primary.js"></script> -->
+    <script src="./assets/scripts/validate-primary.js"></script>
+</body>
+
+</html>

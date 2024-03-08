@@ -1,0 +1,48 @@
+.main-section .main .auth-form {
+  width: 37.25rem;
+}
+
+.main-section .main .auth-form h2 {
+  margin-bottom: 1.75rem;
+}
+
+.main-section .main .form-container .double-input .input-group:first-child {
+  margin-right: 1rem;
+}
+
+.main-section .main .auth-form .input-group {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+.main-section .main .auth-form .input-group.confirm-password {
+  margin-bottom: 0;
+}
+
+.main-section .main .auth-form button {
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 767px) {
+  .main-section .main .auth-form {
+    width: 100%;
+  }
+  .main-section .main .form-container .double-input {
+    display: block;
+  }
+  .main-section .main .auth-form h2 {
+    margin-bottom: 3.2rem;
+  }
+  .main-section .main .form-container .double-input .input-group:first-child,
+  .main-section .main .auth-form .input-group,
+  .main-section .main .auth-form .input-group.confirm-password {
+    margin-bottom: 1.07rem;
+  }
+  .main-section .main .auth-form button {
+    margin-top: 0;
+    margin-bottom: 3.2rem;
+  }
+  .suggested {
+    bottom: -30rem;
+  }
+}/*# sourceMappingURL=register.css.map */

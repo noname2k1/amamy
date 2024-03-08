@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/app.css">
+    <link rel="stylesheet" href="./assets/styles/calculate-order.css">
+    <link rel="stylesheet" href="./assets/styles/responsive.css">
+</head>
+
+<body>
+    <main id="root">
+        <header>
+            <div class="logo">
+                <a href="/">
+                    AMAMY
+                </a>
+            </div>
+            <nav class="menu large">
+                <ul>
+                    <li><a href="#">
+                            Theo dõi bưu kiện
+                        </a></li>
+                    <li>
+                        <a href="#">
+                            Tính giá vận chuyển
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Tin tức
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Hữu ích cho gửi hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Về Amamy
+                        </a>
+                        <img src="./assets/svgs/fi_chevron-down.svg" alt="">
+                    </li>
+                </ul>
+            </nav>
+            <div class="sub">
+                <button>
+                    <picture>
+                        <source media="(max-width:767px)" srcset="./assets/svgs/fi_search.svg">
+                        <img src="./assets/svgs/MagnifyingGlass.svg" alt="">
+                    </picture>
+                </button>
+                <button>
+                    <picture>
+                        <source media="(max-width:767px)" srcset="./assets/svgs/USER-mobile.svg">
+                        <img src="./assets/svgs/USER.svg" alt="">
+                    </picture>
+                </button>
+                <button class="mobile">
+                    <img src="./assets/svgs/fi_menu.svg" alt="">
+                </button>
+            </div>
+        </header>
+        <section class="main-section">
+            <div class="bg">
+                <img src="./assets/images/Rectangle 34625437.png" alt="">
+            </div>
+            <div class="main">
+                <form class="form-container">
+                    <h2 class="large">Tính giá vận chuyển</h2>
+                    <div class="form-group">
+                        <div class="">
+                            <div class="select-group">
+                                <input type="hidden" name="from" id="from">
+                                <div class="core">
+                                    <span>Nơi gửi (quốc gia)</span>
+                                    <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
+                                    <ul class="">
+                                        <li data-value="vi">Việt Nam</li>
+                                        <li data-value="en">Anh</li>
+                                    </ul>
+                                </div>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="select-group">
+                                <input type="hidden" name="to" id="to">
+                                <div class="core">
+                                    <span>Nơi nhận (quốc gia)</span>
+                                    <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
+                                    <ul>
+                                        <li data-value="vi">Việt Nam</li>
+                                        <li data-value="en">Anh</li>
+                                    </ul>
+                                </div>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="select-group">
+                                <input type="hidden" name="weight" id="weight">
+                                <div class="core">
+                                    <span>Mức cân (kg)</span>
+                                    <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
+                                    <ul>
+                                        <li data-value="5">5kg</li>
+                                        <li data-value="10">10kg</li>
+                                        <li data-value="15">15kg</li>
+                                        <li data-value="20">20kg</li>
+                                    </ul>
+                                </div>
+                                <span class="error-message"></span>
+                            </div>
+                            <div class="select-group currency">
+                                <input type="hidden" name="currency" id="currency">
+                                <div class="core">
+                                    <span>Tiền tệ</span>
+                                    <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
+                                    <ul>
+                                        <li data-value="vnd">Việt Nam Đồng</li>
+                                        <li data-value="euro">Bảng Anh</li>
+                                    </ul>
+                                </div>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="price-view">
+                            <h2 class="mobile">Kết quả dự tính</h2>
+                            <div class="total">
+                                <div class="bar">
+                                    <p class="mobile">Bấm xem trước giá</p>
+                                    <p class="color d-none"><span class="large">Kết quả dự tính:</span> 3.000.000 VNĐ
+                                    </p>
+                                    <p class="old-price d-none">3.200.000 VNĐ</p>
+                                    <p class="color large"><span class="large">Kết quả dự tính:</span> 3.000.000 VNĐ
+                                    </p>
+                                    <p class="old-price large">3.200.000 VNĐ</p>
+                                </div>
+                                <div class="benefit d-none">
+                                    <span>Tiết kiệm được 200.000 VNĐ</span>
+                                    <span>Bạn được giảm 3% trên tổng hoá đơn</span>
+                                </div>
+                            </div>
+                            <button>
+                                Nhận tư vấn&nbsp;<span class="mobile">miễn phí</span> <img
+                                    src="./assets/svgs/fi_chevron-right.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="q-and-a mobile">
+                    <span>Hỏi đáp</span><img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="./assets/scripts/calculate-order.js"></script>
+    <script src="./assets/scripts/validate-select.js"></script>
+</body>
+
+</html>

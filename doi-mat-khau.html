@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./assets/styles/index.css">
     <link rel="stylesheet" href="./assets/styles/app.css">
     <link rel="stylesheet" href="./assets/styles/responsive.css">
+    <link rel="stylesheet" href="./assets/styles/responsive-form.css">
 </head>
 
 <body>
@@ -68,11 +69,12 @@
             </div>
         </header>
         <section class="main-section">
+            <a href="/" class="come-back mobile"><img src="./assets/svgs/back.svg" alt=""><span>Đổi mật khẩu</span></a>
             <div class="bg">
                 <img src="./assets/images/Rectangle 34625437.png" alt="">
             </div>
             <div class="main">
-                <div class="user">
+                <div class="user large">
                     <div class="rank-infor">
                         <h1>Xin chào, Ngọc Nguyễn</h1>
                         <div class="line"></div>
@@ -90,14 +92,7 @@
                     </div>
                     <nav class="nav">
                         <ul>
-                            <li class="active large">
-                                <a href="./tai-khoan-cua-toi.html">
-                                    <img src="./assets/svgs/USER-mobile.svg" alt="">
-                                    <img src="./assets/svgs/USER_1.svg" alt="">
-                                    <span>Tài khoản của tôi</span>
-                                </a>
-                            </li>
-                            <li class="mobile">
+                            <li>
                                 <a href="./tai-khoan-cua-toi.html">
                                     <img src="./assets/svgs/USER-mobile.svg" alt="">
                                     <img src="./assets/svgs/USER_1.svg" alt="">
@@ -105,20 +100,20 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="./danh-sach-van-don.html">
                                     <img src="./assets/svgs/file-color.svg" alt=""><img src="./assets/svgs/file.svg"
                                         alt="">
                                     <span>Danh sách vận đơn</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="./membership.html">
                                     <img src="./assets/svgs/star-color.svg" alt="">
                                     <img src="./assets/svgs/Star.svg" alt="">
                                     <span>Hạng thành viên</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="./doi-mat-khau.html">
                                     <img src="./assets/svgs/fi_lock-color.svg" alt="">
                                     <img src="./assets/svgs/fi_lock.svg" alt="">
@@ -135,51 +130,55 @@
                         </ul>
                     </nav>
                 </div>
-                <form class="form-container large" id="my-account">
-                    <h2>Thông tin thành viên</h2>
-                    <div class="double-input">
-                        <div class="input-group">
-                            <label for="fullName">Họ và tên</label>
-                            <input disabled type="text" name="fullName" id="fullName" placeholder="Ngọc Nguyễn">
-                            <span class="error-message"></span>
+                <form class="form-container change-password-form">
+                    <h2 class="large">Đổi mật khẩu</h2>
+                    <div class="user-editable mobile">
+                        <div class="avatar">
+                            <img src="./assets/images/Rectangle 34625436.png" alt="">
+                            <img src="./assets/svgs/EDIT.svg" alt="">
                         </div>
-                        <div class="input-group">
-                            <label for="phone">Số điện thoại</label>
-                            <input disabled type="text" name="phone" placeholder="098630192" id="phone"> <span
-                                class="error-message"></span>
-                        </div>
+                        <p>Ngọc Nguyễn</p>
                     </div>
                     <div class="input-group">
-                        <label for="email">Email đăng nhập*</label>
-                        <input disabled type="email" placeholder="example@gmail.com" id="email"> <span
-                            class="error-message"></span>
-                    </div>
-                    <div class="input-group">
-                        <label for="address-vi">Địa chỉ tại Việt Nam*</label>
-                        <input disabled type="text" name="address-vi" id="address-vi"
-                            placeholder="số 16 đường Hoa Phượng, phường Thành Tô, quận Hải An, Hải Phòng">
+                        <label for="current-password">Mật khẩu cũ*</label>
+                        <div class="input-wrapper">
+                            <input type="password" placeholder="**********" name="current-password"
+                                id="current-password">
+                            <img class="show-pwd" src="./assets/svgs/fi_eye.svg" alt="">
+                            <img class="hide-pwd" src="./assets/svgs/fi_eye-off.svg" alt="">
+                        </div>
                         <span class="error-message"></span>
                     </div>
                     <div class="input-group">
-                        <label for="addresss-foreign">Địa chỉ tại nước ngoài*</label>
-                        <input disabled type="text" id="addresss-foreign" name="addresss-foreign"
-                            placeholder="2464 Royal Ln. Mesa, New Jersey 45463, USA">
+                        <label for="new-password">Mật khẩu mới*</label>
+                        <div class="input-wrapper">
+                            <input type="password" name="new-password" id="new-password" placeholder="**********">
+                            <img class="show-pwd" src="./assets/svgs/fi_eye.svg" alt="">
+                            <img class="hide-pwd" src="./assets/svgs/fi_eye-off.svg" alt="">
+                        </div>
                         <span class="error-message"></span>
                     </div>
-                    <button type="submit" class="edit-on">
-                        <span class="mobile">Sửa</span>
-                        <span class="large">Chỉnh sửa thông tin</span>
-                    </button>
-                    <button type="submit" id="edit-btn" disabled>
-                        Lưu thông tin
+                    <div class="input-group">
+                        <label for="confirm-password">Xác nhận mật khẩu mới*</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="confirm-password" name="confirm-password"
+                                placeholder="**********">
+                            <img class="show-pwd" src="./assets/svgs/fi_eye.svg" alt="">
+                            <img class="hide-pwd" src="./assets/svgs/fi_eye-off.svg" alt="">
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+                    <button type="submit" id="change-password-btn"><span class="text-changeable">
+                            <span class="large">Đổi mật khẩu</span>
+                            <span class="mobile">Lưu mật khẩu</span>
                     </button>
                 </form>
             </div>
         </section>
     </main>
 
-
-    <script src="./assets/scripts/index.js"></script>
+    <script src="./assets/scripts/primary.js"></script>
+    <script src="./assets/scripts/validate-primary.js"></script>
 </body>
 
 </html>

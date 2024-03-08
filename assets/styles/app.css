@@ -1,0 +1,376 @@
+#root {
+  min-height: 100vh;
+  background: var(--soft, #f7fbfd);
+}
+
+header {
+  display: flex;
+  height: 6.58858rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+header .logo {
+  margin-right: 1.5rem;
+  display: flex;
+  padding: 0.375rem 2rem 0.375rem 6.25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+header .logo a {
+  color: var(--primary, #38b6ff);
+  font-family: Montserrat;
+  font-size: 2.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+header .menu {
+  display: flex;
+  width: 60.0625rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+header .menu ul {
+  display: flex;
+  flex: 1;
+  padding-right: 1.1713rem;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+header .menu ul li {
+  display: flex;
+  align-items: center;
+}
+header .menu ul li a {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+header .menu ul li a + img {
+  margin-left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+header .sub {
+  display: flex;
+  margin-right: 6.25rem;
+}
+header .sub button:first-child {
+  margin-right: 1rem;
+}
+header .sub button img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.main-section {
+  position: relative;
+  background: var(--soft, #f7fbfd);
+}
+.main-section .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.main-section .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.main-section .main {
+  position: absolute;
+  display: flex;
+  top: 1.88rem;
+  left: 6.25rem;
+  right: 6.25rem;
+}
+.main-section .main .user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+.main-section .main .user h1 {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 1.05rem */
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+.main-section .main .user .line {
+  background: #ececec;
+  width: 100%;
+  height: 0.0625rem;
+  margin-bottom: 0.75rem;
+}
+.main-section .main .user .rank-infor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.75rem;
+  background: var(--trng-tinh-khi, #fff);
+  margin-bottom: 0.5rem;
+}
+.main-section .main .user .rank-infor .infor {
+  display: flex;
+  border-radius: 0.375rem;
+  background: linear-gradient(100deg, #f7c971 0%, #d59923 56.65%, #fdf6ea 112.17%);
+  box-shadow: 2px 2px 12px 0px rgba(50, 73, 130, 0.1);
+  display: flex;
+  padding: 1rem 1.25rem;
+  align-items: center;
+  align-self: stretch;
+}
+.main-section .main .user .rank-infor .avatar-wrapper {
+  position: relative;
+  margin-right: 0.625rem;
+  cursor: pointer;
+}
+.main-section .main .user .rank-infor .avatar-wrapper img:first-child {
+  border-radius: 50%;
+}
+.main-section .main .user .rank-infor .avatar-wrapper img.edit-btn {
+  position: absolute;
+  right: 0;
+}
+.main-section .main .user .rank-infor .text {
+  color: #fff;
+}
+.main-section .main .user .rank-infor .text p {
+  font-family: Montserrat;
+  margin-bottom: 0.5rem;
+}
+.main-section .main .user .rank-infor .text p:first-child {
+  color: var(--tuyt, #fff);
+  font-size: 0.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 0.6rem */
+}
+.main-section .main .user .rank-infor .text p:nth-child(2) {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+.main-section .main .user .rank-infor .text p:last-child {
+  color: var(--tuyt, #fff);
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 0.75rem */
+  margin-bottom: 0;
+}
+.main-section .main .user nav.nav {
+  border-radius: 0.75rem;
+  background: var(--trng-tinh-khi, #fff);
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+.main-section .main .user nav.nav ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: stretch;
+  margin-bottom: 0.37rem;
+  border-radius: 0.25rem;
+  background: var(--soft, #f7fbfd);
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+.main-section .main .user nav.nav ul li:last-child {
+  margin-bottom: 0;
+}
+.main-section .main .user nav.nav ul li.active, .main-section .main .user nav.nav ul li:hover {
+  background: var(--primary, #38b6ff);
+}
+.main-section .main .user nav.nav ul li.active a span, .main-section .main .user nav.nav ul li:hover a span {
+  color: var(--tuyt, #fff);
+}
+.main-section .main .user nav.nav ul li.active a img:nth-child(1), .main-section .main .user nav.nav ul li:hover a img:nth-child(1) {
+  display: none;
+}
+.main-section .main .user nav.nav ul li.active a img:nth-child(2), .main-section .main .user nav.nav ul li:hover a img:nth-child(2) {
+  display: flex;
+}
+.main-section .main .user nav.nav ul li a {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.875rem 0.75rem;
+}
+.main-section .main .user nav.nav ul li a img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: cover;
+  margin-right: 0.75rem;
+}
+.main-section .main .user nav.nav ul li a img:nth-child(2) {
+  display: none;
+}
+.main-section .main .user nav.nav ul li a span {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 1.05rem */
+  margin-top: 0.1rem;
+}
+.main-section .main .form-container {
+  display: flex;
+  width: 59.0625rem;
+  padding: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0.75rem;
+  background: #fff;
+  margin-left: 3.75rem;
+  background: #fff;
+}
+.main-section .main .form-container h2 {
+  color: var(--primary, #38b6ff);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.main-section .main .form-container .double-input {
+  display: flex;
+  width: 100%;
+}
+.main-section .main .form-container .double-input .input-group:first-child {
+  margin-right: 2.25rem;
+}
+.main-section .main .form-container .input-group {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.main-section .main .form-container .input-group label {
+  margin-bottom: 0.5rem;
+  color: var(--text, #586693);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.main-section .main .form-container .input-group input {
+  color: var(--black, #202432);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border-radius: 0.5rem;
+  border: 1px solid var(--text-3, #9098b1);
+  background: #fff;
+  display: flex;
+  height: 2.875rem;
+  padding: 0.9375rem 1.25rem;
+  align-items: center;
+  gap: 0.625rem;
+  align-self: stretch;
+  outline: none;
+}
+.main-section .main .form-container .input-group input::placeholder {
+  color: var(--text-2, #7887b6);
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.main-section .main .form-container .input-group input:focus {
+  border: 1px solid #000;
+}
+.main-section .main .form-container .input-group span.error-message {
+  color: var(--Main-color-Red, #f5222d);
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
+  margin-top: 0.5rem;
+}
+.main-section .main .form-container button {
+  border-radius: 0.25rem;
+  background: var(--primary, #38b6ff);
+  display: flex;
+  width: 22.75rem;
+  padding: 1rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--tuyt, #fff);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.main-section .main .form-container button#edit-btn {
+  display: none;
+}
+
+.main-section .main .form-container.change-password-form {
+  width: 32.6875rem;
+}
+
+.main-section .main .form-container button#change-password-btn {
+  display: flex;
+  padding: 1rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  width: unset;
+}
+
+.change-password-form .input-wrapper input {
+  outline: none;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  padding-right: 1.25rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--text-3, #9098b1);
+  background: var(--tuyt, #fff);
+}
+.input-wrapper:focus-within {
+  border: 1px solid #000;
+}
+.input-wrapper input {
+  flex: 1;
+  border: none !important;
+}
+.input-wrapper img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.hide-pwd {
+  display: none;
+}/*# sourceMappingURL=app.css.map */

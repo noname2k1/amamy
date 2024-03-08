@@ -6,7 +6,6 @@
 
 html {
     font-size: 1vw;
-    font-family: 'PN Regular';
 }
 
 @media (min-width:1600px) {
@@ -37,7 +36,9 @@ html {
 
 
 
-:root {}
+:root {
+    --primary: #38B6FF
+}
 
 
 
@@ -45,7 +46,7 @@ ul {
     list-style: none;
 }
 
-ul li a {
+a {
     text-decoration: none;
 }
 
@@ -92,6 +93,11 @@ button {
         display: block;
     }
 
+
+    .tablet {
+        display: none;
+    }
+
     .large {
         display: none !important;
     }
@@ -107,9 +113,6 @@ button {
         display: block;
     }
 
-    .large {
-        display: none !important;
-    }
 }
 
 @media (min-width:1024px) {

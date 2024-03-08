@@ -1,0 +1,143 @@
+@media (max-width: 767px) {
+  .main-section .main {
+    top: 13.33rem;
+    display: flex;
+  }
+  .main-section .main .form-container {
+    border-radius: 3.2rem;
+    border: 1px solid #e9ebf8;
+    background: #fff;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.05);
+    display: flex;
+    width: 93.6rem;
+    padding: 1.06667rem 4.26667rem 5.33333rem 4.26667rem;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+  .user-editable {
+    display: flex;
+    width: 100%;
+    margin-bottom: 3.2rem;
+    margin: 3.2rem 0 6.4rem;
+    align-items: center;
+  }
+  .user-editable .avatar {
+    width: 11.73333rem;
+    height: 11.73333rem;
+    flex-shrink: 0;
+    position: relative;
+    margin-right: 3.2rem;
+    cursor: pointer;
+  }
+  .user-editable .avatar img:first-child {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .user-editable .avatar img:nth-child(2) {
+    width: 4.26rem;
+    height: 4.26rem;
+    position: absolute;
+    right: -1rem;
+  }
+  .user-editable p {
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 120%; /* 3.84rem */
+  }
+  .main-section .main .form-container .double-input {
+    flex-direction: column;
+  }
+  .main-section .main .form-container .input-group label {
+    margin-bottom: 2.13rem;
+    color: var(--text, #586693);
+    font-family: Montserrat;
+    font-size: 3.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .main-section .main .form-container .input-group input {
+    border-radius: 1.06667rem;
+    border: 1px solid var(--Grey-scale-Grey-80, #c3cad9);
+    background: var(--Text-color-White, #fff);
+    display: flex;
+    height: 12.26667rem;
+    padding: 4rem 4.27rem;
+    align-items: center;
+    align-self: stretch;
+    color: var(--black, #202432);
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  .main-section .main .form-container .input-group input::placeholder {
+    color: var(--text-2, #7887b6);
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    line-height: 3.73333rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 1rem;
+  }
+  .main-section .main .form-container .input-group {
+    margin-bottom: 4.27rem;
+  }
+  .main-section .main .form-container button {
+    display: flex;
+    padding: 3.73333rem 2.66667rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+    border-radius: 1.06667rem;
+    background: var(--primary, #38b6ff);
+    color: var(--tuyt, #fff);
+    font-family: Montserrat;
+    font-size: 4.26667rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .main-section .main .form-container button#edit-btn {
+    display: none;
+  }
+  .main-section .main .form-container.change-password-form {
+    width: 100%;
+  }
+  .input-wrapper {
+    padding-right: 4.27rem;
+  }
+  .input-wrapper img {
+    width: 6.4rem;
+    height: 6.4rem;
+  }
+  .main-section .main .form-container button#change-password-btn {
+    border-radius: 1.06667rem;
+    background: var(--primary, #38b6ff);
+    display: flex;
+    height: 12.8rem;
+    padding: 4rem 2.66667rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2.66667rem;
+    align-self: stretch;
+    color: var(--tuyt, #fff);
+    font-family: Montserrat;
+    font-size: 3.73333rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .main-section .main .form-container .input-group span.error-message {
+    font-size: 3rem;
+    margin-top: 1.5rem;
+  }
+}/*# sourceMappingURL=responsive-form.css.map */
