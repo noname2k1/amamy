@@ -82,39 +82,35 @@
                                 <div class="core">
                                     <span>Nơi gửi (quốc gia)</span>
                                     <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
-                                    <ul class="">
-                                        <li data-value="vi">Việt Nam</li>
-                                        <li data-value="en">Anh</li>
+                                </div>
+                                <div class="list-wrapper">
+                                    <ul>
+                                        <li data-value="vi"><img src="./assets/svgs/vietnam_flag.svg" alt="">Việt Nam
+                                        </li>
+                                        <li data-value="ger"><img src="./assets/svgs/Germany_flag-2.svg" alt="">Đức</li>
                                     </ul>
                                 </div>
                                 <span class="error-message"></span>
                             </div>
                             <div class="select-group">
                                 <input type="hidden" name="to" id="to">
+                                <div class="list-wrapper">
+                                    <ul>
+                                        <li data-value="vi"><img src="./assets/svgs/vietnam_flag.svg" alt="">Việt Nam
+                                        </li>
+                                        <li data-value="en"><img src="./assets/svgs/Anh.png.webp" alt="">Anh</li>
+                                    </ul>
+                                </div>
                                 <div class="core">
                                     <span>Nơi nhận (quốc gia)</span>
                                     <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
-                                    <ul>
-                                        <li data-value="vi">Việt Nam</li>
-                                        <li data-value="en">Anh</li>
-                                    </ul>
                                 </div>
                                 <span class="error-message"></span>
                             </div>
                         </div>
                         <div class="">
-                            <div class="select-group">
-                                <input type="hidden" name="weight" id="weight">
-                                <div class="core">
-                                    <span>Mức cân (kg)</span>
-                                    <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
-                                    <ul>
-                                        <li data-value="5">5kg</li>
-                                        <li data-value="10">10kg</li>
-                                        <li data-value="15">15kg</li>
-                                        <li data-value="20">20kg</li>
-                                    </ul>
-                                </div>
+                            <div class="weight-wrapper">
+                                <input type="number" name="weight" min="0" id="weight" placeholder="Mức kg (kg)">
                                 <span class="error-message"></span>
                             </div>
                             <div class="select-group currency">
@@ -122,9 +118,12 @@
                                 <div class="core">
                                     <span>Tiền tệ</span>
                                     <img src="./assets/svgs/fi_chevron-down(1).svg" alt="">
+                                </div>
+                                <div class="list-wrapper">
                                     <ul>
-                                        <li data-value="vnd">Việt Nam Đồng</li>
-                                        <li data-value="euro">Bảng Anh</li>
+                                        <li data-value="vnd">Vietnamdong</li>
+                                        <li data-value="usd">USD</li>
+                                        <li data-value="euro">Euro</li>
                                     </ul>
                                 </div>
                                 <span class="error-message"></span>
@@ -135,20 +134,27 @@
                             <div class="total">
                                 <div class="bar">
                                     <p class="mobile">Bấm xem trước giá</p>
-                                    <p class="color d-none"><span class="large">Kết quả dự tính:</span> 3.000.000 VNĐ
+                                    <p class="color d-none"><span class="large">Kết quả dự tính:</span>
+                                        <span class="price"></span>
                                     </p>
-                                    <p class="old-price d-none">3.200.000 VNĐ</p>
-                                    <p class="color large"><span class="large">Kết quả dự tính:</span> 3.000.000 VNĐ
+                                    <p class="old-price d-none"><span class="old-price"></span> <span
+                                            class="currency"></span></p>
+                                    <p class="color large"><span class="large">Kết quả dự tính:</span> <span
+                                            class="price"></span>
                                     </p>
-                                    <p class="old-price large">3.200.000 VNĐ</p>
+                                    <p class="old-price large"><span class="old-price"></span></p>
                                 </div>
-                                <div class="benefit d-none">
-                                    <span>Tiết kiệm được 200.000 VNĐ</span>
-                                    <span>Bạn được giảm 3% trên tổng hoá đơn</span>
+                                <div class="benefit d-none mobile">
+                                    <span>Tiết kiệm được <span class="discount"></span></span>
+                                    <span class="benefit-noti">Bạn được giảm <span class="discount-percentage">3</span>%
+                                        trên tổng hoá
+                                        đơn</span>
                                 </div>
                                 <div class="benefit large">
-                                    <span>Tiết kiệm được 200.000 VNĐ</span>
-                                    <span>Bạn được giảm 3% trên tổng hoá đơn</span>
+                                    <span>Tiết kiệm được <span class="discount"></span></span>
+                                    <span class="benefit-noti">Bạn được giảm <span class="discount-percentage">3</span>%
+                                        trên tổng hoá
+                                        đơn</span>
                                 </div>
                             </div>
                             <button>

@@ -43,11 +43,22 @@ header .menu ul {
   align-items: center;
   flex-shrink: 0;
 }
-header .menu ul li {
+header .menu ul > li {
   display: flex;
   align-items: center;
+  position: relative;
 }
-header .menu ul li a {
+header .menu ul > li:hover > a {
+  color: var(--primary, #38b6ff);
+}
+header .menu ul > li:hover img {
+  filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+}
+header .menu ul > li:hover ul {
+  display: flex;
+}
+header .menu ul > li a {
+  transition: 0.3s linear;
   color: var(--black, #202432);
   font-family: Montserrat;
   font-size: 1rem;
@@ -55,10 +66,53 @@ header .menu ul li a {
   font-weight: 700;
   line-height: normal;
 }
-header .menu ul li a + img {
+header .menu ul > li a + img {
+  transition: 0.3s linear;
   margin-left: 0.5rem;
   width: 1.5rem;
   height: 1.5rem;
+}
+header .menu ul > li::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -1.5rem;
+  width: 200%;
+  height: 1rem;
+}
+header .menu ul > li ul {
+  display: none;
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: -1.5rem;
+  z-index: 1;
+  background-color: #fff;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 0;
+  border-radius: 0.75rem;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+header .menu ul > li ul li {
+  padding-left: 0.25rem;
+  transition: 0.2s linear;
+  width: 100%;
+}
+header .menu ul > li ul li:hover {
+  background-color: #192a3d;
+}
+header .menu ul > li ul li:hover a {
+  color: #fff;
+}
+header .menu ul > li ul li a {
+  font-family: "Montserrat", Sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 1rem 1.75rem;
+  width: 100%;
+  display: block;
 }
 header .sub {
   display: flex;

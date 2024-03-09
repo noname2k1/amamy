@@ -165,6 +165,7 @@
             display: flex;
             // align-items: center;
             li {
+                user-select: none;
                 border-radius: 0.5rem;
                 background: var(--soft, #f7fbfd);
                 cursor: pointer;
@@ -251,14 +252,40 @@
                         }
                     }
                 }
+                .accordion {
+                    p {
+                        img.icon {
+                            transition: transform 0.3s;
+                            transform: scaleY(1);
+                        }
+                    }
+                }
+                &.active {
+                    .accordion {
+                        p {
+                            img.icon {
+                                transform: scaleY(-1);
+                            }
+                        }
+                    }
+                    .detail {
+                        max-height: 10rem;
+                        padding-top: 0.75rem;
+                        padding-bottom: 0.75rem;
+                    }
+                }
                 .detail {
-                    padding: 0.75rem 0.88rem 0.88rem;
-
+                    max-height: 0;
+                    overflow: hidden;
+                    padding-left: 0.88rem;
+                    padding-right: 0.88rem;
+                    padding-top: 0;
+                    padding-bottom: 0;
                     // padding-top: 0;
                     // max-height: 0;
                     // opacity: 0;
                     // overflow: hidden;
-                    transition: 0.2s linear;
+                    transition: max-height 0.3s;
                     h5 {
                         color: var(--black, #202432);
                         font-family: Montserrat;
@@ -443,12 +470,20 @@
         margin-right: 0;
         background-color: transparent;
         margin-bottom: 5.33rem;
+
+        .detail {
+            transition: max-height 0.3s linear;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+        }
         &:last-child {
             margin-bottom: 0;
         }
         &.active {
             margin-bottom: 0;
             .detail {
+                max-height: 36rem;
                 display: flex;
                 padding: 5.33rem 0;
             }
@@ -484,9 +519,6 @@
     .member-ship .rank-introduce ul li h4 + p img {
         width: 6.4rem;
         height: 6.4rem;
-    }
-    .member-ship .rank-introduce ul li .detail {
-        display: none;
     }
 
     .member-ship .rank-introduce ul li .detail h5 {

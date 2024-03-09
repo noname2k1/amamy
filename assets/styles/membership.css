@@ -156,6 +156,7 @@
   display: flex;
 }
 .member-ship .rank-introduce ul li {
+  user-select: none;
   border-radius: 0.5rem;
   background: var(--soft, #f7fbfd);
   cursor: pointer;
@@ -222,9 +223,26 @@
   margin-left: auto;
   transition: 0.2s ease-in;
 }
+.member-ship .rank-introduce ul li .accordion p img.icon {
+  transition: transform 0.3s;
+  transform: scaleY(1);
+}
+.member-ship .rank-introduce ul li.active .accordion p img.icon {
+  transform: scaleY(-1);
+}
+.member-ship .rank-introduce ul li.active .detail {
+  max-height: 10rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 .member-ship .rank-introduce ul li .detail {
-  padding: 0.75rem 0.88rem 0.88rem;
-  transition: 0.2s linear;
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 0.88rem;
+  padding-right: 0.88rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height 0.3s;
 }
 .member-ship .rank-introduce ul li .detail h5 {
   color: var(--black, #202432);
@@ -388,6 +406,12 @@
     background-color: transparent;
     margin-bottom: 5.33rem;
   }
+  .member-ship .rank-introduce ul li .detail {
+    transition: max-height 0.3s linear;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
   .member-ship .rank-introduce ul li:last-child {
     margin-bottom: 0;
   }
@@ -395,6 +419,7 @@
     margin-bottom: 0;
   }
   .member-ship .rank-introduce ul li.active .detail {
+    max-height: 36rem;
     display: flex;
     padding: 5.33rem 0;
   }
@@ -427,9 +452,6 @@
   .member-ship .rank-introduce ul li h4 + p img {
     width: 6.4rem;
     height: 6.4rem;
-  }
-  .member-ship .rank-introduce ul li .detail {
-    display: none;
   }
   .member-ship .rank-introduce ul li .detail h5 {
     color: var(--black, #202432);
