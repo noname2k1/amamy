@@ -431,6 +431,9 @@
   }
   .main-section .main .form-container .form-group > div .select-group .list-wrapper.active {
     max-height: 30rem;
+    border-radius: 1.067777rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
   .main-section .main .form-container .form-group > div .select-group .list-wrapper.active ul {
     max-height: 28rem;
