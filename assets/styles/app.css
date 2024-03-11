@@ -222,6 +222,7 @@ header .sub button img {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 1.3rem;
+  white-space: nowrap;
 }
 .main-section .main .user .rank-infor .text p:last-child {
   color: var(--tuyt, #fff);
@@ -230,6 +231,7 @@ header .sub button img {
   font-weight: 600;
   line-height: 120%; /* 0.75rem */
   margin-bottom: 0;
+  white-space: nowrap;
 }
 .main-section .main .user nav.nav {
   border-radius: 0.75rem;

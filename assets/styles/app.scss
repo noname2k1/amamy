@@ -233,6 +233,7 @@ header {
                             text-transform: uppercase;
                             font-weight: 600;
                             font-size: 1.3rem;
+                            white-space: nowrap;
                         }
                         &:last-child {
                             color: var(--tuyt, #fff);
@@ -241,6 +242,7 @@ header {
                             font-weight: 600;
                             line-height: 120%; /* 0.75rem */
                             margin-bottom: 0;
+                            white-space: nowrap;
                         }
                     }
                 }
