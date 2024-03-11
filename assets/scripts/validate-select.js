@@ -56,10 +56,16 @@ menus.forEach((menu) => {
 
 document.querySelector('form button').onclick = function (e) {
     e.preventDefault();
+    console.log('nhận tư vấn');
 };
 
 window.addEventListener('click', function (e) {
-    if (e.target.id == 'root') {
+    // console.log(e.target);
+    if (
+        !e.target.matches('.core') &&
+        !e.target.matches('.core img') &&
+        !e.target.matches('.core span')
+    ) {
         menus.forEach((menu) => menu.classList.remove('active'));
     }
 });

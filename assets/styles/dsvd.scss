@@ -21,7 +21,8 @@ header {
 }
 
 .main-section .main {
-    right: 21.5rem;
+    right: unset;
+    margin-left: 21rem;
     justify-content: flex-end;
 }
 
@@ -106,6 +107,9 @@ header {
                             cursor: pointer;
                             width: 1rem;
                             height: 1rem;
+                            &.copied {
+                                display: none;
+                            }
                         }
                     }
                     button {
@@ -123,6 +127,11 @@ header {
                         font-style: normal;
                         font-weight: 600;
                         line-height: normal;
+                        &:hover {
+                            transition: 0.2s ease-out;
+                            color: #fdfdfd;
+                            background-color: #4cd1ff;
+                        }
                     }
                 }
                 .middle {
@@ -316,6 +325,10 @@ nav.pagination {
         width: 100%;
     }
 
+    .main-section .main.type-2 {
+        margin-left: 0;
+    }
+
     .content-container .content-wrapper ul li {
         border-radius: 2.13333rem;
         background: var(--tuyt, #fff);
@@ -365,6 +378,9 @@ nav.pagination {
         margin-left: 1.07rem;
         width: 4.26667rem;
         height: 4.26667rem;
+        &.copied {
+            display: none;
+        }
     }
     .content-container .content-wrapper ul li .top button {
         border-radius: 1.6rem;

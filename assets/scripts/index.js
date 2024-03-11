@@ -21,7 +21,7 @@ if (editOnBtn) {
 const namePattern =
     /^(?![\d\s!@#$%^&*()\-=_+[\]{};':"\\|,.<>?`~])[^\d!@#$%^&*()\-=_+[\]{};':"\/\\|,.<>?`~]{1,100}$/u;
 const phonePattern = /^\d{7,}$/;
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const emailPattern = /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\.[a-zA-Z]{2,4}$/;
 const addressPattern = /^[\p{L}\d\s.,-]+$/u;
 
 const myAccountValidates = [
@@ -93,6 +93,7 @@ document.querySelectorAll('input').forEach((input) => {
             }
         }
         if (input.name === 'email') {
+            console.log('email');
             if (!emailPattern.test(value)) {
                 inputElement.parentNode.querySelector(
                     '.error-message'
@@ -186,6 +187,7 @@ const validateInputs = () => {
             }
         }
         if (input.name === 'email') {
+            console.log('email');
             if (!emailPattern.test(value)) {
                 input.parentNode.querySelector('.error-message').textContent =
                     'Dữ liệu nhập không hợp lệ';

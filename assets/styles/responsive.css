@@ -46,6 +46,9 @@
     top: 5.33rem;
     display: block;
   }
+  .main-section .main .user {
+    width: unset;
+  }
   .main-section .main .user .rank-infor {
     border-radius: 3.2rem;
     border: 1px solid #e9ebf8;

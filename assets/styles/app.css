@@ -149,6 +149,7 @@ header .sub button img {
   right: 6.25rem;
 }
 .main-section .main .user {
+  width: 18.1875rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -171,6 +172,7 @@ header .sub button img {
   margin-bottom: 0.75rem;
 }
 .main-section .main .user .rank-infor {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

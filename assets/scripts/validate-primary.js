@@ -14,7 +14,7 @@ const VALIDATES = [
     {
         name: 'email',
         isValid: false,
-        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        pattern: /^[a-zA-Z0-9. _-]+@[a-zA-Z0-9. -]+\.[a-zA-Z]{2,4}$/
     },
     {
         name: 'password',
