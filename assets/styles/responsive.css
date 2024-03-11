@@ -163,15 +163,15 @@
   }
   .come-back.mobile {
     position: absolute;
-    top: 3.73rem;
-    left: 4.27rem;
+    top: 5rem;
+    left: 6.27rem;
     color: #fff;
     z-index: 1;
     display: flex;
     align-items: center;
   }
   .come-back.mobile img {
-    height: 6.4rem;
+    height: 4rem;
     object-fit: cover;
   }
   .come-back.mobile span {
@@ -181,7 +181,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 120%; /* 3.2rem */
-    margin-left: 2.13rem;
+    margin-left: 4rem;
     white-space: nowrap;
   }
   .main-section .main.type-2 {

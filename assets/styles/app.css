@@ -428,4 +428,8 @@ header .sub button img {
 
 .hide-pwd {
   display: none;
+}
+
+input[name=avatar] {
+  display: none;
 }/*# sourceMappingURL=app.css.map */

@@ -36,4 +36,12 @@ document.querySelectorAll('.hide-pwd').forEach((element) => {
     };
 });
 
+// edit avatar
+document.querySelectorAll('.avatar-wrapper, .avatar').forEach((el) => {
+    el.onclick = function () {
+        // console.log(el);
+        el.querySelector("input[name='avatar']").click();
+    };
+});
+
 // calculate progress by data-percent
