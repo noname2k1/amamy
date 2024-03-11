@@ -30,9 +30,11 @@
     margin-right: 3.2rem !important;
   }
   header .sub .item.mobile {
+    margin-right: 0 !important;
+  }
+  header .sub .item.mobile img {
     width: 6.4rem;
     height: 6.4rem;
-    margin-right: 0;
   }
   header .sub .item img {
     width: 5.33333rem;

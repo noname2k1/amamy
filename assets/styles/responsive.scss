@@ -31,9 +31,11 @@
         align-items: center;
         margin-right: 3.2rem !important;
         &.mobile {
-            width: 6.4rem;
-            height: 6.4rem;
-            margin-right: 0;
+            img {
+                width: 6.4rem;
+                height: 6.4rem;
+            }
+            margin-right: 0 !important;
         }
     }
 
