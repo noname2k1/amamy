@@ -121,7 +121,7 @@ header {
     .sub {
         display: flex;
         margin-right: 6.25rem;
-        button {
+        .item {
             &:first-child {
                 margin-right: 1rem;
             }

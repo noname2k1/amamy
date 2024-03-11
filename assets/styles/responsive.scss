@@ -26,7 +26,9 @@
         margin-right: 0;
     }
 
-    header .sub button {
+    header .sub .item {
+        display: flex;
+        align-items: center;
         margin-right: 3.2rem !important;
         &.mobile {
             width: 6.4rem;
@@ -35,7 +37,7 @@
         }
     }
 
-    header .sub button img {
+    header .sub .item img {
         width: 5.33333rem;
         height: 5.33333rem;
     }

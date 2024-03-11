@@ -118,10 +118,10 @@ header .sub {
   display: flex;
   margin-right: 6.25rem;
 }
-header .sub button:first-child {
+header .sub .item:first-child {
   margin-right: 1rem;
 }
-header .sub button img {
+header .sub .item img {
   width: 1.5rem;
   height: 1.5rem;
 }
