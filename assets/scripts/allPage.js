@@ -2,5 +2,6 @@
 const env = 'prod';
 const host = '/amamy';
 // console.log(location);
-document.querySelector('header .logo a').href =
-    '/' + (env == 'dev' ? '' : host);
+window.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('header .logo a').href = env == 'dev' ? '/' : host;
+});

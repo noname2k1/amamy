@@ -300,15 +300,15 @@ document.querySelectorAll('.avatar-wrapper, .avatar').forEach((el) => {
 
 const inputAvatar = document.querySelector("input[name='avatar']");
 
-inputAvatar.addEventListener('click', function () {
+inputAvatar?.addEventListener('click', function () {
     if (inputAvatar.value) {
         inputAvatar.value = null;
     }
 });
 
-inputAvatar.oninput = function () {
+inputAvatar?.addEventListener('input', function () {
     convertToBase64();
-};
+});
 
 const logout = document.getElementById('log-out');
 // logout

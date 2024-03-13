@@ -412,7 +412,7 @@ submitBtn.onclick = function (e) {
             })
                 .then((raw) => raw.json())
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.data?.status) {
                         document.querySelector(
                             '.text-wrapper .error-message'
