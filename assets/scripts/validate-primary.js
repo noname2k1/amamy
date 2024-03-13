@@ -420,7 +420,7 @@ submitBtn.onclick = function (e) {
                         return;
                     }
                     localStorage.setItem('amamy_user', JSON.stringify(res));
-                    location.href = location.href + 'tai-khoan-cua-toi.html';
+                    location.href = location.origin + '/tai-khoan-cua-toi.html';
                 })
                 .catch((err) => {
                     console.log(err);
@@ -462,7 +462,7 @@ submitBtn.onclick = function (e) {
                         onClick: function () {} // Callback after click
                     }).showToast();
                     setTimeout(function () {
-                        location.href = location.href + 'dang-nhap.html';
+                        location.href = location.origin + '/dang-nhap.html';
                     }, 3000);
                 })
                 .catch((err) => {

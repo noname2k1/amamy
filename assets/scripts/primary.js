@@ -312,7 +312,7 @@ logout?.addEventListener('click', function () {
     localStorage.removeItem('amamy_user-infor');
     localStorage.removeItem('amamy_avatar');
     //redirect to login page
-    location.href = location.href + 'dang-nhap.html';
+    location.href = location.origin + '/dang-nhap.html';
 });
 
 // fake thêm đơn vận chuyển
