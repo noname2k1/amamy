@@ -421,8 +421,7 @@ submitBtn.onclick = function (e) {
                     }
                     localStorage.setItem('amamy_user', JSON.stringify(res));
                     location.href =
-                        location.pathname.split('/')[0] +
-                        '/tai-khoan-cua-toi.html';
+                        (env == 'dev' ? '' : host) + '/tai-khoan-cua-toi.html';
                 })
                 .catch((err) => {
                     console.log(err);
@@ -465,7 +464,7 @@ submitBtn.onclick = function (e) {
                     }).showToast();
                     setTimeout(function () {
                         location.href =
-                            location.pathname.split('/')[0] + '/dang-nhap.html';
+                            (env == 'dev' ? '' : host) + '/dang-nhap.html';
                     }, 3000);
                 })
                 .catch((err) => {

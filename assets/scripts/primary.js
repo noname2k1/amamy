@@ -318,7 +318,7 @@ logout?.addEventListener('click', function () {
     localStorage.removeItem('amamy_user-infor');
     localStorage.removeItem('amamy_avatar');
     //redirect to login page
-    location.href = location.pathname.split('/')[0] + '/dang-nhap.html';
+    location.href = (env == 'dev' ? '' : host) + '/dang-nhap.html';
 });
 
 // fake thêm đơn vận chuyển
