@@ -5,7 +5,7 @@ const host = '/amamy';
 
 window.addEventListener('DOMContentLoaded', function () {
     const homeLinks = document.querySelectorAll(
-        'header .logo a, .main-content a.come-back.mobile'
+        'header .logo a, .main-section a.come-back.mobile'
     );
     homeLinks.forEach((link) => {
         link.href = env == 'dev' ? '/' : host;
