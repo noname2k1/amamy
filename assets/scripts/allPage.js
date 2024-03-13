@@ -1,9 +1,11 @@
 // home link change
-const env = 'dev';
+const env = 'prod';
 const host = '/amamy';
 // console.log(location);
+
 window.addEventListener('DOMContentLoaded', function () {
-    document.querySelector(
+    const homeLink = document.querySelector(
         'header .logo a, .main-content a.come-back.mobile'
-    ).href = env == 'dev' ? '/' : host;
+    );
+    homeLink.href = env == 'dev' ? '/' : host;
 });

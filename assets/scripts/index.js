@@ -4,21 +4,21 @@ const editOnBtn = document.querySelector('.edit-on');
 const saveBtn = document.querySelector('button#edit-btn');
 const myUser = JSON.parse(localStorage.getItem('amamy_user'));
 const myUserInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
+const inputsInForm = document
+    .getElementById('my-account')
+    .querySelectorAll('input:not([type="file"])');
 
 if (editOnBtn) {
     editOnBtn.onclick = function (e) {
         e.preventDefault();
         editAble = true;
-        const inputs = document
-            .getElementById('my-account')
-            .querySelectorAll('input:not([type="file"])');
-        inputs.forEach((input) => input.removeAttribute('disabled'));
+        inputsInForm.forEach((input) => input.removeAttribute('disabled'));
         document.querySelector("input[name='email']").value =
             myUser?.user_email;
         document
             .querySelector("input[name='email']")
             .setAttribute('disabled', true);
-        inputs[0].focus();
+        inputsInForm[0].focus();
         document.getElementById('edit-btn').removeAttribute('disabled');
         editOnBtn.style.display = 'none';
         saveBtn.style.display = 'flex';
@@ -54,7 +54,7 @@ const myAccountValidates = [
     }
 ];
 
-document.querySelectorAll('input:not([type="file"])').forEach((input) => {
+inputsInForm.forEach((input) => {
     input.onblur = function (e) {
         const inputElement = e.target;
         const value = inputElement.value.trim();
@@ -152,7 +152,7 @@ document.querySelectorAll('input:not([type="file"])').forEach((input) => {
     };
 });
 const validateInputs = () => {
-    document.querySelectorAll('input:not([type="file"])').forEach((input) => {
+    inputsInForm.forEach((input) => {
         const value = input.value.trim();
         if (!value) {
             input.parentNode.querySelector('.error-message').textContent =
@@ -240,13 +240,12 @@ saveBtn.onclick = function (e) {
     e.preventDefault();
     if (editAble) {
         validateInputs();
+
         if (myAccountValidates.every((item) => item.isValid)) {
             const loader = document.querySelector('.loader');
             loader.classList.add('show');
             const data = {};
-            document
-                .querySelectorAll('input:not([type="file"])')
-                .forEach((input) => (data[input.name] = input.value));
+            inputsInForm.forEach((input) => (data[input.name] = input.value));
 
             const formData = new FormData();
             formData.append('username', data.fullName);
@@ -292,10 +291,7 @@ saveBtn.onclick = function (e) {
                         onClick: function () {} // Callback after click
                     }).showToast();
                     editAble = false;
-                    const inputs = document
-                        .getElementById('my-account')
-                        .querySelectorAll('input:not([type="file"])');
-                    inputs.forEach((input) => {
+                    inputsInForm.forEach((input) => {
                         input.setAttribute('disabled', true);
                         input.value = '';
                     });
@@ -324,11 +320,15 @@ saveBtn.onclick = function (e) {
                     ).placeholder = res.user_dcng;
 
                     const { success, message, ...restData } = res;
+                    localStorage.setItem('amamy_user', {
+                        ...JSON.parse(localStorage.getItem('amamy_user')),
+                        user_display_name: restData.user_name
+                    });
                     localStorage.setItem(
-                        'user-infor',
+                        'amamy_user-infor',
                         JSON.stringify({
                             ...restData,
-                            ...myUserInfor.user_rank
+                            user_rank: myUserInfor.user_rank
                         })
                     );
                 })

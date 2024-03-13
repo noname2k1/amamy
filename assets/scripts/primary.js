@@ -21,9 +21,22 @@ const displayNames = document.querySelectorAll(
     '.rank-infor h1 .display-name, .user-editable p'
 );
 
+const inputGroups = document.querySelectorAll('form .input-group');
+const inputFullName = document.querySelector("input[name='fullName']");
+const inputPhone = document.querySelector("input[name='phone']");
+const inputEmail = document.querySelector("input[name='email']");
+const inputAddressVi = document.querySelector("input[name='address-vi']");
+const inputAddressForeign = document.querySelector(
+    "input[name='address-foreign']"
+);
+
 // loading
 displayRanks.forEach((element) => {
     element.classList.add('skeleton');
+});
+
+inputGroups.forEach((inputGroup) => {
+    inputGroup.classList.add('skeleton');
 });
 
 if (user) {
@@ -66,6 +79,7 @@ if (user) {
                 });
             }
 
+            // render % discount
             discountPecentages.forEach((el) => {
                 el.textContent =
                     res.user_rank === 'Đồng'
@@ -77,12 +91,15 @@ if (user) {
                         : '1.5';
             });
 
+            // render rank names
             displayRankNames.forEach((el) => {
                 el.textContent =
                     res.user_rank === 'Thành viên mới'
                         ? 'Thành viên mới'
                         : 'Hạng ' + res.user_rank;
             });
+
+            // render bg color of rank
             document.querySelectorAll('.user-rank, .infor').forEach((el) => {
                 el.classList.add(
                     res.user_rank === 'Đồng'
@@ -94,18 +111,25 @@ if (user) {
                         : 'newbie'
                 );
             });
+
             displayNames.forEach((el) => {
-                el.textContent = userInfor?.user_name
-                    ? userInfor.user_name
-                    : user.user_display_name;
+                el.textContent = user.user_display_name;
             });
-            displayRanks.forEach((element) => {
-                element.classList.remove('skeleton');
-            });
+
+            if (userInfor?.user_name && inputFullName) {
+                inputFullName.placeholder = userInfor.user_name;
+            }
+            if (userInfor?.user_phone && inputPhone)
+                inputPhone.placeholder = userInfor.user_phone;
+            if (userInfor?.user_email && inputEmail)
+                inputEmail.placeholder = userInfor?.user_email;
+            if (userInfor?.user_dcvn && inputAddressVi)
+                inputAddressVi.placeholder = userInfor.user_dcvn;
+            if (userInfor?.user_dcng && inputAddressForeign)
+                inputAddressForeign.placeholder = userInfor.user_dcng;
         };
         if (!userInfor) {
-            const inputGroup = document.querySelectorAll('form .input-group');
-            inputGroup.forEach((input) => {
+            inputGroups.forEach((input) => {
                 input.classList.add('skeleton');
             });
             fetch('https://amamy.net/wp-json/custom/v1/info', {
@@ -123,41 +147,24 @@ if (user) {
                             JSON.stringify({ ...rest })
                         );
                         if (rest?.user_name) {
-                            document.querySelector(
-                                "input[name='fullName']"
-                            ).placeholder = rest.user_name;
-                        } else {
-                            document.querySelector(
-                                "input[name='fullName']"
-                            ).placeholder = myUser.user_display_name;
+                            inputFullName.placeholder = rest.user_name;
                         }
                         if (rest?.user_phone)
-                            document.querySelector(
-                                "input[name='phone']"
-                            ).placeholder = rest.user_phone;
+                            inputPhone.placeholder = rest.user_phone;
                         if (rest?.user_email)
-                            document.querySelector(
-                                "input[name='email']"
-                            ).placeholder = rest?.user_email;
+                            inputEmail.placeholder = rest?.user_email;
                         if (rest?.user_dcvn)
-                            document.querySelector(
-                                "input[name='address-vi']"
-                            ).placeholder = rest.user_dcvn;
+                            inputAddressVi.placeholder = rest.user_dcvn;
                         if (rest?.user_dcng)
-                            document.querySelector(
-                                "input[name='address-foreign']"
-                            ).placeholder = rest.user_dcng;
+                            inputAddressForeign.placeholder = rest.user_dcng;
                     }
                 })
                 .catch((err) => {
                     // console.log(err);
                 })
                 .finally(() => {
-                    displayRanks.forEach((element) => {
-                        element.classList.remove('skeleton');
-                    });
-                    inputGroup.forEach((input) => {
-                        input.classList.remove('skeleton');
+                    inputGroups.forEach((input) => {
+                        input.classList.add('skeleton');
                     });
                 });
         } else {
@@ -168,6 +175,10 @@ if (user) {
 
 displayRanks.forEach((element) => {
     element.classList.remove('skeleton');
+});
+
+inputGroups.forEach((input) => {
+    input.classList.remove('skeleton');
 });
 
 // show password
@@ -209,6 +220,9 @@ document.querySelectorAll('.hide-pwd').forEach((element) => {
     };
 });
 
+// show dialog avatar selection & upload avatar
+
+// convert file to base64
 function convertToBase64() {
     const fileInput = document.querySelector("input[name='avatar']");
     const file = fileInput.files[0];
@@ -260,7 +274,6 @@ function convertToBase64() {
     }
 }
 
-// show dialog file
 document.querySelectorAll('.avatar-wrapper, .avatar').forEach((el) => {
     el.onclick = function () {
         const inputAvatar = el.querySelector("input[name='avatar']");
@@ -280,8 +293,8 @@ inputAvatar?.addEventListener('input', function () {
     convertToBase64();
 });
 
-const logout = document.getElementById('log-out');
 // logout
+const logout = document.getElementById('log-out');
 logout?.addEventListener('click', function () {
     // delete user data in localStorage
     localStorage.removeItem('amamy_user');

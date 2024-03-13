@@ -47,321 +47,311 @@ const VALIDATES = [
     }
 ];
 
-document
-    .querySelectorAll('form input:not([type="file"])')
-    .forEach((inputElement) => {
-        const currentValidateItem = VALIDATES.find(
-            (item) => item.name === inputElement.name
-        );
-        inputElement.onblur = function (e) {
-            const input = e.target;
-            if (!input.value) {
+const inputs = document.querySelectorAll('form input:not([type="file"])');
+
+inputs.forEach((inputElement) => {
+    const currentValidateItem = VALIDATES.find(
+        (item) => item.name === inputElement.name
+    );
+    inputElement.onblur = function (e) {
+        const input = e.target;
+        if (!input.value) {
+            input
+                .closest('.input-group')
+                .querySelector('.error-message').textContent =
+                currentValidateItem?.customRequiredMessage
+                    ? currentValidateItem.customRequiredMessage
+                    : DEFAULT_MESSAGE_FOR_REQUIRED_FIELD;
+            return;
+        }
+        // fullname
+        if (input.name === 'fullName') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input.parentNode.querySelector('.error-message').textContent =
+                    'Dữ liệu nhập không hợp lệ';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
+        // phone
+        if (input.name === 'phone') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input.parentNode.querySelector('.error-message').textContent =
+                    'Dữ liệu nhập không hợp lệ';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
+        // email
+        if (input.name === 'email') {
+            // console.log('email');
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input.parentNode.querySelector('.error-message').textContent =
+                    'Dữ liệu nhập không hợp lệ';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
+        // password
+        if (input.name === 'password') {
+            if (!currentValidateItem.pattern.test(input.value)) {
                 input
                     .closest('.input-group')
                     .querySelector('.error-message').textContent =
-                    currentValidateItem?.customRequiredMessage
-                        ? currentValidateItem.customRequiredMessage
-                        : DEFAULT_MESSAGE_FOR_REQUIRED_FIELD;
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
                 return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // fullname
-            if (input.name === 'fullName') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input.parentNode.querySelector(
-                        '.error-message'
-                    ).textContent = 'Dữ liệu nhập không hợp lệ';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+        }
+        if (input.name === 'current-password') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // phone
-            if (input.name === 'phone') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input.parentNode.querySelector(
-                        '.error-message'
-                    ).textContent = 'Dữ liệu nhập không hợp lệ';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+        }
+        if (input.name === 'new-password') {
+            if (
+                input.value ===
+                document.querySelector('input[name="current-password"]')?.value
+            ) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    'Mật khẩu mới và mật khẩu cũ không được trùng nhau';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+            } else if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // email
-            if (input.name === 'email') {
-                // console.log('email');
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input.parentNode.querySelector(
-                        '.error-message'
-                    ).textContent = 'Dữ liệu nhập không hợp lệ';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+        }
+        if (input.name === 'confirm-password') {
+            if (
+                input.value !==
+                document.querySelector('input[name="new-password"]').value
+            ) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    'Mật khẩu xác nhận không trùng khớp';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+            } else if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // password
-            if (input.name === 'password') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-            if (input.name === 'current-password') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-            if (input.name === 'new-password') {
-                if (
-                    input.value ===
-                    document.querySelector('input[name="current-password"]')
-                        ?.value
-                ) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        'Mật khẩu mới và mật khẩu cũ không được trùng nhau';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                } else if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-            if (input.name === 'confirm-password') {
-                if (
-                    input.value !==
-                    document.querySelector('input[name="new-password"]').value
-                ) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        'Mật khẩu xác nhận không trùng khớp';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                } else if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-        };
-        inputElement.onfocus = function () {
-            inputElement
-                .closest('.input-group')
-                .querySelector('.error-message').textContent = '';
-        };
-    });
+        }
+    };
+    inputElement.onfocus = function () {
+        inputElement
+            .closest('.input-group')
+            .querySelector('.error-message').textContent = '';
+    };
+});
 
 const validateInputs = () => {
-    document
-        .querySelectorAll('form input:not([type="file"])')
-        .forEach((input) => {
-            const currentValidateItem = VALIDATES.find(
-                (item) => item.name === input.name
-            );
-            if (!input.value) {
-                // console.log(input);
+    inputs.forEach((input) => {
+        const currentValidateItem = VALIDATES.find(
+            (item) => item.name === input.name
+        );
+        if (!input.value) {
+            // console.log(input);
+            input
+                .closest('.input-group')
+                .querySelector('.error-message').textContent =
+                currentValidateItem?.customRequiredMessage
+                    ? currentValidateItem.customRequiredMessage
+                    : DEFAULT_MESSAGE_FOR_REQUIRED_FIELD;
+            return;
+        } // fullname
+        if (input.name === 'fullName') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input.parentNode.querySelector('.error-message').textContent =
+                    'Dữ liệu nhập không hợp lệ';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
+        // phone
+        if (input.name === 'phone') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input.parentNode.querySelector('.error-message').textContent =
+                    'Dữ liệu nhập không hợp lệ';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
+        // email
+        if (input.name === 'email') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input.parentNode.querySelector('.error-message').textContent =
+                    'Dữ liệu nhập không hợp lệ';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
+        // password
+        if (input.name === 'password') {
+            if (!currentValidateItem.pattern.test(input.value)) {
                 input
                     .closest('.input-group')
                     .querySelector('.error-message').textContent =
-                    currentValidateItem?.customRequiredMessage
-                        ? currentValidateItem.customRequiredMessage
-                        : DEFAULT_MESSAGE_FOR_REQUIRED_FIELD;
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
                 return;
-            } // fullname
-            if (input.name === 'fullName') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input.parentNode.querySelector(
-                        '.error-message'
-                    ).textContent = 'Dữ liệu nhập không hợp lệ';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // phone
-            if (input.name === 'phone') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input.parentNode.querySelector(
-                        '.error-message'
-                    ).textContent = 'Dữ liệu nhập không hợp lệ';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+        }
+        if (input.name === 'current-password') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // email
-            if (input.name === 'email') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input.parentNode.querySelector(
-                        '.error-message'
-                    ).textContent = 'Dữ liệu nhập không hợp lệ';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+        }
+        if (input.name === 'new-password') {
+            if (
+                input.value ===
+                document.querySelector('input[name="current-password"]')?.value
+            ) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    'Mật khẩu mới và mật khẩu cũ không được trùng nhau';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+            } else if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            // password
-            if (input.name === 'password') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
+        }
+        if (input.name === 'confirm-password') {
+            if (
+                input.value !==
+                document.querySelector('input[name="new-password"]').value
+            ) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    'Mật khẩu xác nhận không trùng khớp';
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+            } else if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
             }
-            if (input.name === 'current-password') {
-                if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-            if (input.name === 'new-password') {
-                if (
-                    input.value ===
-                    document.querySelector('input[name="current-password"]')
-                        ?.value
-                ) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        'Mật khẩu mới và mật khẩu cũ không được trùng nhau';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                } else if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-            if (input.name === 'confirm-password') {
-                if (
-                    input.value !==
-                    document.querySelector('input[name="new-password"]').value
-                ) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        'Mật khẩu xác nhận không trùng khớp';
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                } else if (!currentValidateItem.pattern.test(input.value)) {
-                    input
-                        .closest('.input-group')
-                        .querySelector('.error-message').textContent =
-                        currentValidateItem.message;
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = false;
-                    return;
-                } else {
-                    VALIDATES.find(
-                        (item) => item.name === input.name
-                    ).isValid = true;
-                }
-            }
-        });
+        }
+    });
 };
 
 const toastStyle = {
@@ -381,9 +371,7 @@ const loader = submitBtn.querySelector('.loader');
 submitBtn.onclick = function (e) {
     e.preventDefault();
     validateInputs();
-    const countInputInForm = Array.from(
-        document.querySelectorAll('form input:not([type="file"])')
-    ).length;
+    const countInputInForm = Array.from(inputs).length;
     const validItemInValidates = VALIDATES.reduce((curr, item) => {
         if (item.isValid) {
             return curr + 1;
@@ -397,9 +385,7 @@ submitBtn.onclick = function (e) {
             .querySelectorAll('.error-message')
             .forEach((errElement) => (errElement.textContent = ''));
         const data = {};
-        document
-            .querySelectorAll('form input:not([type="file"])')
-            .forEach((input) => (data[input.name] = input.value));
+        inputs.forEach((input) => (data[input.name] = input.value));
 
         const formData = new FormData();
         // login
