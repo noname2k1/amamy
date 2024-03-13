@@ -339,6 +339,3 @@ logout?.addEventListener('click', function () {
 //         }
 //     });
 // }
-
-// home link clicked
-document.querySelector('header .logo a').href = location.origin + '/';
