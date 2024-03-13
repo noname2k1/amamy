@@ -294,11 +294,11 @@ document.querySelectorAll('.avatar-wrapper, .avatar').forEach((el) => {
 
 const inputAvatar = document.querySelector("input[name='avatar']");
 
-inputAvatar.onclick = function () {
+inputAvatar.addEventListener('click', function () {
     if (inputAvatar.value) {
         inputAvatar.value = null;
     }
-};
+});
 
 inputAvatar.oninput = function () {
     convertToBase64();
