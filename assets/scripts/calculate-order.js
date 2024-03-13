@@ -108,14 +108,13 @@ const inputFrom = document.querySelector("form input[name='from']");
 const inputTo = document.querySelector("form input[name='to']");
 const inputCurrency = document.querySelector("form input[name='currency']");
 const inputWeight = document.querySelector("form input[name='weight']");
-// console.log(calculateOrder('vi', 'en', 'vnd', 2, 0));
+
 const oldPrice = document.querySelectorAll('span.old-price');
 const price = document.querySelectorAll('span.price');
 const benefit = document.querySelector('.benefit.large');
 const benefitNoti = document.querySelectorAll('.benefit-noti');
 
 const exec = () => {
-    // console.log('change: ', inputCurrency.value);
     if (
         inputFrom.value &&
         inputTo.value &&
@@ -129,7 +128,7 @@ const exec = () => {
             inputWeight.value,
             defaultDiscountPecentage
         );
-        // console.log(result);
+
         oldPrice.forEach((el) => {
             el.textContent = result.sum;
         });

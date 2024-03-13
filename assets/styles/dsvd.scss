@@ -1,5 +1,5 @@
 #root {
-    min-height: 136rem;
+    min-height: 50vh;
 }
 header {
     position: fixed;
@@ -292,6 +292,9 @@ nav.pagination {
             font-style: normal;
             font-weight: 600;
             line-height: 120%; /* 1.05rem */
+            &:hover {
+                background: var(--primary, #38b6ff);
+            }
         }
         img {
             stroke-width: 1.5px;
@@ -518,5 +521,11 @@ nav.pagination {
                 margin-right: 1.42rem;
             }
         }
+    }
+}
+
+nav.pagination {
+    a[disabled] {
+        cursor: default;
     }
 }

@@ -149,15 +149,18 @@
     align-self: stretch;
     margin-bottom: 3.2rem;
   }
-  .main-section .main .user nav.nav ul li a {
+  .main-section .main .user nav.nav ul li a,
+  .main-section .main .user nav.nav ul li button {
     padding: 3.46667rem 3.2rem;
   }
-  .main-section .main .user nav.nav ul li a img {
+  .main-section .main .user nav.nav ul li a img,
+  .main-section .main .user nav.nav ul li button img {
     width: 6.4rem;
     height: 6.4rem;
     margin-right: 3.2rem;
   }
-  .main-section .main .user nav.nav ul li a span {
+  .main-section .main .user nav.nav ul li a span,
+  .main-section .main .user nav.nav ul li button span {
     color: var(--black, #202432);
     font-family: Montserrat;
     font-size: 3.73333rem;
@@ -193,13 +196,22 @@
   }
   .user-rank {
     border-radius: 3.2rem;
-    background: linear-gradient(100deg, #e3b04c 0%, #d59923 56.65%, #fdf6ea 112.17%);
+    background: linear-gradient(100deg, #b9b4cc 0%, #b5b0f1 56.65%, #eaf6fd 112.17%);
     display: flex;
     width: 91.46667rem;
     padding: 4.26667rem 5.33333rem;
     align-items: center;
     gap: 2.66667rem;
     margin-bottom: 4.27rem;
+  }
+  .user-rank.copper {
+    background: linear-gradient(100deg, #f7c971 0%, #d59923 56.65%, #fdf6ea 112.17%);
+  }
+  .user-rank.silver {
+    background: linear-gradient(99deg, #5684b9 0%, #9ecdf8 50.5%, #b9d0dd 100%);
+  }
+  .user-rank.gold {
+    background: linear-gradient(99deg, #ffc700 0%, #fed500 51.5%, #ffe999 100%);
   }
   .user-rank .avatar {
     border-radius: 50%;
@@ -264,5 +276,9 @@
   .q-and-a img {
     width: 6.4rem;
     height: 6.4rem;
+  }
+  .loader {
+    width: 4rem;
+    height: 4rem;
   }
 }/*# sourceMappingURL=responsive.css.map */

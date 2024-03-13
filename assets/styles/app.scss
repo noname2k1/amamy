@@ -156,7 +156,7 @@ header {
         right: 6.25rem;
         // background: #000;
         .user {
-            width: 18.1875rem;
+            min-width: 18.1875rem;
             display: flex;
             flex-direction: column;
             // justify-content: center;
@@ -195,10 +195,34 @@ header {
                     border-radius: 0.375rem;
                     background: linear-gradient(
                         100deg,
-                        #f7c971 0%,
-                        #d59923 56.65%,
-                        #fdf6ea 112.17%
+                        #b9b4cc 0%,
+                        #b5b0f1 56.65%,
+                        #eaf6fd 112.17%
                     );
+                    &.copper {
+                        background: linear-gradient(
+                            100deg,
+                            #f7c971 0%,
+                            #d59923 56.65%,
+                            #fdf6ea 112.17%
+                        );
+                    }
+                    &.silver {
+                        background: linear-gradient(
+                            99deg,
+                            #5684b9 0%,
+                            #9ecdf8 50.5%,
+                            #b9d0dd 100%
+                        );
+                    }
+                    &.gold {
+                        background: linear-gradient(
+                            99deg,
+                            #ffc700 0%,
+                            #fed500 51.5%,
+                            #ffe999 100%
+                        );
+                    }
                     box-shadow: 2px 2px 12px 0px rgba(50, 73, 130, 0.1);
                     display: flex;
                     padding: 1rem 1.25rem;
@@ -211,10 +235,15 @@ header {
                     cursor: pointer;
                     img:first-child {
                         border-radius: 50%;
+                        width: 2.75rem;
+                        height: 2.75rem;
+                        object-fit: cover;
                     }
                     img.edit-btn {
                         position: absolute;
                         right: 0;
+                        width: 1rem;
+                        height: 1rem;
                     }
                 }
                 .text {
@@ -273,7 +302,8 @@ header {
                         &.active,
                         &:hover {
                             background: var(--primary, #38b6ff);
-                            a {
+                            a,
+                            button {
                                 span {
                                     color: var(--tuyt, #fff);
                                 }
@@ -287,7 +317,8 @@ header {
                                 }
                             }
                         }
-                        a {
+                        a,
+                        button {
                             display: flex;
                             align-items: center;
                             width: 100%;
@@ -472,4 +503,49 @@ header {
 
 input[name='avatar'] {
     display: none;
+}
+
+/* HTML: <div class="loader"></div> */
+
+.loader {
+    margin-left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, #fff 90%, #0000) top/4px 4px
+            no-repeat,
+        conic-gradient(#0000 30%, #fff);
+    -webkit-mask: radial-gradient(
+        farthest-side,
+        #0000 calc(100% - 4px),
+        #000 0
+    );
+    animation: rotate 1s infinite linear;
+    display: none;
+    &.show {
+        display: block;
+    }
+}
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton * {
+    visibility: hidden;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+        background-color: hsl(0, 0%, 89%);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(1turn);
+    }
 }

@@ -52,7 +52,7 @@
             top: 0;
             left: 0;
             height: 100%;
-            width: 19.65569rem;
+            width: 0%;
             border-radius: 0.625rem;
             background: var(--primary, #38b6ff);
         }
@@ -141,7 +141,7 @@
             font-weight: 600;
             line-height: 140%;
         }
-        span {
+        span.highlight {
             color: #e78b37;
             font-family: Montserrat;
             font-size: 1rem;
@@ -316,6 +316,15 @@
     }
 }
 
+.main-section .main .user {
+    min-width: unset;
+}
+
+.rank-name,
+.rank-name-next {
+    text-transform: uppercase;
+}
+
 @media (max-width: 767px) {
     .member-ship {
         margin-left: 0;
@@ -397,7 +406,7 @@
         flex-shrink: 0;
     }
 
-    .member-ship .membership-progress .level.copper.active {
+    .member-ship .membership-progress .level.active {
         width: 2.66667rem;
         height: 2.66667rem;
         flex-shrink: 0;
@@ -416,7 +425,7 @@
     }
 
     .member-ship .membership-progress .thumb {
-        width: 26.13333rem;
+        width: 0%;
     }
 
     .member-ship .achieve {
@@ -438,7 +447,7 @@
         line-height: 150%;
     }
 
-    .member-ship .achieve span {
+    .member-ship .achieve span.highlight {
         color: #e78b37;
         font-family: Montserrat;
         font-size: 2.93333rem;
@@ -449,7 +458,7 @@
 
     .rank-introduce {
         margin-top: 8.53rem;
-        margin-bottom: 6.67rem;
+        // margin-bottom: 6.67rem;
     }
     .member-ship .rank-introduce h3 {
         color: var(--black, #202432);

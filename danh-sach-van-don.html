@@ -78,17 +78,18 @@
             <div class="main type-2">
                 <div class="user large">
                     <div class="rank-infor">
-                        <h1>Xin chào, Ngọc Nguyễn</h1>
+                        <h1>Xin chào, <span class="display-name"></span></h1>
                         <div class="line"></div>
                         <div class="infor">
                             <div class="avatar-wrapper">
                                 <img src="./assets/images/Rectangle 34625436.png" alt="">
                                 <img src="./assets/svgs/EDIT.svg" alt="" class="edit-btn">
+                                <input type="file" name="avatar">
                             </div>
                             <div class="text">
                                 <p>THÀNH VIÊN</p>
                                 <p>Hạng đồng</p>
-                                <p>Giảm 3% trên tổng hoá đơn</p>
+                                <p>Giảm <span class="discount-percent"></span>% trên tổng hoá đơn</p>
                             </div>
                         </div>
                     </div>
@@ -130,11 +131,11 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <button id="log-out">
                                     <img src="./assets/svgs/logOut-color.svg" alt="">
                                     <img src="./assets/svgs/logOut.svg" alt="">
                                     <span>Đăng xuất</span>
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </nav>
@@ -152,7 +153,37 @@
                         <div class="content-wrapper">
                             <h2 class="large">Danh sách đơn</h2>
                             <ul>
-                                <li>
+                                <li class="skeleton">
+                                    <div class="top">
+                                        <div class="left">
+                                            <h3>Mã đơn hàng:</h3>
+                                            <span>#112211212</span>
+                                            <img src="./assets/svgs/fi_copy.svg" alt="">
+                                            <img class="copied" src="./assets/svgs/check.svg" alt="">
+                                        </div>
+                                        <button>Tra cứu đơn</button>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="title">
+                                            <h3>Người nhận</h3>
+                                            <h3>Địa chỉ nhận hàng</h3>
+                                            <h3>Trạng thái đơn hàng</h3>
+                                        </div>
+                                        <div class="value">
+                                            <span>Nguyễn Phạm Thanh Minh</span>
+                                            <span>Hà Nội</span>
+                                            <span class="highlight">Đang vận chuyển</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <div class="left">
+                                            <h3>Khối lượng:</h3>
+                                            <strong> 8.2kg</strong>
+                                        </div>
+                                        <span class="total"><strong>250.000đ</strong></span>
+                                    </div>
+                                </li>
+                                <li class="skeleton">
                                     <div class="top">
                                         <div class="left">
                                             <h3>Mã đơn hàng:</h3>
@@ -183,7 +214,7 @@
                                         <span class="total"><strong>250.000đ</strong></span>
                                     </div>
                                 </li>
-                                <li>
+                                <li class="skeleton">
                                     <div class="top">
                                         <div class="left">
                                             <h3>Mã đơn hàng:</h3>
@@ -214,7 +245,7 @@
                                         <span class="total"><strong>250.000đ</strong></span>
                                     </div>
                                 </li>
-                                <li>
+                                <li class="skeleton">
                                     <div class="top">
                                         <div class="left">
                                             <h3>Mã đơn hàng:</h3>
@@ -245,7 +276,7 @@
                                         <span class="total"><strong>250.000đ</strong></span>
                                     </div>
                                 </li>
-                                <li>
+                                <li class="skeleton">
                                     <div class="top">
                                         <div class="left">
                                             <h3>Mã đơn hàng:</h3>
@@ -276,163 +307,7 @@
                                         <span class="total"><strong>250.000đ</strong></span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="top">
-                                        <div class="left">
-                                            <h3>Mã đơn hàng:</h3>
-                                            <span>#112211212</span>
-                                            <img src="./assets/svgs/fi_copy.svg" alt="">
-                                            <img class="copied" src="./assets/svgs/check.svg" alt="">
-                                        </div>
-                                        <button>Tra cứu đơn</button>
-                                    </div>
-                                    <div class="middle">
-                                        <div class="title">
-                                            <h3>Người nhận</h3>
-                                            <h3>Địa chỉ nhận hàng</h3>
-                                            <h3>Trạng thái đơn hàng</h3>
-
-                                        </div>
-                                        <div class="value">
-                                            <span>Nguyễn Phạm Thanh Minh</span>
-                                            <span>Hà Nội</span>
-                                            <span class="highlight">Đang vận chuyển</span>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <h3>Khối lượng:</h3>
-                                            <strong> 8.2kg</strong>
-                                        </div>
-                                        <span class="total"><strong>250.000đ</strong></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="top">
-                                        <div class="left">
-                                            <h3>Mã đơn hàng:</h3>
-                                            <span>#112211212</span>
-                                            <img src="./assets/svgs/fi_copy.svg" alt="">
-                                            <img class="copied" src="./assets/svgs/check.svg" alt="">
-                                        </div>
-                                        <button>Tra cứu đơn</button>
-                                    </div>
-                                    <div class="middle">
-                                        <div class="title">
-                                            <h3>Người nhận</h3>
-                                            <h3>Địa chỉ nhận hàng</h3>
-                                            <h3>Trạng thái đơn hàng</h3>
-
-                                        </div>
-                                        <div class="value">
-                                            <span>Nguyễn Phạm Thanh Minh</span>
-                                            <span>Hà Nội</span>
-                                            <span class="highlight">Đang vận chuyển</span>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <h3>Khối lượng:</h3>
-                                            <strong> 8.2kg</strong>
-                                        </div>
-                                        <span class="total"><strong>250.000đ</strong></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="top">
-                                        <div class="left">
-                                            <h3>Mã đơn hàng:</h3>
-                                            <span>#112211212</span>
-                                            <img src="./assets/svgs/fi_copy.svg" alt="">
-                                            <img class="copied" src="./assets/svgs/check.svg" alt="">
-                                        </div>
-                                        <button>Tra cứu đơn</button>
-                                    </div>
-                                    <div class="middle">
-                                        <div class="title">
-                                            <h3>Người nhận</h3>
-                                            <h3>Địa chỉ nhận hàng</h3>
-                                            <h3>Trạng thái đơn hàng</h3>
-
-                                        </div>
-                                        <div class="value">
-                                            <span>Nguyễn Phạm Thanh Minh</span>
-                                            <span>Hà Nội</span>
-                                            <span class="highlight">Đang vận chuyển</span>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <h3>Khối lượng:</h3>
-                                            <strong> 8.2kg</strong>
-                                        </div>
-                                        <span class="total"><strong>250.000đ</strong></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="top">
-                                        <div class="left">
-                                            <h3>Mã đơn hàng:</h3>
-                                            <span>#112211212</span>
-                                            <img src="./assets/svgs/fi_copy.svg" alt="">
-                                            <img class="copied" src="./assets/svgs/check.svg" alt="">
-                                        </div>
-                                        <button>Tra cứu đơn</button>
-                                    </div>
-                                    <div class="middle">
-                                        <div class="title">
-                                            <h3>Người nhận</h3>
-                                            <h3>Địa chỉ nhận hàng</h3>
-                                            <h3>Trạng thái đơn hàng</h3>
-
-                                        </div>
-                                        <div class="value">
-                                            <span>Nguyễn Phạm Thanh Minh</span>
-                                            <span>Hà Nội</span>
-                                            <span class="highlight">Đang vận chuyển</span>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <h3>Khối lượng:</h3>
-                                            <strong> 8.2kg</strong>
-                                        </div>
-                                        <span class="total"><strong>250.000đ</strong></span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="top">
-                                        <div class="left">
-                                            <h3>Mã đơn hàng:</h3>
-                                            <span>#112211212</span>
-                                            <img src="./assets/svgs/fi_copy.svg" alt="">
-                                            <img class="copied" src="./assets/svgs/check.svg" alt="">
-
-                                        </div>
-                                        <button>Tra cứu đơn</button>
-                                    </div>
-                                    <div class="middle">
-                                        <div class="title">
-                                            <h3>Người nhận</h3>
-                                            <h3>Địa chỉ nhận hàng</h3>
-                                            <h3>Trạng thái đơn hàng</h3>
-
-                                        </div>
-                                        <div class="value">
-                                            <span>Nguyễn Phạm Thanh Minh</span>
-                                            <span>Hà Nội</span>
-                                            <span class="highlight">Đang vận chuyển</span>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <div class="left">
-                                            <h3>Khối lượng:</h3>
-                                            <strong> 8.2kg</strong>
-                                        </div>
-                                        <span class="total"><strong>250.000đ</strong></span>
-                                    </div>
-                                </li>
-                                <li>
+                                <li class="skeleton">
                                     <div class="top">
                                         <div class="left">
                                             <h3>Mã đơn hàng:</h3>
@@ -466,7 +341,7 @@
                             </ul>
                         </div>
                     </div>
-                    <nav class="pagination">
+                    <nav class="pagination skeleton" id="pagination-container">
                         <a href="#">
                             <img src="./assets/svgs/prev.svg" alt="">
                         </a>
@@ -489,8 +364,7 @@
     </main>
 
 
-    <!-- <script src="./assets/scripts/primary.js"></script> -->
-    <!-- <script src="./assets/scripts/membership.js"></script> -->
+    <script src="./assets/scripts/primary.js"></script>
     <script src="./assets/scripts/danhSachVanDon.js"></script>
 </body>
 

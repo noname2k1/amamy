@@ -1,5 +1,5 @@
 #root {
-  min-height: 136rem;
+  min-height: 50vh;
 }
 
 header {
@@ -288,6 +288,9 @@ nav.pagination a.others {
   font-weight: 600;
   line-height: 120%; /* 1.05rem */
 }
+nav.pagination a.others:hover {
+  background: var(--primary, #38b6ff);
+}
 nav.pagination a img {
   stroke-width: 1.5px;
   stroke: var(--primary, #38b6ff);
@@ -503,4 +506,7 @@ nav.pagination a img {
     height: 1.06667rem;
     margin-right: 1.42rem;
   }
+}
+nav.pagination a[disabled] {
+  cursor: default;
 }/*# sourceMappingURL=dsvd.css.map */

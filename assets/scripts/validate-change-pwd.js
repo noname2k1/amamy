@@ -181,6 +181,6 @@ document.querySelector('form button[type="submit"]').onclick = function (e) {
         document
             .querySelectorAll('form input')
             .forEach((input) => (data[input.name] = input.value));
-        console.log(data);
+        // console.log(data);
     }
 };

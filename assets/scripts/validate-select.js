@@ -4,7 +4,6 @@ const menus = document.querySelectorAll('form .select-group .list-wrapper');
 customSelects.forEach((select) => {
     select.onclick = function (e) {
         customSelects.forEach((element) => {
-            // console.log(element);
             if (element !== select) {
                 element.querySelector('.core').style.zIndex = 1;
                 element
@@ -27,7 +26,6 @@ customSelects.forEach((select) => {
 
 document.querySelector('.weight-wrapper').onclick = function () {
     customSelects.forEach((element) => {
-        // console.log(element);
         element.querySelector('.core').style.zIndex = 1;
         element.querySelector('.list-wrapper')?.classList.remove('active');
     });
@@ -56,11 +54,9 @@ menus.forEach((menu) => {
 
 document.querySelector('form button').onclick = function (e) {
     e.preventDefault();
-    console.log('nhận tư vấn');
 };
 
 window.addEventListener('click', function (e) {
-    // console.log(e.target);
     if (
         !e.target.matches('.core') &&
         !e.target.matches('.core img') &&

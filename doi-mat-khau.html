@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./assets/styles/index.css">
     <link rel="stylesheet" href="./assets/styles/app.css">
     <link rel="stylesheet" href="./assets/styles/responsive.css">
@@ -29,7 +30,7 @@
                             Theo dõi bưu kiện
                         </a></li>
                     <li>
-                        <a href="#">
+                        <a href="./tinh-gia-van-chuyen.html">
                             Tính giá vận chuyển
                         </a>
                     </li>
@@ -76,7 +77,7 @@
             <div class="main">
                 <div class="user large">
                     <div class="rank-infor">
-                        <h1>Xin chào, Ngọc Nguyễn</h1>
+                        <h1>Xin chào, <span class="display-name"></span></h1>
                         <div class="line"></div>
                         <div class="infor">
                             <div class="avatar-wrapper">
@@ -87,7 +88,7 @@
                             <div class="text">
                                 <p>THÀNH VIÊN</p>
                                 <p>Hạng đồng</p>
-                                <p>Giảm 3% trên tổng hoá đơn</p>
+                                <p>Giảm <span class="discount-percent"></span>% trên tổng hoá đơn</p>
                             </div>
                         </div>
                     </div>
@@ -122,16 +123,16 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <button id="log-out">
                                     <img src="./assets/svgs/logOut-color.svg" alt="">
                                     <img src="./assets/svgs/logOut.svg" alt="">
                                     <span>Đăng xuất</span>
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </nav>
                 </div>
-                <form class="form-container change-password-form">
+                <form class="form-container change-password-form" id="change-password-form">
                     <h2 class="large">ĐỔI MẬT KHẨU</h2>
                     <div class="user-editable mobile">
                         <div class="avatar">
@@ -139,7 +140,7 @@
                             <img src="./assets/svgs/EDIT.svg" alt="">
                             <input type="file" name="avatar" id="avatar">
                         </div>
-                        <p>Ngọc Nguyễn</p>
+                        <p></p>
                     </div>
                     <div class="input-group">
                         <label for="current-password">Mật khẩu cũ*</label>
@@ -168,17 +169,19 @@
                             <img class="show-pwd" src="./assets/svgs/fi_eye.svg" alt="">
                             <img class="hide-pwd" src="./assets/svgs/fi_eye-off.svg" alt="">
                         </div>
-                        <span class="error-message"></span>
+                        <span class="error-message for-2"></span>
                     </div>
-                    <button type="submit" id="change-password-btn"><span class="text-changeable">
-                            <span class="large">Đổi mật khẩu</span>
-                            <span class="mobile">Lưu mật khẩu</span>
+                    <button type="submit" id="change-password-btn">
+                        <span class="large">Đổi mật khẩu</span>
+                        <span class="mobile">Lưu mật khẩu</span>
+                        <div class="loader"></div>
                     </button>
                 </form>
             </div>
         </section>
     </main>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="./assets/scripts/primary.js"></script>
     <script src="./assets/scripts/validate-primary.js"></script>
 </body>
