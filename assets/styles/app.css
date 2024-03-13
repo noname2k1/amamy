@@ -495,10 +495,6 @@ input[name=avatar] {
   background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
   animation: skeleton-loading 1.5s infinite;
 }
-.skeleton.rounded {
-  border-radius: 50%;
-}
-
 @keyframes skeleton-loading {
   0% {
     left: -100%;
