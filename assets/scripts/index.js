@@ -5,26 +5,6 @@ const saveBtn = document.querySelector('button#edit-btn');
 const myUser = JSON.parse(localStorage.getItem('amamy_user'));
 const myUserInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
 
-if (myUserInfor?.user_name) {
-    document.querySelector("input[name='fullName']").placeholder =
-        myUserInfor?.user_name;
-} else {
-    document.querySelector("input[name='fullName']").placeholder =
-        myUser?.user_display_name;
-}
-if (myUserInfor?.user_phone)
-    document.querySelector("input[name='phone']").placeholder =
-        myUserInfor?.user_phone;
-if (myUserInfor?.user_email)
-    document.querySelector("input[name='email']").placeholder =
-        myUserInfor?.user_email;
-if (myUserInfor?.user_dcvn)
-    document.querySelector("input[name='address-vi']").placeholder =
-        myUserInfor?.user_dcvn;
-if (myUserInfor?.user_dcng)
-    document.querySelector("input[name='address-foreign']").placeholder =
-        myUserInfor?.user_dcng;
-
 if (editOnBtn) {
     editOnBtn.onclick = function (e) {
         e.preventDefault();
@@ -34,7 +14,7 @@ if (editOnBtn) {
             .querySelectorAll('input:not([type="file"])');
         inputs.forEach((input) => input.removeAttribute('disabled'));
         document.querySelector("input[name='email']").value =
-            userInfor.user_email;
+            myUser?.user_email;
         document
             .querySelector("input[name='email']")
             .setAttribute('disabled', true);
@@ -271,7 +251,7 @@ saveBtn.onclick = function (e) {
             const formData = new FormData();
             formData.append('username', data.fullName);
             formData.append('phone', data.phone);
-            formData.append('email', userInfor.user_email);
+            formData.append('email', myUser.user_email);
             formData.append('dcvn', data['address-vi']);
             formData.append('dcng', data['address-foreign']);
             fetch('https://amamy.net/wp-json/custom/v1/edit_info', {
@@ -315,9 +295,10 @@ saveBtn.onclick = function (e) {
                     const inputs = document
                         .getElementById('my-account')
                         .querySelectorAll('input:not([type="file"])');
-                    inputs.forEach((input) =>
-                        input.setAttribute('disabled', true)
-                    );
+                    inputs.forEach((input) => {
+                        input.setAttribute('disabled', true);
+                        input.value = '';
+                    });
                     document
                         .getElementById('edit-btn')
                         .setAttribute('disabled', true);
@@ -326,21 +307,21 @@ saveBtn.onclick = function (e) {
 
                     document.querySelector(
                         "input[name='fullName']"
-                    ).placeholder = res?.user_name;
+                    ).placeholder = res.user_name;
 
                     document.querySelector("input[name='phone']").placeholder =
-                        res?.user_phone;
+                        res.user_phone;
 
                     document.querySelector("input[name='email']").placeholder =
-                        res?.user_email;
+                        res.user_email;
 
                     document.querySelector(
                         "input[name='address-vi']"
-                    ).placeholder = res?.user_dcvn;
+                    ).placeholder = res.user_dcvn;
 
                     document.querySelector(
                         "input[name='address-foreign']"
-                    ).placeholder = res?.user_dcng;
+                    ).placeholder = res.user_dcng;
 
                     const { success, message, ...restData } = res;
                     localStorage.setItem(
@@ -350,7 +331,6 @@ saveBtn.onclick = function (e) {
                             ...myUserInfor.user_rank
                         })
                     );
-                    document.getElementById('my-account').reset();
                 })
                 .catch((err) => {
                     // console.log(err);

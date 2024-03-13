@@ -2,6 +2,12 @@
 const user = JSON.parse(localStorage.getItem('amamy_user'));
 const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
 const avatarLink = localStorage.getItem('amamy_avatar');
+// loading
+document
+    .querySelectorAll('.main-section .main .user .rank-infor')
+    .forEach((element) => {
+        element.classList.add('skeleton');
+    });
 if (user) {
     if (user.token) {
         const renderUserUI = (res) => {
@@ -18,7 +24,10 @@ if (user) {
                             img.src = res.author_pic;
                             img.onload = function () {
                                 // console.log('Đường dẫn hợp lệ');
-                                localStorage.setItem('avatar', res.author_pic);
+                                localStorage.setItem(
+                                    'amamy_avatar',
+                                    res.author_pic
+                                );
                                 document
                                     .querySelectorAll(
                                         '.avatar-wrapper img:first-child, .avatar img:first-child'
@@ -38,9 +47,15 @@ if (user) {
                     })
                     .finally(() => {});
             } else {
-                document.querySelector('.avatar-wrapper img:first-child').src =
-                    res.author_pic;
+                document
+                    .querySelectorAll(
+                        '.avatar-wrapper img:first-child, .avatar img:first-child'
+                    )
+                    .forEach((imgELement) => {
+                        imgELement.src = avatarLink;
+                    });
             }
+
             document
                 .querySelectorAll(
                     'span.discount-percent, .user-rank .infor p:nth-child(3) .discount-percent'
@@ -85,8 +100,37 @@ if (user) {
                         ? userInfor.user_name
                         : user.user_display_name;
                 });
+
+            if (myUserInfor?.user_name) {
+                document.querySelector("input[name='fullName']").placeholder =
+                    myUserInfor.user_name;
+            } else {
+                document.querySelector("input[name='fullName']").placeholder =
+                    myUser.user_display_name;
+            }
+            if (myUserInfor?.user_phone)
+                document.querySelector("input[name='phone']").placeholder =
+                    myUserInfor.user_phone;
+            if (myUserInfor?.user_email)
+                document.querySelector("input[name='email']").placeholder =
+                    myUserInfor?.user_email;
+            if (myUserInfor?.user_dcvn)
+                document.querySelector("input[name='address-vi']").placeholder =
+                    myUserInfor.user_dcvn;
+            if (myUserInfor?.user_dcng)
+                document.querySelector(
+                    "input[name='address-foreign']"
+                ).placeholder = myUserInfor.user_dcng;
+            document
+                .querySelectorAll('.main-section .main .user .rank-infor')
+                .forEach((element) => {
+                    element.classList.remove('skeleton');
+                });
         };
         if (!userInfor) {
+            document.querySelectorAll('form .input-group').forEach((input) => {
+                input.classList.add('skeleton');
+            });
             fetch('https://amamy.net/wp-json/custom/v1/info', {
                 headers: {
                     Authorization: 'Bearer ' + user.token
@@ -101,12 +145,50 @@ if (user) {
                             'user-infor',
                             JSON.stringify({ ...rest })
                         );
+                        if (rest?.user_name) {
+                            document.querySelector(
+                                "input[name='fullName']"
+                            ).placeholder = rest.user_name;
+                        } else {
+                            document.querySelector(
+                                "input[name='fullName']"
+                            ).placeholder = myUser.user_display_name;
+                        }
+                        if (rest?.user_phone)
+                            document.querySelector(
+                                "input[name='phone']"
+                            ).placeholder = rest.user_phone;
+                        if (rest?.user_email)
+                            document.querySelector(
+                                "input[name='email']"
+                            ).placeholder = rest?.user_email;
+                        if (rest?.user_dcvn)
+                            document.querySelector(
+                                "input[name='address-vi']"
+                            ).placeholder = rest.user_dcvn;
+                        if (rest?.user_dcng)
+                            document.querySelector(
+                                "input[name='address-foreign']"
+                            ).placeholder = rest.user_dcng;
                     }
+                    document
+                        .querySelectorAll('form .input-group')
+                        .forEach((input) => {
+                            input.classList.remove('skeleton');
+                        });
                 })
                 .catch((err) => {
                     // console.log(err);
                 })
-                .finally(() => {});
+                .finally(() => {
+                    document
+                        .querySelectorAll(
+                            '.main-section .main .user .rank-infor'
+                        )
+                        .forEach((element) => {
+                            element.classList.remove('skeleton');
+                        });
+                });
         } else {
             renderUserUI(userInfor);
         }
@@ -176,7 +258,10 @@ function convertToBase64() {
                         img.src = res.author_pic;
                         img.onload = function () {
                             // console.log('Đường dẫn hợp lệ');
-                            localStorage.setItem('avatar', res.author_pic);
+                            localStorage.setItem(
+                                'amamy_avatar',
+                                res.author_pic
+                            );
                             document
                                 .querySelectorAll(
                                     '.avatar-wrapper img:first-child, .avatar img:first-child'
