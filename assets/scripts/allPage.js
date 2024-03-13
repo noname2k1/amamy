@@ -1,2 +1,4 @@
 // home link change
-document.querySelector('header .logo a').href = location.origin + '/';
+const host = 'amamy';
+console.log(location);
+document.querySelector('header .logo a').href = location.origin + '/' + host;
