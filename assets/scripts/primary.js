@@ -2,12 +2,30 @@
 const user = JSON.parse(localStorage.getItem('amamy_user'));
 const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
 const avatarLink = localStorage.getItem('amamy_avatar');
+const displayRanks = document.querySelectorAll(
+    '.main-section .main .user .rank-infor'
+);
+const avatars = document.querySelectorAll(
+    '.avatar-wrapper img:first-child, .avatar img:first-child'
+);
+
+const discountPecentages = document.querySelectorAll(
+    'span.discount-percent, .user-rank .infor p:nth-child(3) .discount-percent'
+);
+
+const displayRankNames = document.querySelectorAll(
+    '.main-section .main .user .rank-infor .text p:nth-child(2), .user-rank .infor h2'
+);
+
+const displayNames = document.querySelectorAll(
+    '.rank-infor h1 .display-name, .user-editable p'
+);
+
 // loading
-document
-    .querySelectorAll('.main-section .main .user .rank-infor')
-    .forEach((element) => {
-        element.classList.add('skeleton');
-    });
+displayRanks.forEach((element) => {
+    element.classList.add('skeleton');
+});
+
 if (user) {
     if (user.token) {
         const renderUserUI = (res) => {
@@ -28,13 +46,9 @@ if (user) {
                                     'amamy_avatar',
                                     res.author_pic
                                 );
-                                document
-                                    .querySelectorAll(
-                                        '.avatar-wrapper img:first-child, .avatar img:first-child'
-                                    )
-                                    .forEach((imgELement) => {
-                                        imgELement.src = res.author_pic;
-                                    });
+                                avatars.forEach((imgELement) => {
+                                    imgELement.src = res.author_pic;
+                                });
                             };
 
                             img.onerror = function () {
@@ -47,42 +61,30 @@ if (user) {
                     })
                     .finally(() => {});
             } else {
-                document
-                    .querySelectorAll(
-                        '.avatar-wrapper img:first-child, .avatar img:first-child'
-                    )
-                    .forEach((imgELement) => {
-                        imgELement.src = avatarLink;
-                    });
+                avatars.forEach((imgELement) => {
+                    imgELement.src = avatarLink;
+                });
             }
 
-            document
-                .querySelectorAll(
-                    'span.discount-percent, .user-rank .infor p:nth-child(3) .discount-percent'
-                )
-                .forEach((el) => {
-                    el.textContent =
-                        res.user_rank === 'Đồng'
-                            ? '3'
-                            : res.user_rank === 'Bạc'
-                            ? '4'
-                            : res.user_rank === 'Vàng'
-                            ? '5'
-                            : '1.5';
-                });
-            document
-                .querySelectorAll(
-                    '.main-section .main .user .rank-infor .text p:nth-child(2), .user-rank .infor h2'
-                )
-                .forEach((el) => {
-                    el.textContent =
-                        res.user_rank === 'Thành viên mới'
-                            ? 'Thành viên mới'
-                            : 'Hạng ' + res.user_rank;
-                });
-            document
-                .querySelector('.user-rank')
-                ?.classList.add(
+            discountPecentages.forEach((el) => {
+                el.textContent =
+                    res.user_rank === 'Đồng'
+                        ? '3'
+                        : res.user_rank === 'Bạc'
+                        ? '4'
+                        : res.user_rank === 'Vàng'
+                        ? '5'
+                        : '1.5';
+            });
+
+            displayRankNames.forEach((el) => {
+                el.textContent =
+                    res.user_rank === 'Thành viên mới'
+                        ? 'Thành viên mới'
+                        : 'Hạng ' + res.user_rank;
+            });
+            document.querySelectorAll('.user-rank, .infor').forEach((el) => {
+                el.classList.add(
                     res.user_rank === 'Đồng'
                         ? 'copper'
                         : res.user_rank === 'Bạc'
@@ -91,44 +93,19 @@ if (user) {
                         ? 'gold'
                         : 'newbie'
                 );
-            document
-                .querySelectorAll(
-                    '.rank-infor h1 .display-name, .user-editable p'
-                )
-                .forEach((el) => {
-                    el.textContent = userInfor?.user_name
-                        ? userInfor.user_name
-                        : user.user_display_name;
-                });
-
-            // if (myUserInfor?.user_name) {
-            //     document.querySelector("input[name='fullName']").placeholder =
-            //         myUserInfor.user_name;
-            // } else {
-            //     document.querySelector("input[name='fullName']").placeholder =
-            //         myUser.user_display_name;
-            // }
-            // if (myUserInfor?.user_phone)
-            //     document.querySelector("input[name='phone']").placeholder =
-            //         myUserInfor.user_phone;
-            // if (myUserInfor?.user_email)
-            //     document.querySelector("input[name='email']").placeholder =
-            //         myUserInfor?.user_email;
-            // if (myUserInfor?.user_dcvn)
-            //     document.querySelector("input[name='address-vi']").placeholder =
-            //         myUserInfor.user_dcvn;
-            // if (myUserInfor?.user_dcng)
-            //     document.querySelector(
-            //         "input[name='address-foreign']"
-            //     ).placeholder = myUserInfor.user_dcng;
-            document
-                .querySelectorAll('.main-section .main .user .rank-infor')
-                .forEach((element) => {
-                    element.classList.remove('skeleton');
-                });
+            });
+            displayNames.forEach((el) => {
+                el.textContent = userInfor?.user_name
+                    ? userInfor.user_name
+                    : user.user_display_name;
+            });
+            displayRanks.forEach((element) => {
+                element.classList.remove('skeleton');
+            });
         };
         if (!userInfor) {
-            document.querySelectorAll('form .input-group').forEach((input) => {
+            const inputGroup = document.querySelectorAll('form .input-group');
+            inputGroup.forEach((input) => {
                 input.classList.add('skeleton');
             });
             fetch('https://amamy.net/wp-json/custom/v1/info', {
@@ -176,18 +153,12 @@ if (user) {
                     // console.log(err);
                 })
                 .finally(() => {
-                    document
-                        .querySelectorAll(
-                            '.main-section .main .user .rank-infor'
-                        )
-                        .forEach((element) => {
-                            element.classList.remove('skeleton');
-                        });
-                    document
-                        .querySelectorAll('form .input-group')
-                        .forEach((input) => {
-                            input.classList.remove('skeleton');
-                        });
+                    displayRanks.forEach((element) => {
+                        element.classList.remove('skeleton');
+                    });
+                    inputGroup.forEach((input) => {
+                        input.classList.remove('skeleton');
+                    });
                 });
         } else {
             renderUserUI(userInfor);
@@ -195,11 +166,9 @@ if (user) {
     }
 }
 
-document
-    .querySelectorAll('.main-section .main .user .rank-infor')
-    .forEach((element) => {
-        element.classList.remove('skeleton');
-    });
+displayRanks.forEach((element) => {
+    element.classList.remove('skeleton');
+});
 
 // show password
 document.querySelectorAll('.show-pwd').forEach((element) => {
@@ -220,6 +189,7 @@ document.querySelectorAll('.show-pwd').forEach((element) => {
         }
     };
 });
+// hide password
 document.querySelectorAll('.hide-pwd').forEach((element) => {
     element.onclick = function () {
         const input = element.parentNode.querySelector('input');
