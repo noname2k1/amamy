@@ -43,6 +43,7 @@ if (user) {
     if (user.token) {
         const renderUserUI = (res) => {
             if (!avatarLink || avatarLink == 'undefined') {
+                // get avatar
                 fetch('https://amamy.net/wp-json/custom/v1/avatar', {
                     headers: {
                         Authorization: 'Bearer ' + user.token
@@ -132,6 +133,7 @@ if (user) {
             inputGroups.forEach((input) => {
                 input.classList.add('skeleton');
             });
+            //  get user infor
             fetch('https://amamy.net/wp-json/custom/v1/info', {
                 headers: {
                     Authorization: 'Bearer ' + user.token
@@ -164,7 +166,7 @@ if (user) {
                 })
                 .finally(() => {
                     inputGroups.forEach((input) => {
-                        input.classList.add('skeleton');
+                        input.classList.remove('skeleton');
                     });
                 });
         } else {

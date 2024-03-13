@@ -358,7 +358,7 @@ const toastStyle = {
     background: '#38b6ff',
     color: '#fff',
     fontFamily: 'Montserrat',
-    fontSize: window.innerWidth > 767 ? '1.25rem' : '3rem',
+    fontSize: '2rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 'normal',
@@ -522,11 +522,13 @@ submitBtn.onclick = function (e) {
 //         background: '#38b6ff',
 //         color: '#fff',
 //         fontFamily: 'Montserrat',
-//         fontSize: '1.25rem',
+//         fontSize: '2rem',
 //         fontStyle: 'normal',
 //         fontWeight: 700,
 //         lineHeight: 'normal',
-//         borderRadius: '0.5rem'
+//         borderRadius: '0.5rem',
+//         whiteSpace: 'nowrap',
+//         maxWidth: 'unset'
 //     },
 //     onClick: function () {} // Callback after click
 // }).showToast();

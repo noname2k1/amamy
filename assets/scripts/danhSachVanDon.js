@@ -118,15 +118,15 @@ fetch(
         // console.log(res);
         const listWrapper = document.querySelector('.content-wrapper ul');
         const items = document.querySelectorAll('.content-wrapper ul li');
+        const pagination = document.querySelector('.pagination');
         if (!res.count) {
             items.forEach((item) => {
-                item.style.visibility = 'hidden';
+                item.style.display = 'hidden';
             });
-            document.querySelector('.pagination').style.visibility = 'hidden';
+            pagination.style.visibility = 'hidden';
         } else {
             if (res.count <= limit) {
-                document.querySelector('.pagination').style.visibility =
-                    'hidden';
+                pagination.style.visibility = 'hidden';
             } else {
                 const lastPage = Math.ceil(res.count / limit);
                 paginationContainer.innerHTML = '';
@@ -177,10 +177,6 @@ fetch(
                         break;
                     }
                 }
-                // paginationHtml += `
-                //         <a href="?page=1" class="current-page">1</a>
-                //         <a href="?page=2" class="others">2</a>
-                //         <a href="?page=${lastPage}" class="others">${lastPage}</a>`;
                 // render [...]
                 if (lastPage > 3 && page <= lastPage - 2) {
                     paginationHtml += `
