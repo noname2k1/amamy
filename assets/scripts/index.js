@@ -320,10 +320,6 @@ saveBtn.onclick = function (e) {
                     ).placeholder = res.user_dcng;
 
                     const { success, message, ...restData } = res;
-                    localStorage.setItem('amamy_user', {
-                        ...JSON.parse(localStorage.getItem('amamy_user')),
-                        user_display_name: restData.user_name
-                    });
                     localStorage.setItem(
                         'amamy_user-infor',
                         JSON.stringify({
