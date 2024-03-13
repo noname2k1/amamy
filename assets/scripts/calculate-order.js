@@ -1,20 +1,23 @@
-if (window.innerWidth <= 767) {
-    // let priceView = false;
+const execOnResize = () => {
+    if (window.innerWidth <= 767) {
+        // let priceView = false;
 
-    const total = document.querySelector('.total');
-    total.onclick = function (e) {
-        total.querySelector('.benefit').classList.toggle('d-none');
-        total
-            .querySelectorAll('.bar p')
-            .forEach((p) => p.classList.toggle('d-none'));
-    };
-}
+        const total = document.querySelector('.total');
+        total.onclick = function (e) {
+            total.querySelector('.benefit').classList.toggle('d-none');
+            total
+                .querySelectorAll('.bar p')
+                .forEach((p) => p.classList.toggle('d-none'));
+        };
+    }
+};
+execOnResize();
 
-const defaultDiscountPecentage = 0; // khách
-// const defaultDiscountPecentage = 1.5; // newbie
-// const defaultDiscountPecentage = 3; // copper
-// const defaultDiscountPecentage = 4; // silver
-// const defaultDiscountPecentage = 5; // gold
+window.addEventListener('resize', execOnResize);
+
+const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
+
+let defaultDiscountPecentage = 0; // khách
 
 const formatResult = (result, currency) => {
     switch (currency) {
@@ -39,7 +42,8 @@ const formatResult = (result, currency) => {
     }
 };
 
-const calculateOrder = (from, to, currency, weight, discountPecentage = 0) => {
+const calculateOrder = (from, to, currency, weight, discountPecentage) => {
+    console.log(discountPecentage);
     const FEES = [
         {
             from: 'vi',
@@ -121,6 +125,22 @@ const exec = () => {
         inputCurrency.value &&
         inputWeight.value
     ) {
+        if (userInfor) {
+            switch (userInfor.user_rank) {
+                case 'Thành viên mới':
+                    defaultDiscountPecentage = 1.5; // newbie
+                    break;
+                case 'Đồng':
+                    defaultDiscountPecentage = 3; // copper
+                    break;
+                case 'Bạc':
+                    defaultDiscountPecentage = 4; // silver
+                    break;
+                case 'Vàng':
+                    defaultDiscountPecentage = 5; // gold
+                    break;
+            }
+        }
         const result = calculateOrder(
             inputFrom.value,
             inputTo.value,

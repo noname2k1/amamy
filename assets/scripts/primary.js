@@ -101,26 +101,26 @@ if (user) {
                         : user.user_display_name;
                 });
 
-            if (myUserInfor?.user_name) {
-                document.querySelector("input[name='fullName']").placeholder =
-                    myUserInfor.user_name;
-            } else {
-                document.querySelector("input[name='fullName']").placeholder =
-                    myUser.user_display_name;
-            }
-            if (myUserInfor?.user_phone)
-                document.querySelector("input[name='phone']").placeholder =
-                    myUserInfor.user_phone;
-            if (myUserInfor?.user_email)
-                document.querySelector("input[name='email']").placeholder =
-                    myUserInfor?.user_email;
-            if (myUserInfor?.user_dcvn)
-                document.querySelector("input[name='address-vi']").placeholder =
-                    myUserInfor.user_dcvn;
-            if (myUserInfor?.user_dcng)
-                document.querySelector(
-                    "input[name='address-foreign']"
-                ).placeholder = myUserInfor.user_dcng;
+            // if (myUserInfor?.user_name) {
+            //     document.querySelector("input[name='fullName']").placeholder =
+            //         myUserInfor.user_name;
+            // } else {
+            //     document.querySelector("input[name='fullName']").placeholder =
+            //         myUser.user_display_name;
+            // }
+            // if (myUserInfor?.user_phone)
+            //     document.querySelector("input[name='phone']").placeholder =
+            //         myUserInfor.user_phone;
+            // if (myUserInfor?.user_email)
+            //     document.querySelector("input[name='email']").placeholder =
+            //         myUserInfor?.user_email;
+            // if (myUserInfor?.user_dcvn)
+            //     document.querySelector("input[name='address-vi']").placeholder =
+            //         myUserInfor.user_dcvn;
+            // if (myUserInfor?.user_dcng)
+            //     document.querySelector(
+            //         "input[name='address-foreign']"
+            //     ).placeholder = myUserInfor.user_dcng;
             document
                 .querySelectorAll('.main-section .main .user .rank-infor')
                 .forEach((element) => {
@@ -142,7 +142,7 @@ if (user) {
                         const { success, ...rest } = res;
                         renderUserUI(res);
                         localStorage.setItem(
-                            'user-infor',
+                            'amamy_user-infor',
                             JSON.stringify({ ...rest })
                         );
                         if (rest?.user_name) {
@@ -194,6 +194,12 @@ if (user) {
         }
     }
 }
+
+document
+    .querySelectorAll('.main-section .main .user .rank-infor')
+    .forEach((element) => {
+        element.classList.remove('skeleton');
+    });
 
 // show password
 document.querySelectorAll('.show-pwd').forEach((element) => {
@@ -312,7 +318,7 @@ logout?.addEventListener('click', function () {
     localStorage.removeItem('amamy_user-infor');
     localStorage.removeItem('amamy_avatar');
     //redirect to login page
-    location.href = location.origin + '/dang-nhap.html';
+    location.href = location.pathname.split('/')[0] + '/dang-nhap.html';
 });
 
 // fake thêm đơn vận chuyển

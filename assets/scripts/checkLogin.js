@@ -1,3 +1,3 @@
 if (!localStorage.getItem('amamy_user')) {
-    location.href = location.origin + '/dang-nhap.html';
+    location.href = location.pathname.split('/')[0] + '/dang-nhap.html';
 }
