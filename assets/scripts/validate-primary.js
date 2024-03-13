@@ -420,8 +420,7 @@ submitBtn.onclick = function (e) {
                         return;
                     }
                     localStorage.setItem('amamy_user', JSON.stringify(res));
-                    location.href =
-                        (env == 'dev' ? '' : host) + '/tai-khoan-cua-toi.html';
+                    location.href = (env == 'dev' ? '' : host) + '/';
                 })
                 .catch((err) => {
                     console.log(err);
