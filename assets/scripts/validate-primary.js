@@ -358,7 +358,7 @@ const toastStyle = {
     background: '#38b6ff',
     color: '#fff',
     fontFamily: 'Montserrat',
-    fontSize: '1.25rem',
+    fontSize: window.innerWidth > 767 ? '1.25rem' : '3rem',
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 'normal',
