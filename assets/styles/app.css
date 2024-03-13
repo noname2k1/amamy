@@ -495,6 +495,18 @@ input[name=avatar] {
   background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
   animation: skeleton-loading 1.5s infinite;
 }
+.skeleton.skeleton-avatar {
+  border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+@media screen and (max-width: 767px) {
+  .skeleton.skeleton-avatar {
+    width: 11.73333rem;
+    height: 11.73333rem;
+  }
+}
 @keyframes skeleton-loading {
   0% {
     left: -100%;

@@ -552,8 +552,17 @@ input[name='avatar'] {
         );
         animation: skeleton-loading 1.5s infinite;
     }
-    &.rounded {
-        // border-radius: 50%;
+    &.skeleton-avatar {
+        border-radius: 50%;
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .skeleton.skeleton-avatar {
+        width: 11.73333rem;
+        height: 11.73333rem;
     }
 }
 

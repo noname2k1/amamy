@@ -50,7 +50,7 @@ if (user) {
                 // get avatar
                 avatarWrappers.forEach((wrapper) => {
                     wrapper.classList.add('skeleton');
-                    wrapper.classList.add('rounded');
+                    wrapper.classList.add('skeleton-avatar');
                 });
                 fetch('https://amamy.net/wp-json/custom/v1/avatar', {
                     headers: {
@@ -84,7 +84,7 @@ if (user) {
                     .finally(() => {
                         avatarWrappers.forEach((wrapper) => {
                             wrapper.classList.remove('skeleton');
-                            wrapper.classList.remove('rounded');
+                            wrapper.classList.remove('skeleton-avatar');
                         });
                     });
             } else {
@@ -246,9 +246,8 @@ document.querySelectorAll('.hide-pwd').forEach((element) => {
 // show dialog avatar selection & upload avatar
 
 // convert file to base64
-function convertToBase64() {
-    const fileInput = document.querySelector("input[name='avatar']");
-    const file = fileInput.files[0];
+function convertToBase64(inputAvatar) {
+    const file = inputAvatar.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onloadend = function () {
@@ -259,7 +258,7 @@ function convertToBase64() {
             // edit avatar
             avatarWrappers.forEach((wrapper) => {
                 wrapper.classList.add('skeleton');
-                wrapper.classList.add('rounded');
+                wrapper.classList.add('skeleton-avatar');
             });
             fetch('https://amamy.net/wp-json/custom/v1/avatar', {
                 method: 'POST',
@@ -296,7 +295,7 @@ function convertToBase64() {
                 .finally(() => {
                     avatarWrappers.forEach((wrapper) => {
                         wrapper.classList.remove('skeleton');
-                        wrapper.classList.remove('rounded');
+                        wrapper.classList.remove('skeleton-avatar');
                     });
                 });
         };
@@ -311,16 +310,20 @@ document.querySelectorAll('.avatar-wrapper, .avatar').forEach((el) => {
     };
 });
 
-const inputAvatar = document.querySelector("input[name='avatar']");
+const inputAvatars = document.querySelectorAll("input[name='avatar']");
 
-inputAvatar?.addEventListener('click', function () {
-    if (inputAvatar.value) {
-        inputAvatar.value = null;
-    }
+inputAvatars.forEach((inputAvatar) => {
+    inputAvatar?.addEventListener('click', function () {
+        if (inputAvatar.value) {
+            inputAvatar.value = null;
+        }
+    });
 });
 
-inputAvatar?.addEventListener('input', function () {
-    convertToBase64();
+inputAvatars.forEach((inputAvatar) => {
+    inputAvatar?.addEventListener('input', function () {
+        convertToBase64(inputAvatar);
+    });
 });
 
 // logout
