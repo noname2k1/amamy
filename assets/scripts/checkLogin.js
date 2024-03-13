@@ -1,3 +1,3 @@
 if (!localStorage.getItem('amamy_user')) {
-    location.href = '/dang-nhap.html';
+    location.href = location.href + 'dang-nhap.html';
 }

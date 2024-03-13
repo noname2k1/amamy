@@ -171,11 +171,6 @@ if (user) {
                                 "input[name='address-foreign']"
                             ).placeholder = rest.user_dcng;
                     }
-                    document
-                        .querySelectorAll('form .input-group')
-                        .forEach((input) => {
-                            input.classList.remove('skeleton');
-                        });
                 })
                 .catch((err) => {
                     // console.log(err);
@@ -187,6 +182,11 @@ if (user) {
                         )
                         .forEach((element) => {
                             element.classList.remove('skeleton');
+                        });
+                    document
+                        .querySelectorAll('form .input-group')
+                        .forEach((input) => {
+                            input.classList.remove('skeleton');
                         });
                 });
         } else {
@@ -312,7 +312,7 @@ logout?.addEventListener('click', function () {
     localStorage.removeItem('amamy_user-infor');
     localStorage.removeItem('amamy_avatar');
     //redirect to login page
-    location.href = '/dang-nhap.html';
+    location.href = location.href + 'dang-nhap.html';
 });
 
 // fake thêm đơn vận chuyển
