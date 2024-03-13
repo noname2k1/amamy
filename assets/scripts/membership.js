@@ -1,3 +1,8 @@
+const rankList = document.querySelector('.rank-list');
+const benefit = document.querySelector('.benefit');
+const progressBar = document.querySelector('.membership-progress');
+const achieve = document.querySelector('.achieve');
+// get ranks
 fetch('https://amamy.net/wp-json/custom/v1/rank')
     .then((raw) => raw.json())
     .then((res) => {
@@ -22,7 +27,6 @@ fetch('https://amamy.net/wp-json/custom/v1/rank')
                 : res.user_rank === 'Vàng'
                 ? '5%'
                 : '1.5%';
-
         // highlight rank trong progress
         document
             .querySelector('.level.newbie')
@@ -64,6 +68,7 @@ fetch('https://amamy.net/wp-json/custom/v1/rank')
                     document.querySelector(
                         '.member-ship .membership-progress .thumb'
                     ).style.width = currentPercent + '%';
+                    progressBar.classList.remove('skeleton');
                     // ẩn dòng gửi thêm khi đạt rank tối đa
                     if (myRankIndex === rankSorted.length - 1) {
                         document.querySelector('.instruction').style.display =
@@ -86,6 +91,11 @@ fetch('https://amamy.net/wp-json/custom/v1/rank')
             })
             .catch((err) => {
                 // console.log(err)
+            })
+            .finally(() => {
+                progressBar.classList.remove('skeleton');
+                benefit.classList.remove('skeleton');
+                achieve.classList.remove('skeleton');
             });
 
         // render ranks
@@ -121,14 +131,14 @@ fetch('https://amamy.net/wp-json/custom/v1/rank')
                     </div>
                     </li>`)
         );
-        document.querySelector('.rank-list').innerHTML = html;
+        rankList.innerHTML = html;
     })
     .catch((err) => {
         // console.log(err);
     });
 
+//  toggle rank dropdown
 document.addEventListener('DOMContentLoaded', (event) => {
-    const rankList = document.querySelector('.rank-list');
     rankList.addEventListener('click', function (event) {
         const targetElement = event.target;
         const rankItem = targetElement.closest('li');

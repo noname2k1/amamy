@@ -2,9 +2,8 @@
 const user = JSON.parse(localStorage.getItem('amamy_user'));
 const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
 const avatarLink = localStorage.getItem('amamy_avatar');
-const displayRanks = document.querySelectorAll(
-    '.main-section .main .user .rank-infor'
-);
+
+const displayRanks = document.querySelectorAll('.rank-infor');
 const avatars = document.querySelectorAll(
     '.avatar-wrapper img:first-child, .avatar img:first-child'
 );
@@ -30,20 +29,29 @@ const inputAddressForeign = document.querySelector(
     "input[name='address-foreign']"
 );
 
-// loading
-displayRanks.forEach((element) => {
-    element.classList.add('skeleton');
-});
+const avatarWrappers = document.querySelectorAll('.avatar-wrapper, .avatar');
+const avatarImgs = document.querySelectorAll(
+    '.avatar-wrapper img:first-child, .avatar img:first-child'
+);
 
-inputGroups.forEach((inputGroup) => {
-    inputGroup.classList.add('skeleton');
-});
+// loading
+// displayRanks.forEach((element) => {
+//     element.classList.add('skeleton');
+// });
+
+// inputGroups.forEach((inputGroup) => {
+//     inputGroup.classList.add('skeleton');
+// });
 
 if (user) {
     if (user.token) {
         const renderUserUI = (res) => {
             if (!avatarLink || avatarLink == 'undefined') {
                 // get avatar
+                avatarWrappers.forEach((wrapper) => {
+                    wrapper.classList.add('skeleton');
+                    wrapper.classList.add('rounded');
+                });
                 fetch('https://amamy.net/wp-json/custom/v1/avatar', {
                     headers: {
                         Authorization: 'Bearer ' + user.token
@@ -73,7 +81,12 @@ if (user) {
                     .catch((err) => {
                         // console.log(err);
                     })
-                    .finally(() => {});
+                    .finally(() => {
+                        avatarWrappers.forEach((wrapper) => {
+                            wrapper.classList.remove('skeleton');
+                            wrapper.classList.remove('rounded');
+                        });
+                    });
             } else {
                 avatars.forEach((imgELement) => {
                     imgELement.src = avatarLink;
@@ -128,6 +141,14 @@ if (user) {
                 inputAddressVi.placeholder = userInfor.user_dcvn;
             if (userInfor?.user_dcng && inputAddressForeign)
                 inputAddressForeign.placeholder = userInfor.user_dcng;
+
+            displayRanks.forEach((element) => {
+                element.classList.remove('skeleton');
+            });
+
+            // inputGroups.forEach((input) => {
+            //     input.classList.remove('skeleton');
+            // });
         };
         if (!userInfor) {
             inputGroups.forEach((input) => {
@@ -175,13 +196,13 @@ if (user) {
     }
 }
 
-displayRanks.forEach((element) => {
-    element.classList.remove('skeleton');
-});
+// displayRanks.forEach((element) => {
+//     element.classList.remove('skeleton');
+// });
 
-inputGroups.forEach((input) => {
-    input.classList.remove('skeleton');
-});
+// inputGroups.forEach((input) => {
+//     input.classList.remove('skeleton');
+// });
 
 // show password
 document.querySelectorAll('.show-pwd').forEach((element) => {
@@ -236,6 +257,10 @@ function convertToBase64() {
             const formData = new FormData();
             formData.append('avatar', base64String);
             // edit avatar
+            avatarWrappers.forEach((wrapper) => {
+                wrapper.classList.add('skeleton');
+                wrapper.classList.add('rounded');
+            });
             fetch('https://amamy.net/wp-json/custom/v1/avatar', {
                 method: 'POST',
                 headers: {
@@ -254,13 +279,10 @@ function convertToBase64() {
                                 'amamy_avatar',
                                 res.author_pic
                             );
-                            document
-                                .querySelectorAll(
-                                    '.avatar-wrapper img:first-child, .avatar img:first-child'
-                                )
-                                .forEach((imgELement) => {
-                                    imgELement.src = res.author_pic;
-                                });
+
+                            avatarImgs.forEach((imgELement) => {
+                                imgELement.src = res.author_pic;
+                            });
                         };
 
                         img.onerror = function () {
@@ -270,6 +292,12 @@ function convertToBase64() {
                 })
                 .catch((err) => {
                     // console.log(err)
+                })
+                .finally(() => {
+                    avatarWrappers.forEach((wrapper) => {
+                        wrapper.classList.remove('skeleton');
+                        wrapper.classList.remove('rounded');
+                    });
                 });
         };
         reader.readAsDataURL(file);

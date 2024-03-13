@@ -1,5 +1,5 @@
 // home link change
-const env = 'prod';
+const env = 'dev';
 const host = '/amamy';
 // console.log(location);
 

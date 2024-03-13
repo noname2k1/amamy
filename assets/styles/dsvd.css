@@ -1,5 +1,5 @@
 #root {
-  min-height: 50vh;
+  min-height: 80vh;
 }
 
 header {
@@ -299,6 +299,22 @@ nav.pagination a img {
   object-fit: cover;
 }
 
+nav.pagination a[disabled] {
+  cursor: default;
+}
+
+.content-container .content-wrapper ul li.no-order {
+  min-height: 50vh;
+  align-items: center;
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+  display: none;
+}
+
 @media (max-width: 767px) {
   #root {
     height: 350.66667rem;
@@ -506,7 +522,7 @@ nav.pagination a img {
     height: 1.06667rem;
     margin-right: 1.42rem;
   }
-}
-nav.pagination a[disabled] {
-  cursor: default;
+  .content-container .content-wrapper ul li.no-order {
+    font-size: 2.875rem;
+  }
 }/*# sourceMappingURL=dsvd.css.map */

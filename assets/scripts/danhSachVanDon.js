@@ -1,8 +1,19 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    // const copy = document.querySelectorAll(
-    //     '.content-container .content-wrapper ul li .top .left img'
-    // );
+const dynamicMarginLeft = () => {
+    if (window.innerWidth > 767) {
+        document.querySelector('.main').style.marginLeft = `calc(${
+            document.querySelector('.user').clientWidth + 'px'
+        } + 2rem)`;
+    } else {
+        document.querySelector('.main').style.marginLeft = 'unset';
+    }
+};
+dynamicMarginLeft();
+window.addEventListener('resize', function () {
+    dynamicMarginLeft();
+});
 
+// copy order code to clipboard
+document.addEventListener('DOMContentLoaded', (event) => {
     const list = document.querySelector(
         '.content-container .content-wrapper ul'
     );
@@ -28,20 +39,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }, 5000);
         }
     });
-});
-
-const dynamicMarginLeft = () => {
-    if (window.innerWidth > 767) {
-        document.querySelector('.main').style.marginLeft = `calc(${
-            document.querySelector('.user').clientWidth + 'px'
-        } + 2rem)`;
-    } else {
-        document.querySelector('.main').style.marginLeft = 'unset';
-    }
-};
-dynamicMarginLeft();
-window.addEventListener('resize', function () {
-    dynamicMarginLeft();
 });
 
 const formatResult = (result = 0, currency = 'vnd') => {
@@ -75,6 +72,7 @@ const formatResult = (result = 0, currency = 'vnd') => {
     }
 };
 
+// convert location.search -> object
 function parseQueryString(queryString) {
     const params = new URLSearchParams(queryString);
     const obj = {};
@@ -95,8 +93,11 @@ function parseQueryString(queryString) {
 }
 
 const searchParams = parseQueryString(location.search);
-
 const paginationContainer = document.querySelector('#pagination-container');
+const listWrapper = document.querySelector('.content-wrapper ul');
+const items = document.querySelectorAll('.content-wrapper ul li');
+const pagination = document.querySelector('.pagination');
+const noOrder = document.querySelector('li.no-order');
 const limit = 10;
 let page = 1;
 if (location.search) {
@@ -105,6 +106,7 @@ if (location.search) {
         page = searchParams.page;
     }
 }
+// get list order
 fetch(
     `https://amamy.net/wp-json/custom/v1/don_hang?page=${page}&per_page=${limit}`,
     {
@@ -115,15 +117,14 @@ fetch(
 )
     .then((r) => r.json())
     .then((res) => {
-        // console.log(res);
-        const listWrapper = document.querySelector('.content-wrapper ul');
-        const items = document.querySelectorAll('.content-wrapper ul li');
-        const pagination = document.querySelector('.pagination');
+        // không có đơn hàng nào
         if (!res.count) {
-            items.forEach((item) => {
-                item.style.display = 'hidden';
+            items.forEach((order) => {
+                order.style.display = 'none';
+                order.classList.remove('skeleton');
             });
             pagination.style.visibility = 'hidden';
+            noOrder.style.display = 'flex';
         } else {
             if (res.count <= limit) {
                 pagination.style.visibility = 'hidden';
@@ -203,7 +204,6 @@ fetch(
                         `;
 
                 paginationContainer.innerHTML = paginationHtml;
-                paginationContainer.classList.remove('skeleton');
             }
             let html = '';
             res.item.forEach((item) => {
@@ -249,6 +249,12 @@ fetch(
                 </li>`;
             });
             listWrapper.innerHTML = html;
+            items.forEach((order) => {
+                order.classList.remove('skeleton');
+            });
         }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => {
+        paginationContainer.classList.remove('skeleton');
+    });
