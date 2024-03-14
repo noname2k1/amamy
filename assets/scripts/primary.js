@@ -1,3 +1,4 @@
+import { fetchUserInfor, fetchAvatar, editAvatar } from './fetch.js';
 // show infor of user
 const user = JSON.parse(localStorage.getItem('amamy_user'));
 const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
@@ -34,175 +35,139 @@ const avatarImgs = document.querySelectorAll(
     '.avatar-wrapper img:first-child, .avatar img:first-child'
 );
 
-// loading
-// displayRanks.forEach((element) => {
-//     element.classList.add('skeleton');
-// });
-
-// inputGroups.forEach((inputGroup) => {
-//     inputGroup.classList.add('skeleton');
-// });
-
 if (user) {
     if (user.token) {
-        const renderUserUI = (res) => {
-            if (!avatarLink || avatarLink == 'undefined') {
-                // get avatar
-                avatarWrappers.forEach((wrapper) => {
-                    wrapper.classList.add('skeleton');
-                    wrapper.classList.add('skeleton-avatar');
-                });
-                fetch('https://amamy.net/wp-json/custom/v1/avatar', {
-                    headers: {
-                        Authorization: 'Bearer ' + user.token
-                    }
-                })
-                    .then((raw) => raw.json())
-                    .then((res) => {
-                        if (res.success) {
-                            const img = new Image();
-                            img.src = res.author_pic;
-                            img.onload = function () {
-                                // console.log('Đường dẫn hợp lệ');
-                                localStorage.setItem(
-                                    'amamy_avatar',
-                                    res.author_pic
-                                );
-                                avatars.forEach((imgELement) => {
-                                    imgELement.src = res.author_pic;
-                                });
-                            };
-
-                            img.onerror = function () {
-                                // console.log('Đường dẫn không hợp lệ');
-                            };
-                        }
-                    })
-                    .catch((err) => {
-                        // console.log(err);
-                    })
-                    .finally(() => {
-                        avatarWrappers.forEach((wrapper) => {
-                            wrapper.classList.remove('skeleton');
-                            wrapper.classList.remove('skeleton-avatar');
-                        });
-                    });
-            } else {
-                avatars.forEach((imgELement) => {
-                    imgELement.src = avatarLink;
-                });
-            }
-
-            // render % discount
-            discountPecentages.forEach((el) => {
-                el.textContent =
-                    res.user_rank === 'Đồng'
-                        ? '3'
-                        : res.user_rank === 'Bạc'
-                        ? '4'
-                        : res.user_rank === 'Vàng'
-                        ? '5'
-                        : '1.5';
+        if (!avatarLink || avatarLink == 'undefined') {
+            // get avatar
+            avatarWrappers.forEach((wrapper) => {
+                wrapper.classList.add('skeleton');
+                wrapper.classList.add('skeleton-avatar');
             });
-
-            // render rank names
-            displayRankNames.forEach((el) => {
-                el.textContent =
-                    res.user_rank === 'Thành viên mới'
-                        ? 'Thành viên mới'
-                        : 'Hạng ' + res.user_rank;
-            });
-
-            // render bg color of rank
-            document.querySelectorAll('.user-rank, .infor').forEach((el) => {
-                el.classList.add(
-                    res.user_rank === 'Đồng'
-                        ? 'copper'
-                        : res.user_rank === 'Bạc'
-                        ? 'silver'
-                        : res.user_rank === 'Vàng'
-                        ? 'gold'
-                        : 'newbie'
-                );
-            });
-
-            displayNames.forEach((el) => {
-                el.textContent = user.user_display_name;
-            });
-
-            if (userInfor?.user_name && inputFullName) {
-                inputFullName.placeholder = userInfor.user_name;
-            }
-            if (userInfor?.user_phone && inputPhone)
-                inputPhone.placeholder = userInfor.user_phone;
-            if (userInfor?.user_email && inputEmail)
-                inputEmail.placeholder = userInfor?.user_email;
-            if (userInfor?.user_dcvn && inputAddressVi)
-                inputAddressVi.placeholder = userInfor.user_dcvn;
-            if (userInfor?.user_dcng && inputAddressForeign)
-                inputAddressForeign.placeholder = userInfor.user_dcng;
-
-            displayRanks.forEach((element) => {
-                element.classList.remove('skeleton');
-            });
-
-            // inputGroups.forEach((input) => {
-            //     input.classList.remove('skeleton');
-            // });
-        };
-        if (!userInfor) {
-            inputGroups.forEach((input) => {
-                input.classList.add('skeleton');
-            });
-            //  get user infor
-            fetch('https://amamy.net/wp-json/custom/v1/info', {
-                headers: {
-                    Authorization: 'Bearer ' + user.token
-                }
-            })
-                .then((raw) => raw.json())
-                .then((res) => {
-                    if (res.success) {
-                        const { success, ...rest } = res;
-                        renderUserUI(res);
+            try {
+                const GET_AVATAR = await fetchAvatar(user.token);
+                if (GET_AVATAR.success) {
+                    const img = new Image();
+                    img.src = GET_AVATAR.author_pic;
+                    img.onload = function () {
+                        // console.log('Đường dẫn hợp lệ');
                         localStorage.setItem(
-                            'amamy_user-infor',
-                            JSON.stringify({ ...rest })
+                            'amamy_avatar',
+                            GET_AVATAR.author_pic
                         );
-                        if (rest?.user_name) {
-                            inputFullName.placeholder = rest.user_name;
-                        }
-                        if (rest?.user_phone)
-                            inputPhone.placeholder = rest.user_phone;
-                        if (rest?.user_email)
-                            inputEmail.placeholder = rest?.user_email;
-                        if (rest?.user_dcvn)
-                            inputAddressVi.placeholder = rest.user_dcvn;
-                        if (rest?.user_dcng)
-                            inputAddressForeign.placeholder = rest.user_dcng;
-                    }
-                })
-                .catch((err) => {
-                    // console.log(err);
-                })
-                .finally(() => {
-                    inputGroups.forEach((input) => {
-                        input.classList.remove('skeleton');
-                    });
+                        avatars.forEach((imgELement) => {
+                            imgELement.src = GET_AVATAR.author_pic;
+                        });
+                    };
+                    img.onerror = function () {
+                        // console.log('Đường dẫn không hợp lệ');
+                    };
+                }
+                avatarWrappers.forEach((wrapper) => {
+                    wrapper.classList.remove('skeleton');
+                    wrapper.classList.remove('skeleton-avatar');
                 });
+            } catch (error) {
+                // console.log(error)
+            }
         } else {
-            renderUserUI(userInfor);
+            avatars.forEach((imgELement) => {
+                imgELement.src = avatarLink;
+            });
         }
+
+        // render placeholder of required field smilar to existed data
+        if (userInfor?.user_name && inputFullName) {
+            inputFullName.placeholder = userInfor.user_name;
+        }
+        if (userInfor?.user_phone && inputPhone)
+            inputPhone.placeholder = userInfor.user_phone;
+        if (userInfor?.user_email && inputEmail)
+            inputEmail.placeholder = userInfor?.user_email;
+
+        displayRanks.forEach((element) => {
+            element.classList.remove('skeleton');
+        });
+
+        // inputGroups.forEach((input) => {
+        //     input.classList.remove('skeleton');
+        // });
     }
 }
+const renderUserUI = async (res) => {
+    // render % discount
+    // render user_name
+    displayNames.forEach((el) => {
+        el.textContent = res.user_name ? res.user_name : user.user_display_name;
+    });
 
-// displayRanks.forEach((element) => {
-//     element.classList.remove('skeleton');
-// });
+    discountPecentages.forEach((el) => {
+        el.textContent =
+            res.user_rank === 'Đồng'
+                ? '3'
+                : res.user_rank === 'Bạc'
+                ? '4'
+                : res.user_rank === 'Vàng'
+                ? '5'
+                : '1.5';
+    });
 
-// inputGroups.forEach((input) => {
-//     input.classList.remove('skeleton');
-// });
+    // render rank names
+    displayRankNames.forEach((el) => {
+        el.textContent =
+            res.user_rank === 'Thành viên mới'
+                ? 'Thành viên mới'
+                : 'Hạng ' + res.user_rank;
+    });
+
+    // render bg color of rank
+    document.querySelectorAll('.user-rank, .infor').forEach((el) => {
+        el.classList.add(
+            res.user_rank === 'Đồng'
+                ? 'copper'
+                : res.user_rank === 'Bạc'
+                ? 'silver'
+                : res.user_rank === 'Vàng'
+                ? 'gold'
+                : 'newbie'
+        );
+    });
+};
+if (!userInfor) {
+    inputGroups.forEach((input) => {
+        input.classList.add('skeleton');
+    });
+    //  get user infor
+    try {
+        const FETCH_USER_INFOR = await fetchUserInfor(user.token);
+        if (FETCH_USER_INFOR.success) {
+            const { success, ...rest } = FETCH_USER_INFOR;
+
+            // render UI
+            renderUserUI(FETCH_USER_INFOR);
+            // save user infor
+            localStorage.setItem(
+                'amamy_user-infor',
+                JSON.stringify({ ...rest })
+            );
+            if (rest?.user_name) {
+                inputFullName.placeholder = rest.user_name;
+            }
+            if (rest?.user_phone) inputPhone.placeholder = rest.user_phone;
+            if (rest?.user_email) inputEmail.placeholder = rest?.user_email;
+            // if (rest?.user_dcvn)
+            //     inputAddressVi.placeholder = rest.user_dcvn;
+            // if (rest?.user_dcng)
+            //     inputAddressForeign.placeholder = rest.user_dcng;
+        }
+    } catch (error) {
+        // console.log(error);
+    }
+    inputGroups.forEach((input) => {
+        input.classList.remove('skeleton');
+    });
+} else {
+    renderUserUI(userInfor);
+}
 
 // show password
 document.querySelectorAll('.show-pwd').forEach((element) => {
@@ -243,14 +208,12 @@ document.querySelectorAll('.hide-pwd').forEach((element) => {
     };
 });
 
-// show dialog avatar selection & upload avatar
-
-// convert file to base64
+// convert file to base64 & upload avatar
 function convertToBase64(inputAvatar) {
     const file = inputAvatar.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onloadend = function () {
+        reader.onloadend = async function () {
             const base64String = reader.result;
             // console.log(base64String);
             const formData = new FormData();
@@ -260,49 +223,39 @@ function convertToBase64(inputAvatar) {
                 wrapper.classList.add('skeleton');
                 wrapper.classList.add('skeleton-avatar');
             });
-            fetch('https://amamy.net/wp-json/custom/v1/avatar', {
-                method: 'POST',
-                headers: {
-                    Authorization: 'Bearer ' + user.token
-                },
-                body: formData
-            })
-                .then((r) => r.json())
-                .then((res) => {
-                    if (res.success) {
-                        const img = new Image();
-                        img.src = res.author_pic;
-                        img.onload = function () {
-                            // console.log('Đường dẫn hợp lệ');
-                            localStorage.setItem(
-                                'amamy_avatar',
-                                res.author_pic
-                            );
-
-                            avatarImgs.forEach((imgELement) => {
-                                imgELement.src = res.author_pic;
-                            });
-                        };
-
-                        img.onerror = function () {
-                            // console.log('Đường dẫn không hợp lệ');
-                        };
-                    }
-                })
-                .catch((err) => {
-                    // console.log(err)
-                })
-                .finally(() => {
-                    avatarWrappers.forEach((wrapper) => {
-                        wrapper.classList.remove('skeleton');
-                        wrapper.classList.remove('skeleton-avatar');
-                    });
-                });
+            try {
+                // edit avatar
+                const EDIT_AVATAR = await editAvatar(user.token, formData);
+                if (EDIT_AVATAR.success) {
+                    const img = new Image();
+                    img.src = EDIT_AVATAR.author_pic;
+                    img.onload = function () {
+                        // console.log('Đường dẫn hợp lệ');
+                        localStorage.setItem(
+                            'amamy_avatar',
+                            EDIT_AVATAR.author_pic
+                        );
+                        avatarImgs.forEach((imgELement) => {
+                            imgELement.src = EDIT_AVATAR.author_pic;
+                        });
+                    };
+                    img.onerror = function () {
+                        // console.log('Đường dẫn không hợp lệ');
+                    };
+                }
+            } catch (error) {
+                // console.log(error)
+            }
+            avatarWrappers.forEach((wrapper) => {
+                wrapper.classList.remove('skeleton');
+                wrapper.classList.remove('skeleton-avatar');
+            });
         };
         reader.readAsDataURL(file);
     }
 }
 
+// show dialog avatar selection
 document.querySelectorAll('.avatar-wrapper, .avatar').forEach((el) => {
     el.onclick = function () {
         const inputAvatar = el.querySelector("input[name='avatar']");

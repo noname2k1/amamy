@@ -3,11 +3,13 @@
 
 <head>
     <script src="./assets/scripts/allPage.js"></script>
+    <script src="./assets/scripts/checkAuth.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles/index.css">
@@ -85,10 +87,17 @@
                     <div class="input-group email">
                         <label for="email">Email*</label>
                         <input type="email" name="email" id="email" placeholder="example@gmail.com">
-                        <span class="error-message"></span>
+                        <span class="error-message for-2"></span>
+                    </div>
+                    <div class="input-group reset-code d-none">
+                        <label for="code">Mã đặt lại mật khẩu*</label>
+                        <input disabled type="text" name="code" id="code" placeholder="Nhập reset code nhận tại email"
+                            class="d-none">
+                        <span class="error-message for-3"></span>
                     </div>
                     <button type="submit">
                         Lấy lại mật khẩu
+                        <div class="loader"></div>
                     </button>
                     <span class="or">Hoặc</span>
                     <a href="#">Liên hệ bộ phận hỗ trợ</a>
@@ -100,8 +109,8 @@
 
     <!-- <script src="./assets/scripts/primary.js"></script> -->
     <script src="./assets/scripts/allPage.js"></script>
-    <script src="./assets/scripts/checkAuth.js"></script>
-    <script src="./assets/scripts/validate-primary.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="./assets/scripts/validate-primary.js"></script>
 </body>
 
 </html>

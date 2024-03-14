@@ -1,6 +1,6 @@
 // home link change
-const env = 'prod';
-const host = '/amamy';
+env = 'dev';
+host = '/amamy';
 // console.log(location);
 
 window.addEventListener('DOMContentLoaded', function () {

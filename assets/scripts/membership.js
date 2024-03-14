@@ -127,7 +127,13 @@ fetch('https://amamy.net/wp-json/custom/v1/rank')
                             rank.giam_gia
                         }% trên tổng hóa đơn mỗi lần gửi hàng</p>
                         <h5>Điều kiện</h5>
-                        <p>-Đã đăng kí thành viên tại AMAMY</p>
+                        <p>-${
+                            rank.so_can_can_dat == 0
+                                ? 'Đã đăng kí hội viên'
+                                : 'Đã gửi tại Amamy ' +
+                                  rank.so_can_can_dat +
+                                  'kg'
+                        }</p>
                     </div>
                     </li>`)
         );

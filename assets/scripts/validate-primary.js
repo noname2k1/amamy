@@ -1,3 +1,7 @@
+import { fetchOrder, fetchUserInfor } from './fetch.js';
+
+const user = JSON.parse(localStorage.getItem('amamy_user'));
+
 const DEFAULT_MESSAGE_FOR_REQUIRED_FIELD = 'Dữ liệu không được để trống';
 const VALIDATES = [
     {
@@ -20,34 +24,43 @@ const VALIDATES = [
     {
         name: 'password',
         isValid: false,
-        pattern: /^[\w]{8,}$/u,
+        pattern: /^.{8,}$/u,
         customRequiredMessage: 'Mật khẩu không được để trống',
         message: 'Mật khẩu không hợp lệ, phải ít nhất 8 ký tự, không có dấu'
     },
     {
         name: 'current-password',
         isValid: false,
-        pattern: /^[\w]{8,}$/u,
+        pattern: /^.{8,}$/u,
         customRequiredMessage: 'Mật khẩu không được để trống',
         message: 'Mật khẩu không hợp lệ, phải ít nhất 8 ký tự, không có dấu'
     },
     {
         name: 'new-password',
         isValid: false,
-        pattern: /^[\w]{8,}$/u,
+        pattern: /^.{8,}$/u,
         customRequiredMessage: 'Mật khẩu không được để trống',
         message: 'Mật khẩu không hợp lệ, phải ít nhất 8 ký tự, không có dấu'
     },
     {
         name: 'confirm-password',
         isValid: false,
-        pattern: /^[\w]{8,}$/u,
+        pattern: /^.{8,}$/u,
         customRequiredMessage: 'Mật khẩu không được để trống',
         message: 'Mật khẩu không hợp lệ, phải ít nhất 8 ký tự, không có dấu'
+    },
+    {
+        name: 'code',
+        isValid: false,
+        pattern: /^.{4,}$/u,
+        customRequiredMessage: 'Mã không được để trống',
+        message: 'Mã không hợp lệ'
     }
 ];
 
-const inputs = document.querySelectorAll('form input:not([type="file"])');
+const inputs = document.querySelectorAll(
+    'form input:not([type="file"]):not([disabled].d-none)'
+);
 
 inputs.forEach((inputElement) => {
     const currentValidateItem = VALIDATES.find(
@@ -362,12 +375,15 @@ const toastStyle = {
     fontStyle: 'normal',
     fontWeight: 700,
     lineHeight: 'normal',
-    borderRadius: '0.5rem'
+    borderRadius: '0.5rem',
+    whiteSpace: 'nowrap',
+    maxWidth: 'unset'
 };
 
 const form = document.querySelector('form');
 const submitBtn = document.querySelector('form button[type="submit"]');
 const loader = submitBtn.querySelector('.loader');
+const errorMessages = document.querySelectorAll('.error-message');
 submitBtn.onclick = function (e) {
     e.preventDefault();
     validateInputs();
@@ -381,9 +397,7 @@ submitBtn.onclick = function (e) {
     // console.log({ countInputInForm, validItemInValidates });
     if (countInputInForm === validItemInValidates) {
         loader.classList.add('show');
-        document
-            .querySelectorAll('.error-message')
-            .forEach((errElement) => (errElement.textContent = ''));
+        errorMessages.forEach((errElement) => (errElement.textContent = ''));
         const data = {};
         inputs.forEach((input) => (data[input.name] = input.value));
 
@@ -397,7 +411,7 @@ submitBtn.onclick = function (e) {
                 body: formData
             })
                 .then((raw) => raw.json())
-                .then((res) => {
+                .then(async (res) => {
                     // console.log(res);
                     if (res.data?.status) {
                         document.querySelector(
@@ -405,11 +419,27 @@ submitBtn.onclick = function (e) {
                         ).textContent = res.message;
                         return;
                     }
-                    localStorage.setItem('amamy_user', JSON.stringify(res));
-                    location.href = (env == 'dev' ? '' : host) + '/';
+                    try {
+                        const orders = await fetchOrder(res.token);
+                        const { success, ...restUserInfor } =
+                            await fetchUserInfor(res.token);
+                        localStorage.setItem('amamy_user', JSON.stringify(res));
+                        localStorage.setItem(
+                            'amamy_orders',
+                            JSON.stringify(orders)
+                        );
+                        localStorage.setItem(
+                            'amamy_user-infor',
+                            JSON.stringify(restUserInfor)
+                        );
+                        // redirect to home page
+                        location.href = (env == 'dev' ? '' : host) + '/';
+                    } catch (error) {
+                        console.log(error);
+                    }
                 })
                 .catch((err) => {
-                    console.log(err);
+                    // console.log(err);
                 })
                 .finally(() => {
                     loader.classList.remove('show');
@@ -501,16 +531,132 @@ submitBtn.onclick = function (e) {
                 });
         }
 
-        // forgot password
+        // forgot password step 1 (send reset code to own email)
         if (form.id === 'forgot-password-form') {
+            const inputResetCodeGroup = form.querySelector(
+                '.input-group.reset-code'
+            );
+            const inputResetCode = form.querySelector(
+                '.input-group.reset-code input'
+            );
             console.log(data);
             formData.append('email', data.email);
+
+            // gửi request yêu cầu reset password
+            fetch('https://amamy.net/wp-json/bdpwr/v1/reset-password', {
+                method: 'POST',
+                body: formData
+            })
+                .then((raw) => raw.json())
+                .then((res) => {
+                    console.log(res);
+                    if (res.data.status !== 200) {
+                        document.querySelector(
+                            '.error-message.for-2'
+                        ).textContent = res.message;
+                        return;
+                    }
+                    Toastify({
+                        text: 'Mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
+                        duration: 5000,
+                        newWindow: false,
+                        close: true,
+                        gravity: 'top', // `top` or `bottom`
+                        position: 'right', // `left`, `center` or `right`
+                        stopOnFocus: true, // Prevents dismissing of toast on hover
+                        style: toastStyle,
+                        onClick: function () {} // Callback after click
+                    }).showToast();
+                    // show reset code input
+                    inputResetCodeGroup.classList.remove('d-none');
+                    inputResetCode.classList.remove('d-none');
+                    inputResetCode.removeAttribute('disabled');
+                    inputResetCode.focus();
+                    form.id = 'validation-reset-code';
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    loader.classList.remove('show');
+                });
+        }
+
+        // forgot password step 2 (validation reset code)
+        if (form.id === 'validation-reset-code') {
+            const inputResetCodeGroup = form.querySelector(
+                '.input-group.reset-code'
+            );
+            const inputResetCode = form.querySelector(
+                '.input-group.reset-code input'
+            );
+
+            const resetCodeErrorMessage = inputResetCodeGroup.querySelector(
+                '.error-message.for-3'
+            );
+
+            loader.classList.add('show');
+
+            const currentValidateItem = VALIDATES.find(
+                (validateItem) => validateItem.name === inputResetCode.name
+            );
+            if (!inputResetCode.value) {
+                resetCodeErrorMessage.textContent =
+                    currentValidateItem?.customRequiredMessage
+                        ? currentValidateItem.customRequiredMessage
+                        : DEFAULT_MESSAGE_FOR_REQUIRED_FIELD;
+                return;
+            }
+            if (!currentValidateItem.pattern.test(inputResetCode.value)) {
+                resetCodeErrorMessage.textContent = currentValidateItem.message;
+                return;
+            }
+            console.log(data);
+            formData.append('email', data.email);
+            formData.append('code', data.code);
+
+            // gửi request validate code
+            fetch('https://amamy.net/wp-json/bdpwr/v1/validate-code', {
+                method: 'POST',
+                body: formData
+            })
+                .then((raw) => raw.json())
+                .then((res) => {
+                    console.log(res);
+                    if (res.data.status !== 200) {
+                        resetCodeErrorMessage.textContent = res.message;
+                        return;
+                    }
+                    // Toastify({
+                    //     text: 'Mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
+                    //     duration: 5000,
+                    //     newWindow: false,
+                    //     close: true,
+                    //     gravity: 'top', // `top` or `bottom`
+                    //     position: 'right', // `left`, `center` or `right`
+                    //     stopOnFocus: true, // Prevents dismissing of toast on hover
+                    //     style: toastStyle,
+                    //     onClick: function () {} // Callback after click
+                    // }).showToast();
+                    // // show reset code input
+                    // inputResetCodeGroup.classList.remove('d-none');
+                    // inputResetCode.classList.remove('d-none');
+                    // inputResetCode.removeAttribute('disabled');
+                    // inputResetCode.focus();
+                    // form.id = 'validation reset code';
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => {
+                    loader.classList.remove('show');
+                });
         }
     }
 };
 
 // Toastify({
-//     text: 'Đăng ký tài khoản thành công',
+//     text: 'Một mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
 //     duration: 100000,
 //     destination: '/dang-nhap.html',
 //     newWindow: false,
