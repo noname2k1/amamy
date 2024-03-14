@@ -505,9 +505,16 @@ submitBtn.onclick = async function (e) {
             try {
                 const REGISTER = await register(formData);
                 if (REGISTER.data?.status) {
-                    document.querySelector(
-                        '.confirm-password .error-message'
-                    ).textContent = REGISTER.message;
+                    if (REGISTER.message.includes('email')) {
+                        document.querySelector(
+                            '.confirm-password .error-message'
+                        ).textContent = 'Email đã được sử dụng';
+                    }
+                    // họ và tên được trùng nhau
+
+                    // document.querySelector(
+                    //     '.confirm-password .error-message'
+                    // ).textContent = REGISTER.message;
                     loader.classList.remove('show');
                     return;
                 }
@@ -570,6 +577,7 @@ submitBtn.onclick = async function (e) {
 
         // forgot password step 1 (send reset code to own email)
         if (form.id === 'forgot-password-form') {
+            const errorMessage = document.querySelector('.error-message.for-2');
             formData.append('email', data.email);
 
             try {
@@ -578,8 +586,9 @@ submitBtn.onclick = async function (e) {
                     formData
                 );
                 if (REQUEST_RESET_PASSWORD.data.status !== 200) {
-                    document.querySelector('.error-message.for-2').textContent =
-                        REQUEST_RESET_PASSWORD.message;
+                    // document.querySelector('.error-message.for-2').textContent =
+                    //     REQUEST_RESET_PASSWORD.message;
+                    errorMessage.textContent = 'Email người dùng không tồn tại';
                     loader.classList.remove('show');
                     return;
                 }
@@ -610,7 +619,9 @@ submitBtn.onclick = async function (e) {
         // forgot password step 2 (validation reset code)
         if (form.id === 'validate-reset-code-form') {
             const errorMessage = document.querySelector('.error-message.for-2');
+            const resendCodeBtn = form.querySelector('.code-resend');
             const emailForgot = localStorage.getItem('amamy_forgot');
+            const submitBtn = form.querySelector("button[type='submit']");
 
             formData.append('email', emailForgot);
             formData.append('code', data.code);
@@ -621,7 +632,31 @@ submitBtn.onclick = async function (e) {
 
                 console.log(VALIDATE_RESET_CODE);
                 if (VALIDATE_RESET_CODE.data.status !== 200) {
-                    errorMessage.textContent = VALIDATE_RESET_CODE.message;
+                    if (
+                        VALIDATE_RESET_CODE.message.includes(
+                            'attempts remaining'
+                        )
+                    ) {
+                        const regex = /\d+/;
+                        const ketQua = VALIDATE_RESET_CODE.message.match(regex);
+                        if (ketQua) {
+                            const so = parseInt(ketQua[0], 10);
+                            errorMessage.textContent =
+                                'Mã đặt lại không hợp lệ. Bạn còn ' +
+                                so +
+                                ' lần thử lại';
+                        }
+                    } else if (emailForgot) {
+                        errorMessage.textContent =
+                            'Bạn đã sử dụng số lần thử tối đa được phép. Bạn phải yêu cầu một mã đặt lại mới';
+                        resendCodeBtn.classList.remove('d-none');
+                        submitBtn.classList.add('d-none');
+                        submitBtn.setAttribute('disabled', true);
+                    } else {
+                        errorMessage.textContent =
+                            'Bạn phải yêu cầu mã đặt lại mật khẩu trước khi đặt lại mật khẩu';
+                    }
+                    // errorMessage.textContent = VALIDATE_RESET_CODE.message;
                     loader.classList.remove('show');
                     return;
                 }
