@@ -455,9 +455,14 @@ submitBtn.onclick = async function (e) {
                 const LOGIN = await login(formData);
                 // console.log(res);
                 if (LOGIN.data?.status) {
-                    document.querySelector(
-                        '.text-wrapper .error-message'
-                    ).textContent = LOGIN.message;
+                    // console.log(LOGIN);
+                    if (LOGIN.code)
+                        document.querySelector(
+                            '.text-wrapper .error-message'
+                        ).textContent = 'Thông tin tài khoản không chính xác';
+                    // document.querySelector(
+                    //     '.text-wrapper .error-message'
+                    // ).textContent = LOGIN.message;
                     loader.classList.remove('show');
                     return;
                 }

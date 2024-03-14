@@ -74,9 +74,13 @@ if (user) {
                 });
             }
         } else {
-            avatars.forEach((imgELement) => {
-                imgELement.src = avatarLink;
-            });
+            const img = new Image();
+            img.src = avatarLink;
+            img.onload = function () {
+                avatars.forEach((imgELement) => {
+                    imgELement.src = avatarLink;
+                });
+            };
         }
 
         // render placeholder of required field smilar to existed data

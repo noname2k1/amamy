@@ -1,5 +1,5 @@
 // home link change
-env = 'prod';
+env = 'dev';
 host = '/amamy';
 // console.log(location);
 
