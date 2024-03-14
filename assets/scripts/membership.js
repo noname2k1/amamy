@@ -1,108 +1,92 @@
+import { fetchRanks, fetchWeight } from './fetch.js';
+
 const rankList = document.querySelector('.rank-list');
 const benefit = document.querySelector('.benefit');
 const progressBar = document.querySelector('.membership-progress');
 const achieve = document.querySelector('.achieve');
-// get ranks
-fetch('https://amamy.net/wp-json/custom/v1/rank')
-    .then((raw) => raw.json())
-    .then((res) => {
-        // sort ranks asc
-        const rankSorted = res.sort(
-            (a, b) => parseFloat(a.giam_gia) - parseFloat(b.giam_gia)
-        );
-        // show rank bản thân
-        const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
-        const myRankIndex = rankSorted.findIndex(
-            (rank) => rank.name === userInfor.user_rank
-        );
-        document.querySelector('.rank-name').textContent =
-            rankSorted[myRankIndex].name === 'Thành viên mới'
-                ? 'Thành viên mới'
-                : 'Hạng ' + rankSorted[myRankIndex].name;
-        document.querySelector('.benefit-percentage').textContent =
-            rankSorted[myRankIndex].name === 'Đồng'
-                ? '3%'
-                : res.user_rank === 'Bạc'
-                ? '4%'
-                : res.user_rank === 'Vàng'
-                ? '5%'
-                : '1.5%';
-        // highlight rank trong progress
-        document
-            .querySelector('.level.newbie')
-            .classList.toggle(
-                'active',
-                rankSorted[myRankIndex].giam_gia === '1.5'
-            );
-        document
-            .querySelector('.level.copper')
-            .classList.toggle(
-                'active',
-                rankSorted[myRankIndex].giam_gia === '3'
-            );
-        document
-            .querySelector('.level.silver')
-            .classList.toggle(
-                'active',
-                rankSorted[myRankIndex].giam_gia === '4'
-            );
-        document
-            .querySelector('.level.gold')
-            .classList.toggle(
-                'active',
-                rankSorted[myRankIndex].giam_gia === '5'
-            );
+const rankName = document.querySelector('.rank-name');
+const benefitPecentage = document.querySelector('.benefit-percentage');
 
-        // số kg đã gửi
-        fetch('https://amamy.net/wp-json/custom/v1/rank_can')
-            .then((raw) => raw.json())
-            .then((res) => {
-                if (res.success) {
-                    const weightSent = res.tong_so_can;
-                    document.querySelector('.weight-sent').textContent =
-                        weightSent;
-                    const lastRank = rankSorted[rankSorted.length - 1];
-                    const currentPercent =
-                        (parseFloat(lastRank.so_can_can_dat) / 100) *
-                        parseFloat(weightSent);
-                    document.querySelector(
-                        '.member-ship .membership-progress .thumb'
-                    ).style.width = currentPercent + '%';
-                    progressBar.classList.remove('skeleton');
-                    // ẩn dòng gửi thêm khi đạt rank tối đa
-                    if (myRankIndex === rankSorted.length - 1) {
-                        document.querySelector('.instruction').style.display =
-                            'none';
-                    } else {
-                        const nextRank = rankSorted[myRankIndex + 1];
+try {
+    // get ranks
+    const GET_RANKS = await fetchRanks();
+    // sort ranks asc
+    const rankSorted = GET_RANKS.sort(
+        (a, b) => parseFloat(a.giam_gia) - parseFloat(b.giam_gia)
+    );
+    // show rank bản thân
+    const user = JSON.parse(localStorage.getItem('amamy_user'));
+    const userInfor = JSON.parse(localStorage.getItem('amamy_user-infor'));
+    const myRankIndex = rankSorted.findIndex(
+        (rank) => rank.name === userInfor.user_rank
+    );
+    rankName.textContent =
+        rankSorted[myRankIndex].name === 'Thành viên mới'
+            ? 'Thành viên mới'
+            : 'Hạng ' + rankSorted[myRankIndex].name;
+    benefitPecentage.textContent =
+        rankSorted[myRankIndex].name === 'Đồng'
+            ? '3%'
+            : GET_RANKS.user_rank === 'Bạc'
+            ? '4%'
+            : GET_RANKS.user_rank === 'Vàng'
+            ? '5%'
+            : '1.5%';
+    // highlight rank trong progress
+    document
+        .querySelector('.level.newbie')
+        .classList.toggle('active', rankSorted[myRankIndex].giam_gia === '1.5');
+    document
+        .querySelector('.level.copper')
+        .classList.toggle('active', rankSorted[myRankIndex].giam_gia === '3');
+    document
+        .querySelector('.level.silver')
+        .classList.toggle('active', rankSorted[myRankIndex].giam_gia === '4');
+    document
+        .querySelector('.level.gold')
+        .classList.toggle('active', rankSorted[myRankIndex].giam_gia === '5');
 
-                        const weightNeeded =
-                            parseFloat(nextRank.so_can_can_dat) -
-                            parseFloat(weightSent);
-                        document.querySelector('.weight-needed').textContent =
-                            weightNeeded + 'kg';
-                        document.querySelector('.rank-name-next').textContent =
-                            'Hạng ' + nextRank.name;
-                        document.querySelector(
-                            '.discount-percent-next'
-                        ).textContent = nextRank.giam_gia;
-                    }
-                }
-            })
-            .catch((err) => {
-                // console.log(err)
-            })
-            .finally(() => {
-                progressBar.classList.remove('skeleton');
-                benefit.classList.remove('skeleton');
-                achieve.classList.remove('skeleton');
-            });
+    const weightSentElement = document.querySelector('.weight-sent');
+    const thumbProgress = document.querySelector(
+        '.member-ship .membership-progress .thumb'
+    );
+    const instruction = document.querySelector('.instruction');
+    const weightNeededElement = document.querySelector('.weight-needed');
+    const rankNameNext = document.querySelector('.rank-name-next');
+    const discountPecentNext = document.querySelector('.discount-percent-next');
 
-        // render ranks
-        let html = '';
-        rankSorted.forEach(
-            (rank) =>
-                (html += `<li class="">
+    // số kg đã gửi
+    const WEIGHT = await fetchWeight(user.token);
+    // console.log(WEIGHT);
+    if (WEIGHT.success) {
+        const weightSent = WEIGHT.tong_so_can;
+        weightSentElement.textContent = weightSent;
+        const lastRank = rankSorted[rankSorted.length - 1];
+        const currentPercent =
+            (parseFloat(lastRank.so_can_can_dat) / 100) *
+            parseFloat(weightSent);
+        // console.log(currentPercent);
+
+        thumbProgress.style.width = currentPercent + '%';
+        progressBar.classList.remove('skeleton');
+        // ẩn dòng gửi thêm khi đạt rank tối đa
+        if (myRankIndex === rankSorted.length - 1) {
+            instruction.style.display = 'none';
+        } else {
+            const nextRank = rankSorted[myRankIndex + 1];
+            const weightNeeded =
+                parseFloat(nextRank.so_can_can_dat) - parseFloat(weightSent);
+            weightNeededElement.textContent = weightNeeded + 'kg';
+            rankNameNext.textContent = 'Hạng ' + nextRank.name;
+            discountPecentNext.textContent = nextRank.giam_gia;
+        }
+    }
+
+    // render ranks
+    let html = '';
+    rankSorted.forEach(
+        (rank) =>
+            (html += `<li class="">
                     <div class="${
                         rank.giam_gia === '3'
                             ? 'copper'
@@ -130,28 +114,31 @@ fetch('https://amamy.net/wp-json/custom/v1/rank')
                         <p>-${
                             rank.so_can_can_dat == 0
                                 ? 'Đã đăng kí hội viên'
-                                : 'Đã gửi tại Amamy ' +
-                                  rank.so_can_can_dat +
-                                  'kg'
+                                : `Đã gửi tại Amamy ${rank.so_can_can_dat}kg`
                         }</p>
                     </div>
                     </li>`)
-        );
-        rankList.innerHTML = html;
-    })
-    .catch((err) => {
-        // console.log(err);
-    });
+    );
+    rankList.innerHTML = html;
+    progressBar.classList.remove('skeleton');
+    benefit.classList.remove('skeleton');
+    achieve.classList.remove('skeleton');
+    rankList.classList.remove('skeleton');
+} catch (error) {
+    // console.log(error);
+    progressBar.classList.remove('skeleton');
+    benefit.classList.remove('skeleton');
+    achieve.classList.remove('skeleton');
+    rankList.classList.remove('skeleton');
+}
 
 //  toggle rank dropdown
-document.addEventListener('DOMContentLoaded', (event) => {
-    rankList.addEventListener('click', function (event) {
-        const targetElement = event.target;
-        const rankItem = targetElement.closest('li');
+rankList.addEventListener('click', function (event) {
+    const targetElement = event.target;
+    const rankItem = targetElement.closest('li');
 
-        if (rankItem) {
-            rankItem.classList.toggle('active');
-            rankItem.querySelector('.detail').classList.toggle('active');
-        }
-    });
+    if (rankItem) {
+        rankItem.classList.toggle('active');
+        rankItem.querySelector('.detail').classList.toggle('active');
+    }
 });

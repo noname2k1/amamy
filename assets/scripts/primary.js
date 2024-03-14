@@ -25,10 +25,10 @@ const inputGroups = document.querySelectorAll('form .input-group');
 const inputFullName = document.querySelector("input[name='fullName']");
 const inputPhone = document.querySelector("input[name='phone']");
 const inputEmail = document.querySelector("input[name='email']");
-const inputAddressVi = document.querySelector("input[name='address-vi']");
-const inputAddressForeign = document.querySelector(
-    "input[name='address-foreign']"
-);
+// const inputAddressVi = document.querySelector("input[name='address-vi']");
+// const inputAddressForeign = document.querySelector(
+//     "input[name='address-foreign']"
+// );
 
 const avatarWrappers = document.querySelectorAll('.avatar-wrapper, .avatar');
 const avatarImgs = document.querySelectorAll(
@@ -135,14 +135,6 @@ const renderUserUI = async (res) => {
                 : 'newbie'
         );
     });
-
-    if (res?.user_name) {
-        inputFullName.placeholder = res.user_name;
-    } else {
-        inputFullName.placeholder = user.user_display_name;
-    }
-    if (res?.user_phone) inputPhone.placeholder = res.user_phone;
-    if (res?.user_email) inputEmail.placeholder = res?.user_email;
 };
 if (!userInfor) {
     inputGroups.forEach((input) => {

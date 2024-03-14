@@ -18,6 +18,10 @@ const inputsMustValidate = document
         'input:not([type="file"]):not([name="address-vi"]):not([name="address-foreign"])'
     );
 
+const inputFullName = document.querySelector("input[name='fullName']");
+const inputPhone = document.querySelector("input[name='phone']");
+const inputEmail = document.querySelector("input[name='email']");
+
 // enabled edit user infor
 if (editOnBtn) {
     editOnBtn.onclick = function (e) {
@@ -237,6 +241,18 @@ const validateInputs = () => {
         }
     });
 };
+
+if (myUserInfor) {
+    if (myUserInfor?.user_name) {
+        inputFullName.placeholder = myUserInfor.user_name;
+    } else {
+        inputFullName.placeholder = user.user_display_name;
+    }
+    if (myUserInfor?.user_phone)
+        inputPhone.placeholder = myUserInfor.user_phone;
+    if (myUserInfor?.user_email)
+        inputEmail.placeholder = myUserInfor?.user_email;
+}
 
 // submit btn for edit user infor
 saveBtn.onclick = async function (e) {

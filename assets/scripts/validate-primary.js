@@ -477,7 +477,7 @@ submitBtn.onclick = async function (e) {
                     // redirect to home page
                     location.href = (env == 'dev' ? '' : host) + '/';
                 } catch (error) {
-                    console.log(error);
+                    // console.log(error);
                 }
 
                 loader.classList.remove('show');
@@ -592,7 +592,7 @@ submitBtn.onclick = async function (e) {
                         '/xac-thuc-reset-code.html';
                 }, 2000);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
         }
 
@@ -637,7 +637,7 @@ submitBtn.onclick = async function (e) {
                         (env == 'dev' ? '' : host) + '/dat-mat-khau.html';
                 }, 2000);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
             loader.classList.remove('show');
         }
@@ -679,7 +679,7 @@ submitBtn.onclick = async function (e) {
                         (env == 'dev' ? '' : host) + '/dang-nhap.html';
                 }, 2000);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
             loader.classList.remove('show');
         }
