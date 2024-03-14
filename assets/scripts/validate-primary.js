@@ -1,4 +1,13 @@
-import { fetchOrder, fetchUserInfor } from './fetch.js';
+import {
+    changePassword,
+    fetchOrder,
+    fetchUserInfor,
+    login,
+    register,
+    requestResetPassword,
+    setPassword,
+    validateResetCode
+} from './fetch.js';
 
 const user = JSON.parse(localStorage.getItem('amamy_user'));
 
@@ -210,6 +219,24 @@ inputs.forEach((inputElement) => {
                 ).isValid = true;
             }
         }
+
+        // code
+        if (input.name === 'code') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
     };
     inputElement.onfocus = function () {
         inputElement
@@ -364,6 +391,23 @@ const validateInputs = () => {
                 ).isValid = true;
             }
         }
+        // code
+        if (input.name === 'code') {
+            if (!currentValidateItem.pattern.test(input.value)) {
+                input
+                    .closest('.input-group')
+                    .querySelector('.error-message').textContent =
+                    currentValidateItem.message;
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = false;
+                return;
+            } else {
+                VALIDATES.find(
+                    (item) => item.name === input.name
+                ).isValid = true;
+            }
+        }
     });
 };
 
@@ -384,7 +428,7 @@ const form = document.querySelector('form');
 const submitBtn = document.querySelector('form button[type="submit"]');
 const loader = submitBtn.querySelector('.loader');
 const errorMessages = document.querySelectorAll('.error-message');
-submitBtn.onclick = function (e) {
+submitBtn.onclick = async function (e) {
     e.preventDefault();
     validateInputs();
     const countInputInForm = Array.from(inputs).length;
@@ -406,275 +450,238 @@ submitBtn.onclick = function (e) {
         if (form.id === 'login-form') {
             formData.append('username', data.email);
             formData.append('password', data.password);
-            fetch('https://amamy.net/wp-json/jwt-auth/v1/token', {
-                method: 'POST',
-                body: formData
-            })
-                .then((raw) => raw.json())
-                .then(async (res) => {
-                    // console.log(res);
-                    if (res.data?.status) {
-                        document.querySelector(
-                            '.text-wrapper .error-message'
-                        ).textContent = res.message;
-                        return;
-                    }
-                    try {
-                        const orders = await fetchOrder(res.token);
-                        const { success, ...restUserInfor } =
-                            await fetchUserInfor(res.token);
-                        localStorage.setItem('amamy_user', JSON.stringify(res));
-                        localStorage.setItem(
-                            'amamy_orders',
-                            JSON.stringify(orders)
-                        );
-                        localStorage.setItem(
-                            'amamy_user-infor',
-                            JSON.stringify(restUserInfor)
-                        );
-                        // redirect to home page
-                        location.href = (env == 'dev' ? '' : host) + '/';
-                    } catch (error) {
-                        console.log(error);
-                    }
-                })
-                .catch((err) => {
-                    // console.log(err);
-                })
-                .finally(() => {
+            try {
+                const LOGIN = await login(formData);
+                // console.log(res);
+                if (LOGIN.data?.status) {
+                    document.querySelector(
+                        '.text-wrapper .error-message'
+                    ).textContent = LOGIN.message;
                     loader.classList.remove('show');
-                });
+                    return;
+                }
+                try {
+                    const orders = await fetchOrder(LOGIN.token);
+                    const { success, ...restUserInfor } = await fetchUserInfor(
+                        LOGIN.token
+                    );
+                    localStorage.setItem('amamy_user', JSON.stringify(LOGIN));
+                    localStorage.setItem(
+                        'amamy_orders',
+                        JSON.stringify(orders)
+                    );
+                    localStorage.setItem(
+                        'amamy_user-infor',
+                        JSON.stringify(restUserInfor)
+                    );
+                    // redirect to home page
+                    location.href = (env == 'dev' ? '' : host) + '/';
+                } catch (error) {
+                    console.log(error);
+                }
+
+                loader.classList.remove('show');
+            } catch (error) {
+                // console.log(error);
+            }
         }
         // register
         if (form.id === 'register-form') {
-            console.log(data);
             formData.append('username', data.fullName);
             formData.append('email', data.email);
             formData.append('phone', data.phone);
             formData.append('password', data['new-password']);
-            fetch('https://amamy.net/wp-json/custom/v1/register', {
-                method: 'POST',
-                body: formData
-            })
-                .then((raw) => raw.json())
-                .then((res) => {
-                    console.log(res);
-                    if (res.data?.status) {
-                        document.querySelector(
-                            '.confirm-password .error-message'
-                        ).textContent = res.message;
-                        return;
-                    }
-                    Toastify({
-                        text: 'Đăng ký tài khoản thành công',
-                        duration: 3000,
-                        destination: '/dang-nhap.html',
-                        newWindow: false,
-                        close: true,
-                        gravity: 'top', // `top` or `bottom`
-                        position: 'right', // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: toastStyle,
-                        onClick: function () {} // Callback after click
-                    }).showToast();
-                    setTimeout(function () {
-                        location.href =
-                            (env == 'dev' ? '' : host) + '/dang-nhap.html';
-                    }, 3000);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
+            try {
+                const REGISTER = await register(formData);
+                if (REGISTER.data?.status) {
+                    document.querySelector(
+                        '.confirm-password .error-message'
+                    ).textContent = REGISTER.message;
                     loader.classList.remove('show');
-                });
+                    return;
+                }
+                Toastify({
+                    text: 'Đăng ký tài khoản thành công',
+                    duration: 3000,
+                    destination: '/dang-nhap.html',
+                    newWindow: false,
+                    close: true,
+                    gravity: 'top', // `top` or `bottom`
+                    position: 'right', // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: toastStyle,
+                    onClick: function () {} // Callback after click
+                }).showToast();
+                setTimeout(function () {
+                    location.href =
+                        (env == 'dev' ? '' : host) + '/dang-nhap.html';
+                }, 1000);
+            } catch (error) {
+                // console.log(error);
+            }
+            loader.classList.remove('show');
         }
 
         // change password
         if (form.id === 'change-password-form') {
-            console.log(data);
             formData.append('password', data['current-password']);
             formData.append('new_password', data['new-password']);
-            fetch('https://amamy.net/wp-json/custom/v1/update_password', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    Authorization: 'Bearer ' + user.token
-                }
-            })
-                .then((raw) => raw.json())
-                .then((res) => {
-                    // console.log(res);
-                    if (!res.status) {
-                        document.querySelector(
-                            '.error-message.for-2'
-                        ).textContent = res.message;
-                        return;
-                    }
-                    Toastify({
-                        text: 'Đổi mật khẩu thành công',
-                        duration: 3000,
-                        newWindow: false,
-                        close: true,
-                        gravity: 'top', // `top` or `bottom`
-                        position: 'right', // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: toastStyle,
-                        onClick: function () {} // Callback after click
-                    }).showToast();
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
+            try {
+                const CHANGE_PASSWORD = await changePassword(
+                    user.token,
+                    formData
+                );
+
+                // console.log(res);
+                if (!CHANGE_PASSWORD.status) {
+                    document.querySelector('.error-message.for-2').textContent =
+                        CHANGE_PASSWORD.message;
                     loader.classList.remove('show');
-                });
+                    return;
+                }
+                Toastify({
+                    text: 'Đổi mật khẩu thành công',
+                    duration: 3000,
+                    newWindow: false,
+                    close: true,
+                    gravity: 'top', // `top` or `bottom`
+                    position: 'right', // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: toastStyle,
+                    onClick: function () {} // Callback after click
+                }).showToast();
+
+                loader.classList.remove('show');
+            } catch (error) {
+                // console.log(error)
+            }
         }
 
         // forgot password step 1 (send reset code to own email)
         if (form.id === 'forgot-password-form') {
-            const inputResetCodeGroup = form.querySelector(
-                '.input-group.reset-code'
-            );
-            const inputResetCode = form.querySelector(
-                '.input-group.reset-code input'
-            );
-            console.log(data);
             formData.append('email', data.email);
 
-            // gửi request yêu cầu reset password
-            fetch('https://amamy.net/wp-json/bdpwr/v1/reset-password', {
-                method: 'POST',
-                body: formData
-            })
-                .then((raw) => raw.json())
-                .then((res) => {
-                    console.log(res);
-                    if (res.data.status !== 200) {
-                        document.querySelector(
-                            '.error-message.for-2'
-                        ).textContent = res.message;
-                        return;
-                    }
-                    Toastify({
-                        text: 'Mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
-                        duration: 5000,
-                        newWindow: false,
-                        close: true,
-                        gravity: 'top', // `top` or `bottom`
-                        position: 'right', // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: toastStyle,
-                        onClick: function () {} // Callback after click
-                    }).showToast();
-                    // show reset code input
-                    inputResetCodeGroup.classList.remove('d-none');
-                    inputResetCode.classList.remove('d-none');
-                    inputResetCode.removeAttribute('disabled');
-                    inputResetCode.focus();
-                    form.id = 'validation-reset-code';
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
+            try {
+                // gửi request yêu cầu reset password
+                const REQUEST_RESET_PASSWORD = await requestResetPassword(
+                    formData
+                );
+                if (REQUEST_RESET_PASSWORD.data.status !== 200) {
+                    document.querySelector('.error-message.for-2').textContent =
+                        REQUEST_RESET_PASSWORD.message;
                     loader.classList.remove('show');
-                });
+                    return;
+                }
+                loader.classList.remove('show');
+                Toastify({
+                    text: 'Mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
+                    duration: 5000,
+                    newWindow: false,
+                    close: true,
+                    gravity: 'top', // `top` or `bottom`
+                    position: 'right', // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: toastStyle,
+                    onClick: function () {} // Callback after click
+                }).showToast();
+                loader.classList.remove('show');
+                localStorage.setItem('amamy_forgot', data.email);
+                setTimeout(function () {
+                    location.href =
+                        (env == 'dev' ? '' : host) +
+                        '/xac-thuc-reset-code.html';
+                }, 2000);
+            } catch (error) {
+                console.log(error);
+            }
         }
 
         // forgot password step 2 (validation reset code)
-        if (form.id === 'validation-reset-code') {
-            const inputResetCodeGroup = form.querySelector(
-                '.input-group.reset-code'
-            );
-            const inputResetCode = form.querySelector(
-                '.input-group.reset-code input'
-            );
+        if (form.id === 'validate-reset-code-form') {
+            const errorMessage = document.querySelector('.error-message.for-2');
+            const emailForgot = localStorage.getItem('amamy_forgot');
 
-            const resetCodeErrorMessage = inputResetCodeGroup.querySelector(
-                '.error-message.for-3'
-            );
-
-            loader.classList.add('show');
-
-            const currentValidateItem = VALIDATES.find(
-                (validateItem) => validateItem.name === inputResetCode.name
-            );
-            if (!inputResetCode.value) {
-                resetCodeErrorMessage.textContent =
-                    currentValidateItem?.customRequiredMessage
-                        ? currentValidateItem.customRequiredMessage
-                        : DEFAULT_MESSAGE_FOR_REQUIRED_FIELD;
-                return;
-            }
-            if (!currentValidateItem.pattern.test(inputResetCode.value)) {
-                resetCodeErrorMessage.textContent = currentValidateItem.message;
-                return;
-            }
-            console.log(data);
-            formData.append('email', data.email);
+            formData.append('email', emailForgot);
             formData.append('code', data.code);
 
             // gửi request validate code
-            fetch('https://amamy.net/wp-json/bdpwr/v1/validate-code', {
-                method: 'POST',
-                body: formData
-            })
-                .then((raw) => raw.json())
-                .then((res) => {
-                    console.log(res);
-                    if (res.data.status !== 200) {
-                        resetCodeErrorMessage.textContent = res.message;
-                        return;
-                    }
-                    // Toastify({
-                    //     text: 'Mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
-                    //     duration: 5000,
-                    //     newWindow: false,
-                    //     close: true,
-                    //     gravity: 'top', // `top` or `bottom`
-                    //     position: 'right', // `left`, `center` or `right`
-                    //     stopOnFocus: true, // Prevents dismissing of toast on hover
-                    //     style: toastStyle,
-                    //     onClick: function () {} // Callback after click
-                    // }).showToast();
-                    // // show reset code input
-                    // inputResetCodeGroup.classList.remove('d-none');
-                    // inputResetCode.classList.remove('d-none');
-                    // inputResetCode.removeAttribute('disabled');
-                    // inputResetCode.focus();
-                    // form.id = 'validation reset code';
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-                .finally(() => {
+            try {
+                const VALIDATE_RESET_CODE = await validateResetCode(formData);
+
+                console.log(VALIDATE_RESET_CODE);
+                if (VALIDATE_RESET_CODE.data.status !== 200) {
+                    errorMessage.textContent = VALIDATE_RESET_CODE.message;
                     loader.classList.remove('show');
-                });
+                    return;
+                }
+                localStorage.setItem(
+                    'amamy_forgot',
+                    JSON.stringify({
+                        email: emailForgot,
+                        code: data.code
+                    })
+                );
+                Toastify({
+                    text: 'Mã đặt lại mật khẩu hợp lệ',
+                    duration: 3000,
+                    newWindow: false,
+                    close: true,
+                    gravity: 'top', // `top` or `bottom`
+                    position: 'right', // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: toastStyle,
+                    onClick: function () {} // Callback after click
+                }).showToast();
+                setTimeout(function () {
+                    location.href =
+                        (env == 'dev' ? '' : host) + '/dat-mat-khau.html';
+                }, 2000);
+            } catch (error) {
+                console.log(error);
+            }
+            loader.classList.remove('show');
+        }
+
+        // forgot password final step (set password)
+        if (form.id === 'set-password-form') {
+            const errorMessage = document.querySelector('.error-message.for-2');
+            const { email, code } = JSON.parse(
+                localStorage.getItem('amamy_forgot')
+            );
+            formData.append('email', email);
+            formData.append('code', code);
+            formData.append('password', data.password);
+
+            // set password
+            try {
+                const SET_PASSWORD = await setPassword(formData);
+
+                console.log(SET_PASSWORD);
+                if (SET_PASSWORD.data.status !== 200) {
+                    errorMessage.textContent = SET_PASSWORD.message;
+                    loader.classList.remove('show');
+                    return;
+                }
+                localStorage.removeItem('amamy_forgot');
+                Toastify({
+                    text: 'Đặt lại mật khẩu thành công',
+                    duration: 3000,
+                    newWindow: false,
+                    close: true,
+                    gravity: 'top', // `top` or `bottom`
+                    position: 'right', // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: toastStyle,
+                    onClick: function () {} // Callback after click
+                }).showToast();
+                setTimeout(function () {
+                    location.href =
+                        (env == 'dev' ? '' : host) + '/dang-nhap.html';
+                }, 2000);
+            } catch (error) {
+                console.log(error);
+            }
+            loader.classList.remove('show');
         }
     }
 };
-
-// Toastify({
-//     text: 'Một mã đặt lại mật khẩu đã được gửi đến e-mail của bạn',
-//     duration: 100000,
-//     destination: '/dang-nhap.html',
-//     newWindow: false,
-//     close: true,
-//     gravity: 'top', // `top` or `bottom`
-//     position: 'right', // `left`, `center` or `right`
-//     stopOnFocus: true, // Prevents dismissing of toast on hover
-//     style: {
-//         background: '#38b6ff',
-//         color: '#fff',
-//         fontFamily: 'Montserrat',
-//         fontSize: '2rem',
-//         fontStyle: 'normal',
-//         fontWeight: 700,
-//         lineHeight: 'normal',
-//         borderRadius: '0.5rem',
-//         whiteSpace: 'nowrap',
-//         maxWidth: 'unset'
-//     },
-//     onClick: function () {} // Callback after click
-// }).showToast();

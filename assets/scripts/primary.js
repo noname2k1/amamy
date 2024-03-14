@@ -68,6 +68,10 @@ if (user) {
                 });
             } catch (error) {
                 // console.log(error)
+                avatarWrappers.forEach((wrapper) => {
+                    wrapper.classList.remove('skeleton');
+                    wrapper.classList.remove('skeleton-avatar');
+                });
             }
         } else {
             avatars.forEach((imgELement) => {
