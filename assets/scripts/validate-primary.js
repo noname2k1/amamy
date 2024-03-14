@@ -1,5 +1,6 @@
 import {
     changePassword,
+    fetchAvatar,
     fetchOrder,
     fetchUserInfor,
     login,
@@ -465,6 +466,7 @@ submitBtn.onclick = async function (e) {
                     const { success, ...restUserInfor } = await fetchUserInfor(
                         LOGIN.token
                     );
+                    const AVATAR = await fetchAvatar(LOGIN.token);
                     localStorage.setItem('amamy_user', JSON.stringify(LOGIN));
                     localStorage.setItem(
                         'amamy_orders',
@@ -473,6 +475,10 @@ submitBtn.onclick = async function (e) {
                     localStorage.setItem(
                         'amamy_user-infor',
                         JSON.stringify(restUserInfor)
+                    );
+                    localStorage.setItem(
+                        'amamy_avatar',
+                        JSON.stringify(AVATAR.author_pic)
                     );
                     // redirect to home page
                     location.href = (env == 'dev' ? '' : host) + '/';
