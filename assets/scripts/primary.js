@@ -135,6 +135,14 @@ const renderUserUI = async (res) => {
                 : 'newbie'
         );
     });
+
+    if (res?.user_name) {
+        inputFullName.placeholder = res.user_name;
+    } else {
+        inputFullName.placeholder = user.user_display_name;
+    }
+    if (res?.user_phone) inputPhone.placeholder = res.user_phone;
+    if (res?.user_email) inputEmail.placeholder = res?.user_email;
 };
 if (!userInfor) {
     inputGroups.forEach((input) => {
@@ -153,11 +161,6 @@ if (!userInfor) {
                 'amamy_user-infor',
                 JSON.stringify({ ...rest })
             );
-            if (rest?.user_name) {
-                inputFullName.placeholder = rest.user_name;
-            }
-            if (rest?.user_phone) inputPhone.placeholder = rest.user_phone;
-            if (rest?.user_email) inputEmail.placeholder = rest?.user_email;
             // if (rest?.user_dcvn)
             //     inputAddressVi.placeholder = rest.user_dcvn;
             // if (rest?.user_dcng)

@@ -1,6 +1,5 @@
 import { editUserInfor } from './fetch.js';
 
-// validate input
 let editAble = false; // editable flag
 const editOnBtn = document.querySelector('.edit-on');
 const saveBtn = document.querySelector('button#edit-btn');
