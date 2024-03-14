@@ -63,8 +63,8 @@ try {
         weightSentElement.textContent = weightSent;
         const lastRank = rankSorted[rankSorted.length - 1];
         const currentPercent =
-            (parseFloat(lastRank.so_can_can_dat) / 100) *
-            parseFloat(weightSent);
+            (parseFloat(weightSent) / parseFloat(lastRank.so_can_can_dat)) *
+            100;
         // console.log(currentPercent);
 
         thumbProgress.style.width = currentPercent + '%';
