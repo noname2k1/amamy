@@ -246,7 +246,7 @@ if (myUserInfor) {
     if (myUserInfor?.user_name) {
         inputFullName.placeholder = myUserInfor.user_name;
     } else {
-        inputFullName.placeholder = user.user_display_name;
+        inputFullName.placeholder = myUser.user_display_name;
     }
     if (myUserInfor?.user_phone)
         inputPhone.placeholder = myUserInfor.user_phone;
