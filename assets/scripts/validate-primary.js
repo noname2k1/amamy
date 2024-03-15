@@ -507,14 +507,15 @@ submitBtn.onclick = async function (e) {
                 if (REGISTER.data?.status) {
                     if (REGISTER.message.includes('email')) {
                         document.querySelector(
-                            '.confirm-password .error-message'
+                            '.email .error-message'
                         ).textContent = 'Email đã được sử dụng';
+                    } else {
+                        document.querySelector(
+                            '.confirm-password .error-message'
+                        ).textContent = REGISTER.message;
                     }
                     // họ và tên được trùng nhau
 
-                    // document.querySelector(
-                    //     '.confirm-password .error-message'
-                    // ).textContent = REGISTER.message;
                     loader.classList.remove('show');
                     return;
                 }
@@ -648,7 +649,7 @@ submitBtn.onclick = async function (e) {
                         }
                     } else if (emailForgot) {
                         errorMessage.textContent =
-                            'Bạn đã sử dụng số lần thử tối đa được phép. Bạn phải yêu cầu một mã đặt lại mới';
+                            'Mã bị vô hiệu hóa. Bạn phải yêu cầu mã đặt lại mật khẩu mới';
                         resendCodeBtn.classList.remove('d-none');
                         submitBtn.classList.add('d-none');
                         submitBtn.setAttribute('disabled', true);
